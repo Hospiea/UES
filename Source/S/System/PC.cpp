@@ -10,6 +10,7 @@
 #include "InputMappingContext.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Attacks/Basic/Basic.h"
+#include "GMB.h"
 
 
 APC::APC(const FObjectInitializer& Init)
@@ -44,7 +45,7 @@ void APC::MoveFunc(const FInputActionValue& value)
 	FVector2D Dir = value.Get<FVector2D>();
 
 	Dir.Normalize();
-	Dir *= 150.0f;
+	Dir *= Managers->Data->PlayerStats->FindRow<FPlayerStats>(TEXT("1"), TEXT(""))->Speed;
 
 	User->GetCharacterMovement()->Velocity = FVector(Dir.X, 0.0f, Dir.Y);
 }

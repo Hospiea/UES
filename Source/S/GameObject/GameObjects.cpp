@@ -18,8 +18,7 @@ AGameObjects::AGameObjects()
 	
 	GetCharacterMovement()->SetPlaneConstraintAxisSetting(EPlaneConstraintAxisSetting::Y);
 	GetCharacterMovement()->SetPlaneConstraintEnabled(true);
-
-	//GetCapsuleComponent()->SetConstraintMode(EDOFMode::XZPlane);
+	GetCharacterMovement()->GravityScale = 0.0f;
 }
 
 void AGameObjects::BeginPlay()

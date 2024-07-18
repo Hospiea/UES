@@ -5,6 +5,7 @@
 #include "PaperFlipbookComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameObject/GameObjects.h"
+#include "GameObject/Enemy.h"
 
 // Sets default values for this component's properties
 UAnimationComponent::UAnimationComponent()
@@ -29,6 +30,11 @@ void UAnimationComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	if (!MovementComponent) return;
+	if (AEnemy* enemy = Cast<AEnemy>(GetOwner()))
+	{
+		if (enemy->GetEnemyState() == AEnemy::EnemyState::KnockBacked)
+			return;
+	}
 
 	if (MovementComponent->Velocity.X > 0.0f)
 	{

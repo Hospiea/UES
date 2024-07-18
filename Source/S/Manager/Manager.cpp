@@ -7,6 +7,7 @@ void UManager::Initialize(FSubsystemCollectionBase& Collection)
 {
 	Super::Initialize(Collection);
 	Game = new GameManager;
+	Data = NewObject<UDataManager>();
 }
 
 void UManager::Deinitialize()

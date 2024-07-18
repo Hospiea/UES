@@ -15,11 +15,27 @@ class S_API AEnemy : public AGameObjects
 	GENERATED_BODY()
 
 public:
+	enum class EnemyState
+	{
+		Normal,
+		KnockBacked,
+		Electricted,
+		Slowed,
+		Poisoned,
+		Recovering
+	};
 	AEnemy();
+
+	inline const EnemyState& GetEnemyState() { return State; }
+	inline void SetEnemyState(const EnemyState& state) { State = state; }
 
 protected:
 	virtual void BeginPlay() override;
 	
+	FTimerHandle TimerHandle;
+
+	EnemyState State;
+
 	UPROPERTY()
 	TObjectPtr<AUser> Target;
 

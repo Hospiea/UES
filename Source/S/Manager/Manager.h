@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Subsystems/EngineSubsystem.h"
+#include "DataManager.h"
 #include "GameManager.h"
 #include "Manager.generated.h"
 
@@ -18,7 +19,8 @@ class S_API UManager : public UEngineSubsystem
 
 public:
 	GameManager* Game;
-
+	UPROPERTY()
+	TObjectPtr<UDataManager> Data;
 
 protected:
 	virtual void Initialize(FSubsystemCollectionBase& Collection) override;

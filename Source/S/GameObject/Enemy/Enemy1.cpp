@@ -4,6 +4,8 @@
 #include "GameObject/Enemy/Enemy1.h"
 #include "GameObject/Player/User.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "PaperFlipbookComponent.h"
+#include "System/GMB.h"
 
 AEnemy1::AEnemy1()
 {
@@ -13,11 +15,33 @@ AEnemy1::AEnemy1()
 void AEnemy1::Tick(float dt)
 {
 	Super::Tick(dt);
-	FVector Location = Target->GetActorLocation() - GetActorLocation();
-	Location.Normalize();
-	
-	FVector2D Dir = FVector2D(Location.X, Location.Z);
-	Dir *= 30.0f;
 
-	GetCharacterMovement()->Velocity = FVector(Dir.X, 0.0f, Dir.Y);
+	switch (State)
+	{
+	case EnemyState::Normal:
+	{
+		FVector Location = Target->GetActorLocation() - GetActorLocation();
+		Location.Normalize();
+
+		FVector2D Dir = FVector2D(Location.X, Location.Z);
+		Dir *= Managers->Data->EnemyStats->FindRow<FEnemyStats>(TEXT("1"), TEXT(""))->Speed;
+
+		GetCharacterMovement()->Velocity = FVector(Dir.X, 0.0f, Dir.Y);
+		break;
+	}
+
+	case EnemyState::KnockBacked:
+	{
+		GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &ThisClass::RecoverFromKnockBack, 0.05f);
+		SetEnemyState(EnemyState::Recovering);
+		break;
+	}
+	}
+	
+}
+
+void AEnemy1::RecoverFromKnockBack()
+{
+	State = EnemyState::Normal;
+	GetSprite()->SetSpriteColor(FLinearColor::White);
 }

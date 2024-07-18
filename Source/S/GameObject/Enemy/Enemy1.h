@@ -20,4 +20,6 @@ public:
 protected:
 	virtual void Tick(float dt) override;
 
+	UFUNCTION()
+	void RecoverFromKnockBack();
 };
