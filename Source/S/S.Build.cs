@@ -8,7 +8,9 @@ public class S : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "Niagara" });
+
+		PublicIncludePaths.AddRange(new string[] { "S" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 
