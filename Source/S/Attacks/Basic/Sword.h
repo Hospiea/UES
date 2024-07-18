@@ -15,7 +15,7 @@ class S_API USword : public UBasic
 	
 public:
 	USword();
-	virtual void BasicAttack() override;
+	virtual void BasicAttack(const FVector2D& Dir) override;
 
 	UPROPERTY()
 	TSubclassOf<APSword> SwordClass;

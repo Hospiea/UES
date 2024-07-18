@@ -12,10 +12,12 @@ USword::USword()
 	SwordClass = sword.Class;
 }
 
-void USword::BasicAttack()
+void USword::BasicAttack(const FVector2D& Dir)
 {
-	Super::BasicAttack();
-	auto temp = World->SpawnActor<APSword>(SwordClass, User->GetActorLocation() + FVector(30.0f, 0.0f, 0.0f), FRotator(0.0f, 0.0f, 0.0f));
-	
+	Super::BasicAttack(Dir);
+
+	FVector2D NewDir = Dir * 30.0f;
+	auto temp = World->SpawnActor<APSword>(SwordClass, User->GetActorLocation() + FVector(NewDir.X, 0.0f, NewDir.Y), FRotator(0.0f, 0.0f, 0.0f));
+
 	temp->AttachToComponent(User->GetCenter(), FAttachmentTransformRules::KeepWorldTransform);
 }

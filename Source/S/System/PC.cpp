@@ -68,5 +68,11 @@ void APC::StopFunc(const FInputActionValue& value)
 
 void APC::LeftFunc(const FInputActionValue& value)
 {
-	User->GetBasicAttack()->BasicAttack();
+	FVector2D Location;
+	GetMousePosition(Location.X, Location.Y);
+	int32 CenterX, CenterY;
+	GetViewportSize(CenterX, CenterY);
+	FVector2D Dir = FVector2D(Location.X - static_cast<double>(CenterX) / 2, static_cast<double>(CenterY) / 2 - Location.Y);
+	Dir.Normalize();
+	User->GetBasicAttack()->BasicAttack(Dir);
 }

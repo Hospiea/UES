@@ -30,9 +30,7 @@ void UCenter::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponen
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	CurrentRotation.Pitch += -20.0f * DeltaTime;
-
-	// 누적된 회전을 설정
+	CurrentRotation.Pitch += -100.0f * DeltaTime;
 	SetRelativeRotation(CurrentRotation);
 }
 
