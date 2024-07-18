@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "Data/ObjectStatData.h"
+#include "Data/WeaponDataTable.h"
 #include "DataManager.generated.h"
 
 
@@ -21,4 +22,7 @@ public:
 
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UDataTable> EnemyStats;
+
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr<UDataTable> WeaponData;
 };

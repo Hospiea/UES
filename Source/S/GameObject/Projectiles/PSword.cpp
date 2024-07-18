@@ -15,6 +15,10 @@ APSword::APSword()
 void APSword::BeginPlay()
 {
 	Super::BeginPlay();
+
+	Data.Damage = Managers->Data->WeaponData->FindRow<FWeaponData>(TEXT("1"), TEXT(""))->Damage;
+	Data.Rate = Managers->Data->WeaponData->FindRow<FWeaponData>(TEXT("1"), TEXT(""))->Rate;
+	Data.Range = Managers->Data->WeaponData->FindRow<FWeaponData>(TEXT("1"), TEXT(""))->Range;
 }
 
 void APSword::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -25,7 +29,7 @@ void APSword::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherA
 	{
 		enemy->SetEnemyState(AEnemy::EnemyState::KnockBacked);
 		FVector dir = enemy->GetActorLocation() - Managers->Game->Player->GetActorLocation();
-		enemy->GetDamage(10.0f);
+		enemy->GetDamage(Data.Damage);
 		dir.Y = 0.0f;
 		dir.Normalize();
 		dir *= 200.0f;

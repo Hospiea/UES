@@ -9,7 +9,10 @@ UDataManager::UDataManager(const FObjectInitializer& ObjectInitializer)
 {
 	static ConstructorHelpers::FObjectFinder<UDataTable> playerstats(TEXT("/Script/Engine.DataTable'/Game/Assets/Data/PlayerStats.PlayerStats'"));
 	static ConstructorHelpers::FObjectFinder<UDataTable> enemystats(TEXT("/Script/Engine.DataTable'/Game/Assets/Data/EnemyStats.EnemyStats'"));
+	static ConstructorHelpers::FObjectFinder<UDataTable> weapondata(TEXT("/Script/Engine.DataTable'/Game/Assets/Data/WeaponData.WeaponData'"));
+
 
 	PlayerStats = playerstats.Object;
 	EnemyStats = enemystats.Object;
+	WeaponData = weapondata.Object;
 }
