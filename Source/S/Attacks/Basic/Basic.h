@@ -16,7 +16,7 @@ class S_API UBasic : public UObject, public IBasicAttack
 	GENERATED_BODY()
 	
 public:
-	void BasicAttack(const FVector2D& Dir) override {};
+	void BasicAttack(const FVector2D& Dir) override;
 	inline void SetPlayer(AUser* user) { User = user; }
 	inline void SetWorld(UWorld* world) { World = world; }
 
@@ -27,4 +27,6 @@ protected:
 
 	UPROPERTY()
 	TObjectPtr<UWorld> World;
+
+	
 };

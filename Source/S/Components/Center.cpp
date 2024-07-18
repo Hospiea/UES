@@ -30,7 +30,7 @@ void UCenter::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponen
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	CurrentRotation.Pitch += -100.0f * DeltaTime;
+	CurrentRotation.Pitch += -500.0f * DeltaTime;
 	SetRelativeRotation(CurrentRotation);
 }
 
