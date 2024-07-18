@@ -37,8 +37,12 @@ protected:
 	TObjectPtr<UInputAction> Move;
 
 	UPROPERTY(EditAnywhere)
+	TObjectPtr<UInputAction> Left;
+
+	UPROPERTY(EditAnywhere)
 	TObjectPtr<UInputMappingContext> Context;
 
 	void MoveFunc(const FInputActionValue& value);
 	void StopFunc(const FInputActionValue& value);
+	void LeftFunc(const FInputActionValue& value);
 };

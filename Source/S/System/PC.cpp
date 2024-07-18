@@ -9,6 +9,7 @@
 #include "InputAction.h"
 #include "InputMappingContext.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Attacks/Basic/Basic.h"
 
 
 APC::APC(const FObjectInitializer& Init)
@@ -35,6 +36,7 @@ void APC::BeginPlay()
 
 	Component->BindAction(Move, ETriggerEvent::Triggered, this, &APC::MoveFunc);
 	Component->BindAction(Move, ETriggerEvent::Completed, this, &APC::StopFunc);
+	Component->BindAction(Left, ETriggerEvent::Triggered, this, &APC::LeftFunc);
 }
 
 void APC::MoveFunc(const FInputActionValue& value)
@@ -62,4 +64,9 @@ void APC::StopFunc(const FInputActionValue& value)
 	{
 		User->GetCharacterMovement()->Velocity = FVector(0.0f, 0.0f, 0.0f);
 	}
+}
+
+void APC::LeftFunc(const FInputActionValue& value)
+{
+	User->GetBasicAttack()->BasicAttack();
 }
