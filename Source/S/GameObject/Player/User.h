@@ -16,5 +16,5 @@ class S_API AUser : public AGameObjects
 	
 protected:
 	virtual void BeginPlay() override;
-
+	virtual void Tick(float dt) override;
 };

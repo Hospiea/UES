@@ -3,6 +3,7 @@
 
 #include "GameObject/GameObjects.h"
 #include "Components/CapsuleComponent.h"
+#include "Components/AnimationComponent.h"
 
 AGameObjects::AGameObjects()
 {
@@ -12,4 +13,14 @@ AGameObjects::AGameObjects()
 	static ConstructorHelpers::FObjectFinder<UFlipbookAsset> flipbooks(TEXT("/Script/S.FlipbookAsset'/Game/Assets/Data/Flipbooks.Flipbooks'"));
 	Flipbooks = flipbooks.Object;
 
+	AnimationComponent = CreateDefaultSubobject<UAnimationComponent>(TEXT("AnimationComponent"));
+	
+}
+
+void AGameObjects::BeginPlay()
+{
+	Super::BeginPlay();
+	AnimationComponent->SetOwningGameObject(this);
+	AnimationComponent->SetSprite(GetSprite());
+	AnimationComponent->SetMovementComponent(GetCharacterMovement());
 }

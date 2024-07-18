@@ -7,6 +7,7 @@
 #include "Data/FlipbookAsset.h"
 #include "GameObjects.generated.h"
 
+class UAnimationComponent;
 
 UCLASS()
 class S_API AGameObjects : public APaperCharacter
@@ -17,6 +18,11 @@ public:
 	AGameObjects();
 
 protected:
+	virtual void BeginPlay() override;
+
 	UPROPERTY(VisibleAnywhere, Category = "Flipbook Assets")
 	TObjectPtr<UFlipbookAsset> Flipbooks;
+
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr<UAnimationComponent> AnimationComponent;
 };
