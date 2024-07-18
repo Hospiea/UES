@@ -25,7 +25,7 @@ void APSword::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherA
 	{
 		enemy->SetEnemyState(AEnemy::EnemyState::KnockBacked);
 		FVector dir = enemy->GetActorLocation() - Managers->Game->Player->GetActorLocation();
-
+		enemy->GetDamage(10.0f);
 		dir.Y = 0.0f;
 		dir.Normalize();
 		dir *= 200.0f;

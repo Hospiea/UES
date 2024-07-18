@@ -16,9 +16,12 @@ class S_API AGameObjects : public APaperCharacter
 	
 public:
 	AGameObjects();
+	virtual void GetDamage(const float& value) {};
 
 protected:
 	virtual void BeginPlay() override;
+
+	
 
 	UPROPERTY(VisibleAnywhere, Category = "Flipbook Assets")
 	TObjectPtr<UFlipbookAsset> Flipbooks;
@@ -26,6 +29,5 @@ protected:
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UAnimationComponent> AnimationComponent;
 
-	UPROPERTY()
-	float CurHp;
+	
 };

@@ -40,4 +40,7 @@ protected:
 	TObjectPtr<UBasic> Basic;
 
 	PlayerStats Stats;
+
+	UPROPERTY()
+	float CurHp;
 };
