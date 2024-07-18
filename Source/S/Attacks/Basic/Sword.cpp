@@ -17,18 +17,22 @@ void USword::BasicAttack(const FVector2D& Dir)
 {
 	Super::BasicAttack(Dir);
 
-    FVector2D NewDir = Dir * 30.0f;
-    FVector SpawnLocation = User->GetActorLocation() + FVector(NewDir.X, 0.0f, NewDir.Y);
+	FVector2D NewDir = Dir * 50.0f;
+	FVector SpawnLocation = User->GetActorLocation() + FVector(NewDir.X, 0.0f, NewDir.Y);
+	FVector Base = FVector::ForwardVector;
 
-    APSword* temp = World->SpawnActor<APSword>(SwordClass, SpawnLocation, FRotator::ZeroRotator);
-    if (temp)
-    {
-        FVector TargetLocation = SpawnLocation + FVector(NewDir.X, 0.0f, NewDir.Y);
-        FRotator Rotation = UKismetMathLibrary::FindLookAtRotation(FVector(1.0f, 0.0f, 0.0f), SpawnLocation);
+	FVector NormalizedSpawnLocation = FVector(NewDir.X, 0.0f, NewDir.Y).GetSafeNormal();
+	FVector NormalizedBase = Base.GetSafeNormal();
+	float CosineAngle = FVector::DotProduct(NormalizedSpawnLocation, NormalizedBase);
+	float Angle = FMath::RadiansToDegrees(FMath::Acos(CosineAngle));
 
-        FRotator AdjustedRotation = FRotator(Rotation.Yaw, 0.0f, 0.0f);
 
-        temp->SetActorRotation(AdjustedRotation);
-        temp->AttachToComponent(User->GetCenter(), FAttachmentTransformRules::KeepWorldTransform);
-    }
+	FVector CrossProduct = FVector::CrossProduct(NormalizedSpawnLocation, NormalizedBase);
+	if (CrossProduct.Y < 0)
+		Angle = -Angle;
+
+		
+	APSword* temp = World->SpawnActor<APSword>(SwordClass, SpawnLocation, FRotator(Angle, 0.0f, 0.0f));
+	temp->AttachToComponent(User->GetCenter(), FAttachmentTransformRules::KeepWorldTransform);
+	temp->SetLifeSpan(0.15f);
 }
