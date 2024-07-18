@@ -8,6 +8,8 @@
 
 class UCenter;
 class UBasic;
+class USWidgetComponent;
+
 
 UCLASS()
 class S_API AUser : public AGameObjects
@@ -38,6 +40,9 @@ protected:
 
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UBasic> Basic;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	TObjectPtr<USWidgetComponent> HPBar;
 
 	PlayerStats Stats;
 

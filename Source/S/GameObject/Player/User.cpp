@@ -10,18 +10,23 @@
 #include "Components/CapsuleComponent.h"
 #include "System/GMB.h"
 #include "Data/ObjectStatData.h"
+#include "Components/SWidgetComponent.h"
 
 AUser::AUser()
 {
 	Center = CreateDefaultSubobject<UCenter>(TEXT("CenterComponent"));
 	Center->SetupAttachment(RootComponent);
 	GetCapsuleComponent()->SetCollisionProfileName(TEXT("Player"));
+
+	HPBar = CreateDefaultSubobject<USWidgetComponent>(TEXT("HPBar"));
+	HPBar->SetupAttachment(RootComponent);
 }
 
 void AUser::PreInitializeComponents()
 {
 	Super::PreInitializeComponents();
-	Managers->Game->Player = this;
+	if(Managers)
+		Managers->Game->Player = this;
 
 	Stats.Speed = Managers->Data->PlayerStats->FindRow<FPlayerStats>(TEXT("1"), TEXT(""))->Speed;
 	Stats.MaxHp = Managers->Data->PlayerStats->FindRow<FPlayerStats>(TEXT("1"), TEXT(""))->MaxHp;
