@@ -11,6 +11,7 @@
 #include "System/GMB.h"
 #include "Data/ObjectStatData.h"
 #include "Components/SWidgetComponent.h"
+#include "Widgets/WidgetHUD.h"
 
 AUser::AUser()
 {
@@ -53,4 +54,5 @@ void AUser::Tick(float dt)
 
 	else
 		GetSprite()->SetFlipbook(Flipbooks->Flipbooks["C1_Run"]);
+
 }
