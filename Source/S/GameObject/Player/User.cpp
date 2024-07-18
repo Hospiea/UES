@@ -9,6 +9,7 @@
 #include "Attacks/Basic/Basic.h"
 #include "Components/CapsuleComponent.h"
 #include "System/GMB.h"
+#include "Data/ObjectStatData.h"
 
 AUser::AUser()
 {
@@ -31,6 +32,9 @@ void AUser::BeginPlay()
 	Basic = NewObject<USword>(this);
 	Basic->SetPlayer(this);
 	Basic->SetWorld(GetWorld());
+
+	Stats.Speed = Managers->Data->PlayerStats->FindRow<FPlayerStats>(TEXT("1"), TEXT(""))->Speed;
+	Stats.MaxHp = Managers->Data->PlayerStats->FindRow<FPlayerStats>(TEXT("1"), TEXT(""))->MaxHp;
 
 }
 

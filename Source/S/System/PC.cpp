@@ -45,7 +45,7 @@ void APC::MoveFunc(const FInputActionValue& value)
 	FVector2D Dir = value.Get<FVector2D>();
 
 	Dir.Normalize();
-	Dir *= Managers->Data->PlayerStats->FindRow<FPlayerStats>(TEXT("1"), TEXT(""))->Speed;
+	Dir *= User->GetStats().Speed;
 
 	User->GetCharacterMovement()->Velocity = FVector(Dir.X, 0.0f, Dir.Y);
 }

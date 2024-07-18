@@ -8,6 +8,7 @@
 
 class AUser;
 class AAIC;
+struct EnemyStats;
 
 UCLASS()
 class S_API AEnemy : public AGameObjects
@@ -15,6 +16,12 @@ class S_API AEnemy : public AGameObjects
 	GENERATED_BODY()
 
 public:
+	struct EnemyStats
+	{
+		float Speed;
+		float MaxHp;
+	};
+
 	enum class EnemyState
 	{
 		Normal,
@@ -45,4 +52,5 @@ protected:
 	UFUNCTION()
 	virtual void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 	
+	EnemyStats Stats;
 };

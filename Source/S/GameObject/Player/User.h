@@ -15,7 +15,16 @@ class S_API AUser : public AGameObjects
 	GENERATED_BODY()
 
 public:
+	struct PlayerStats
+	{
+		float Speed;
+		float MaxHp;
+	};
+
+
+
 	AUser();
+	inline const PlayerStats& GetStats() { return Stats; }
 	TObjectPtr<UCenter>& GetCenter() { return Center; }
 	TObjectPtr<UBasic>& GetBasicAttack() { return Basic; }
 
@@ -29,4 +38,6 @@ protected:
 
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UBasic> Basic;
+
+	PlayerStats Stats;
 };
