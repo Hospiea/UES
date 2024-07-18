@@ -37,6 +37,7 @@ public:
 	inline void SetEnemyState(const EnemyState& state) { State = state; }
 
 protected:
+	virtual void PreInitializeComponents() override;
 	virtual void BeginPlay() override;
 	
 	FTimerHandle TimerHandle;

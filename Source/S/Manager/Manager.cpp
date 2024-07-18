@@ -3,6 +3,11 @@
 
 #include "Manager/Manager.h"
 
+UManager::~UManager()
+{
+	delete Game;
+}
+
 void UManager::Initialize(FSubsystemCollectionBase& Collection)
 {
 	Super::Initialize(Collection);
@@ -13,6 +18,5 @@ void UManager::Initialize(FSubsystemCollectionBase& Collection)
 void UManager::Deinitialize()
 {
 	Super::Deinitialize();
-	delete Game;
 
 }

@@ -22,6 +22,9 @@ void AUser::PreInitializeComponents()
 {
 	Super::PreInitializeComponents();
 	Managers->Game->Player = this;
+
+	Stats.Speed = Managers->Data->PlayerStats->FindRow<FPlayerStats>(TEXT("1"), TEXT(""))->Speed;
+	Stats.MaxHp = Managers->Data->PlayerStats->FindRow<FPlayerStats>(TEXT("1"), TEXT(""))->MaxHp;
 }
 
 void AUser::BeginPlay()
@@ -33,8 +36,7 @@ void AUser::BeginPlay()
 	Basic->SetPlayer(this);
 	Basic->SetWorld(GetWorld());
 
-	Stats.Speed = Managers->Data->PlayerStats->FindRow<FPlayerStats>(TEXT("1"), TEXT(""))->Speed;
-	Stats.MaxHp = Managers->Data->PlayerStats->FindRow<FPlayerStats>(TEXT("1"), TEXT(""))->MaxHp;
+	CurHp = Stats.MaxHp;
 
 }
 

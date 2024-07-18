@@ -25,4 +25,7 @@ protected:
 
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UAnimationComponent> AnimationComponent;
+
+	UPROPERTY()
+	float CurHp;
 };

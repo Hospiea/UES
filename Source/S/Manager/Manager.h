@@ -14,9 +14,12 @@ class S_API UManager : public UEngineSubsystem
 	
 
 public:
+	virtual ~UManager() override;
+	
 	GameManager* Game;
 	UPROPERTY()
 	TObjectPtr<UDataManager> Data;
+
 
 protected:
 	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
