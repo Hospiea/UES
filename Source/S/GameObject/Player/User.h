@@ -20,6 +20,7 @@ public:
 	TObjectPtr<UBasic>& GetBasicAttack() { return Basic; }
 
 protected:
+	virtual void PreInitializeComponents() override;
 	virtual void BeginPlay() override;
 	virtual void Tick(float dt) override;
 

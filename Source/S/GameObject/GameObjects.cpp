@@ -4,6 +4,7 @@
 #include "GameObject/GameObjects.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/AnimationComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 AGameObjects::AGameObjects()
 {
@@ -15,11 +16,16 @@ AGameObjects::AGameObjects()
 
 	AnimationComponent = CreateDefaultSubobject<UAnimationComponent>(TEXT("AnimationComponent"));
 	
+	GetCharacterMovement()->SetPlaneConstraintAxisSetting(EPlaneConstraintAxisSetting::Y);
+	GetCharacterMovement()->SetPlaneConstraintEnabled(true);
+
+	//GetCapsuleComponent()->SetConstraintMode(EDOFMode::XZPlane);
 }
 
 void AGameObjects::BeginPlay()
 {
 	Super::BeginPlay();
+	
 	AnimationComponent->SetOwningGameObject(this);
 	AnimationComponent->SetSprite(GetSprite());
 	AnimationComponent->SetMovementComponent(GetCharacterMovement());

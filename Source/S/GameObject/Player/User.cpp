@@ -8,12 +8,19 @@
 #include "Attacks/Basic/Sword.h"
 #include "Attacks/Basic/Basic.h"
 #include "Components/CapsuleComponent.h"
+#include "System/GMB.h"
 
 AUser::AUser()
 {
 	Center = CreateDefaultSubobject<UCenter>(TEXT("CenterComponent"));
 	Center->SetupAttachment(RootComponent);
 	GetCapsuleComponent()->SetCollisionProfileName(TEXT("Player"));
+}
+
+void AUser::PreInitializeComponents()
+{
+	Super::PreInitializeComponents();
+	Managers->Game->Player = this;
 }
 
 void AUser::BeginPlay()
@@ -24,6 +31,7 @@ void AUser::BeginPlay()
 	Basic = NewObject<USword>(this);
 	Basic->SetPlayer(this);
 	Basic->SetWorld(GetWorld());
+
 }
 
 void AUser::Tick(float dt)

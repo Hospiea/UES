@@ -4,23 +4,29 @@
 
 #include "CoreMinimal.h"
 #include "GameObject/GameObjects.h"
-#include "Projectiles.generated.h"
+#include "Enemy.generated.h"
 
-/**
- * 
- */
+class AUser;
+class AAIC;
+
 UCLASS()
-class S_API AProjectiles : public AGameObjects
+class S_API AEnemy : public AGameObjects
 {
 	GENERATED_BODY()
 
 public:
-	AProjectiles();
-	
+	AEnemy();
+
 protected:
 	virtual void BeginPlay() override;
+	
+	UPROPERTY()
+	TObjectPtr<AUser> Target;
+
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr<AAIC> AIController;
 
 	UFUNCTION()
 	virtual void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
-
+	
 };
