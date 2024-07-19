@@ -11,7 +11,6 @@
 #include "System/GMB.h"
 #include "Data/ObjectStatData.h"
 #include "Components/SWidgetComponent.h"
-#include "Widgets/WidgetHUD.h"
 
 AUser::AUser()
 {
