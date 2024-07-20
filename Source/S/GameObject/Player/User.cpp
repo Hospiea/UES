@@ -16,6 +16,7 @@
 #include "Attacks/Basic/Staff.h"
 #include "Components/DetectComponent.h"
 
+
 AUser::AUser()
 {
 	Center = CreateDefaultSubobject<UCenter>(TEXT("CenterComponent"));
@@ -29,12 +30,30 @@ AUser::AUser()
 	DetectComponent->SetupAttachment(RootComponent);
 }
 
+void AUser::GetExp(const float& value)
+{
+	CurExp += value;
+
+	//if(CurExp > )
+}
+
 void AUser::PreInitializeComponents()
 {
 	Super::PreInitializeComponents();
 	if(Managers)
 		Managers->Game->Player = this;
 
+	
+	
+	DetectComponent->SetPlayer(this);
+}
+
+void AUser::BeginPlay()
+{
+	Super::BeginPlay();
+	GetSprite()->SetFlipbook(Flipbooks->Flipbooks["C1_Idle"]);
+
+#pragma region Setting
 	Stats.Speed = Managers->Data->PlayerStats->FindRow<FPlayerStats>(TEXT("1"), TEXT(""))->Speed;
 	Stats.MaxHp = Managers->Data->PlayerStats->FindRow<FPlayerStats>(TEXT("1"), TEXT(""))->MaxHp;
 	Stats.HPRegen = Managers->Data->PlayerStats->FindRow<FPlayerStats>(TEXT("1"), TEXT(""))->HPRegen;
@@ -49,24 +68,16 @@ void AUser::PreInitializeComponents()
 	Stats.ProjectileSize = Managers->Data->PlayerStats->FindRow<FPlayerStats>(TEXT("1"), TEXT(""))->ProjectileSize;
 	Stats.ProjectileDuration = Managers->Data->PlayerStats->FindRow<FPlayerStats>(TEXT("1"), TEXT(""))->ProjectileDuration;
 	
-	DetectComponent->SetPlayer(this);
-}
-
-void AUser::BeginPlay()
-{
-	Super::BeginPlay();
-	GetSprite()->SetFlipbook(Flipbooks->Flipbooks["C1_Idle"]);
-
-	// Initialize Weapon Here
-	/*Basic = NewObject<USword>(this);
-	Basic->SetPlayer(this);
-	Basic->SetWorld(GetWorld());*/
-	Basic = NewObject<UStaff>(this);
+	Basic = NewObject<USword>(this);
 	Basic->SetPlayer(this);
 	Basic->SetWorld(GetWorld());
 	Basic->Init();
 
 	CurHp = Stats.MaxHp;
+
+	ExpData->GetAllRows<FExpData>(TEXT(""), RequiredExp);
+#pragma endregion
+
 }
 
 void AUser::Tick(float dt)

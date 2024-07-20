@@ -16,4 +16,11 @@ public:
 	UPROPERTY()
 	TObjectPtr<AUser> Player;
 
+	UPROPERTY()
+	uint32 KillCounts;
+
+	UPROPERTY()
+	float Timer;
+
+	
 };

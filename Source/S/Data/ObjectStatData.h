@@ -79,3 +79,13 @@ struct S_API FPlayerStats : public FTableRowBase
 
 
 };
+
+
+USTRUCT()
+struct S_API FExpData : public FTableRowBase
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere)
+	float RequiredExp;
+};

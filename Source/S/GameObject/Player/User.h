@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameObject/GameObjects.h"
+#include "Data/ObjectStatData.h"
 #include "User.generated.h"
 
 class UCenter;
@@ -40,6 +41,7 @@ public:
 	inline const PlayerStats& GetStats() { return Stats; }
 	TObjectPtr<UCenter>& GetCenter() { return Center; }
 	TObjectPtr<UBasic>& GetBasicAttack() { return Basic; }
+	void GetExp(const float& value);
 
 protected:
 	virtual void PreInitializeComponents() override;
@@ -58,8 +60,19 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	TObjectPtr<USWidgetComponent> HPBar;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TObjectPtr<UDataTable> ExpData;
+
+	TArray<FExpData*> RequiredExp;
+
 	PlayerStats Stats;
 
 	UPROPERTY()
 	float CurHp;
+
+	UPROPERTY()
+	float CurExp;
+
+	UPROPERTY()
+	uint8 Level;
 };
