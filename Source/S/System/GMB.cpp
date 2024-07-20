@@ -4,6 +4,7 @@
 #include "System/GMB.h"
 #include "Spawner.h"
 #include "Manager/Manager.h"
+#include "Blueprint/UserWidget.h"
 
 AGMB* AGMB::Instance = nullptr;
 
@@ -22,4 +23,5 @@ void AGMB::BeginPlay()
 {
 	Super::BeginPlay();
 	Spawner = GetWorld()->SpawnActor<ASpawner>();
+	Managers->Widget = GetWorld()->SpawnActor<AWidgetManager>();
 }

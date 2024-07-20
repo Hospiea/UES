@@ -11,6 +11,8 @@
 #include "System/GMB.h"
 #include "Data/ObjectStatData.h"
 #include "Components/SWidgetComponent.h"
+#include "Attacks/Basic/Axe.h"
+#include "Attacks/Basic/Spear.h"
 
 AUser::AUser()
 {
@@ -30,6 +32,18 @@ void AUser::PreInitializeComponents()
 
 	Stats.Speed = Managers->Data->PlayerStats->FindRow<FPlayerStats>(TEXT("1"), TEXT(""))->Speed;
 	Stats.MaxHp = Managers->Data->PlayerStats->FindRow<FPlayerStats>(TEXT("1"), TEXT(""))->MaxHp;
+	Stats.HPRegen = Managers->Data->PlayerStats->FindRow<FPlayerStats>(TEXT("1"), TEXT(""))->HPRegen;
+	Stats.Defense = Managers->Data->PlayerStats->FindRow<FPlayerStats>(TEXT("1"), TEXT(""))->Defense;
+	Stats.ExpValue = Managers->Data->PlayerStats->FindRow<FPlayerStats>(TEXT("1"), TEXT(""))->ExpValue;
+	Stats.SourceValue = Managers->Data->PlayerStats->FindRow<FPlayerStats>(TEXT("1"), TEXT(""))->SourceValue;
+	Stats.UntouchableTime = Managers->Data->PlayerStats->FindRow<FPlayerStats>(TEXT("1"), TEXT(""))->UntouchableTime;
+	Stats.ObtainRange = Managers->Data->PlayerStats->FindRow<FPlayerStats>(TEXT("1"), TEXT(""))->ObtainRange;
+	Stats.AttackValue = Managers->Data->PlayerStats->FindRow<FPlayerStats>(TEXT("1"), TEXT(""))->AttackValue;
+	Stats.Rate = Managers->Data->PlayerStats->FindRow<FPlayerStats>(TEXT("1"), TEXT(""))->Rate;
+	Stats.ProjectileSpeed = Managers->Data->PlayerStats->FindRow<FPlayerStats>(TEXT("1"), TEXT(""))->ProjectileSpeed;
+	Stats.ProjectileSize = Managers->Data->PlayerStats->FindRow<FPlayerStats>(TEXT("1"), TEXT(""))->ProjectileSize;
+	Stats.ProjectileDuration = Managers->Data->PlayerStats->FindRow<FPlayerStats>(TEXT("1"), TEXT(""))->ProjectileDuration;
+
 }
 
 void AUser::BeginPlay()
@@ -37,9 +51,14 @@ void AUser::BeginPlay()
 	Super::BeginPlay();
 	GetSprite()->SetFlipbook(Flipbooks->Flipbooks["C1_Idle"]);
 
+	// Initialize Weapon Here
+	/*Basic = NewObject<USword>(this);
+	Basic->SetPlayer(this);
+	Basic->SetWorld(GetWorld());*/
 	Basic = NewObject<USword>(this);
 	Basic->SetPlayer(this);
 	Basic->SetWorld(GetWorld());
+	Basic->Init();
 
 	CurHp = Stats.MaxHp;
 

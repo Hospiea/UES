@@ -30,5 +30,10 @@ struct S_API FWeaponData : public FTableRowBase
 	UPROPERTY(VisibleAnywhere)
 	float Range;
 
+	UPROPERTY(VisibleAnywhere)
+	float Speed;
+
+	UPROPERTY(VisibleAnywhere)
+	float Duration;
 	
 };

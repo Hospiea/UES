@@ -14,7 +14,7 @@ AWidgetManager::AWidgetManager()
 void AWidgetManager::BeginPlay()
 {
 	Super::BeginPlay();
-	CurrentWidget = CreateWidget(GetWorld(), Widgets->Widgets["HUD"]);
+	CurrentWidget = CreateWidget(GetWorld(), Widgets->Widgets["Battle"]);
 	CurrentWidget->AddToViewport();
 }
 

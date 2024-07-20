@@ -4,20 +4,21 @@
 
 #include "CoreMinimal.h"
 #include "Attacks/Basic/Basic.h"
-#include "Sword.generated.h"
+#include "Axe.generated.h"
 
-class APSword;
+class APAxe;
 
 UCLASS()
-class S_API USword : public UBasic
+class S_API UAxe : public UBasic
 {
 	GENERATED_BODY()
 	
-public:
-	USword(const FObjectInitializer& Init);
+
+protected:
 	virtual void Init() override;
 	virtual void BasicAttack(const FVector2D& Dir) override;
+	
 
 	UPROPERTY()
-	TSubclassOf<APSword> SwordClass;
+	TSubclassOf<APAxe> AxeClass;
 };

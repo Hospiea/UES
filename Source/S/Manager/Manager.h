@@ -6,6 +6,7 @@
 #include "GameManager.h"
 #include "Manager.generated.h"
 
+class AWidgetManager;
 
 UCLASS()
 class S_API UManager : public UEngineSubsystem
@@ -15,7 +16,7 @@ class S_API UManager : public UEngineSubsystem
 
 public:
 	virtual ~UManager() override;
-	
+	TObjectPtr<AWidgetManager> Widget;
 	GameManager* Game;
 	UPROPERTY()
 	TObjectPtr<UDataManager> Data;

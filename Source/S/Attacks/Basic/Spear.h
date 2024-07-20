@@ -4,20 +4,18 @@
 
 #include "CoreMinimal.h"
 #include "Attacks/Basic/Basic.h"
-#include "Sword.generated.h"
+#include "Spear.generated.h"
 
-class APSword;
-
+/**
+ * 
+ */
 UCLASS()
-class S_API USword : public UBasic
+class S_API USpear : public UBasic
 {
 	GENERATED_BODY()
 	
-public:
-	USword(const FObjectInitializer& Init);
+protected:
 	virtual void Init() override;
 	virtual void BasicAttack(const FVector2D& Dir) override;
 
-	UPROPERTY()
-	TSubclassOf<APSword> SwordClass;
 };

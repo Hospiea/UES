@@ -15,10 +15,14 @@ class S_API APSword : public AMelee
 
 public:
 	APSword();
+	inline const WeaponData& GetData()
+	{
+		return Data;
+	}
 
 protected:
 	virtual void BeginPlay() override;
-
+	static WeaponData Data;
 
 	virtual void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) override;
 };

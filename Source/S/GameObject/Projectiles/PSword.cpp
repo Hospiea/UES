@@ -7,18 +7,25 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "System/GMB.h"
 
+
+
 APSword::APSword()
 {
-
+	str = TEXT("Sword");
 }
 
 void APSword::BeginPlay()
 {
 	Super::BeginPlay();
-
-	Data.Damage = Managers->Data->WeaponData->FindRow<FWeaponData>(TEXT("1"), TEXT(""))->Damage;
-	Data.Rate = Managers->Data->WeaponData->FindRow<FWeaponData>(TEXT("1"), TEXT(""))->Rate;
-	Data.Range = Managers->Data->WeaponData->FindRow<FWeaponData>(TEXT("1"), TEXT(""))->Range;
+	if (Data.Damage == 0.0f)
+	{
+		Data.Damage = Managers->Data->WeaponData->FindRow<FWeaponData>(TEXT("Sword"), TEXT(""))->Damage;
+		Data.Duration = Managers->Data->WeaponData->FindRow<FWeaponData>(TEXT("Sword"), TEXT(""))->Duration;
+		Data.Range = Managers->Data->WeaponData->FindRow<FWeaponData>(TEXT("Sword"), TEXT(""))->Range;
+		Data.Rate = Managers->Data->WeaponData->FindRow<FWeaponData>(TEXT("Sword"), TEXT(""))->Rate;
+		Data.Speed = Managers->Data->WeaponData->FindRow<FWeaponData>(TEXT("Sword"), TEXT(""))->Speed;
+	}
+	
 }
 
 void APSword::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)

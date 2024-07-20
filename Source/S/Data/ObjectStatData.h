@@ -38,12 +38,44 @@ USTRUCT()
 struct S_API FPlayerStats : public FTableRowBase
 {
 	GENERATED_BODY()
-
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(VisibleAnywhere)
 	float Speed;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(VisibleAnywhere)
 	float MaxHp;
+
+	UPROPERTY(VisibleAnywhere)
+	float HPRegen;
+
+	UPROPERTY(VisibleAnywhere)
+	float Defense;
+
+	UPROPERTY(VisibleAnywhere)
+	float ExpValue;
+
+	UPROPERTY(VisibleAnywhere)
+	float SourceValue;
+
+	UPROPERTY(VisibleAnywhere)
+	float UntouchableTime;
+
+	UPROPERTY(VisibleAnywhere)
+	float ObtainRange;
+
+	UPROPERTY(VisibleAnywhere)
+	float AttackValue;
+
+	UPROPERTY(VisibleAnywhere)
+	float Rate;
+
+	UPROPERTY(VisibleAnywhere)
+	float ProjectileSpeed;
+
+	UPROPERTY(VisibleAnywhere)
+	float ProjectileSize;
+
+	UPROPERTY(VisibleAnywhere)
+	float ProjectileDuration;
 
 
 };

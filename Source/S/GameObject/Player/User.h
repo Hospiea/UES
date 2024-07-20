@@ -21,6 +21,17 @@ public:
 	{
 		float Speed;
 		float MaxHp;
+		float HPRegen;
+		float Defense;
+		float ExpValue;
+		float SourceValue;
+		float UntouchableTime;
+		float ObtainRange;
+		float AttackValue;
+		float Rate;
+		float ProjectileSpeed;
+		float ProjectileSize;
+		float ProjectileDuration;
 	};
 
 

@@ -1,2 +1,4 @@
-Index,Damage,Rate,Range
-1,10,0,50
+Index,Damage,Rate,Range,Speed,Duration
+Sword,10,0.5,50,0,0.1
+Axe,5,0.7,25,200,0.5
+Spear,5,1,25,1000,0.3
