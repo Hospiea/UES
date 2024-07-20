@@ -12,15 +12,13 @@ WeaponData APSword::Data;
 USword::USword(const FObjectInitializer& Init)
 	:Super(Init)
 {
-	//static ConstructorHelpers::FClassFinder<APSword> sword(TEXT("/Script/Engine.Blueprint'/Game/Assets/Blueprints/GameObjects/Projectiles/Basic/BP_PSword.BP_PSword_C'"));
-	//SwordClass = sword.Class;
-	//SwordClass
 
 }
 
 void USword::Init()
 {
 	WeaponClass = Weapons->Weapons["Sword"];
+	
 }
 
 void USword::BasicAttack(const FVector2D& Dir)

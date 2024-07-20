@@ -16,7 +16,7 @@
 APC::APC(const FObjectInitializer& Init)
 	:Super(Init)
 {
-	
+	PrimaryActorTick.bCanEverTick = true;
 }
 
 void APC::BeginPlay()
@@ -38,6 +38,14 @@ void APC::BeginPlay()
 	Component->BindAction(Move, ETriggerEvent::Triggered, this, &APC::MoveFunc);
 	Component->BindAction(Move, ETriggerEvent::Completed, this, &APC::StopFunc);
 	Component->BindAction(Left, ETriggerEvent::Triggered, this, &APC::LeftFunc);
+
+	Timer = 0.0f;
+}
+
+void APC::Tick(float dt)
+{
+	Super::Tick(dt);
+	Timer += dt;
 }
 
 void APC::MoveFunc(const FInputActionValue& value)
@@ -69,6 +77,8 @@ void APC::StopFunc(const FInputActionValue& value)
 
 void APC::LeftFunc(const FInputActionValue& value)
 {
+	
+
 	FVector2D Location;
 	GetMousePosition(Location.X, Location.Y);
 	int32 CenterX, CenterY;

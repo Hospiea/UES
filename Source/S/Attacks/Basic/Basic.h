@@ -23,6 +23,7 @@ public:
 	inline void SetPlayer(AUser* user) { User = user; }
 	inline void SetWorld(UWorld* world) { World = world; }
 	virtual void Init() {};
+	const float& GetRate() { return Rate; }
 
 protected:
 	UPROPERTY()
@@ -33,6 +34,9 @@ protected:
 
 	UPROPERTY()
 	float Angle;
+
+	UPROPERTY()
+	float Rate;
 
 	UPROPERTY()
 	FVector SpawnLocation;

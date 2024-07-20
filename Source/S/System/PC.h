@@ -23,6 +23,7 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
+	virtual void Tick(float dt) override;
 
 	UPROPERTY(BlueprintReadOnly)
 	TObjectPtr<AUser> User;
@@ -41,6 +42,9 @@ protected:
 
 	UPROPERTY(EditAnywhere)
 	TObjectPtr<UInputMappingContext> Context;
+
+	UPROPERTY(VisibleAnywhere)
+	float Timer;
 
 	void MoveFunc(const FInputActionValue& value);
 	void StopFunc(const FInputActionValue& value);

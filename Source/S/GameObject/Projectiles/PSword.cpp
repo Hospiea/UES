@@ -11,6 +11,7 @@
 
 APSword::APSword()
 {
+	PrimaryActorTick.bCanEverTick = true;
 	str = TEXT("Sword");
 }
 
@@ -25,6 +26,12 @@ void APSword::BeginPlay()
 		Data.Rate = Managers->Data->WeaponData->FindRow<FWeaponData>(TEXT("Sword"), TEXT(""))->Rate;
 		Data.Speed = Managers->Data->WeaponData->FindRow<FWeaponData>(TEXT("Sword"), TEXT(""))->Speed;
 	}
+	
+}
+
+void APSword::Tick(float dt)
+{
+	Super::Tick(dt);
 	
 }
 

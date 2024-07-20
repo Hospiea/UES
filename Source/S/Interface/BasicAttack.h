@@ -23,4 +23,5 @@ class S_API IBasicAttack
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
 	virtual void BasicAttack(const FVector2D& Dir) = 0;
+	//virtual inline const WeaponData& GetData() = 0;
 };
