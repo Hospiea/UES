@@ -15,6 +15,7 @@
 #include "Attacks/Basic/Spear.h"
 #include "Attacks/Basic/Staff.h"
 #include "Components/DetectComponent.h"
+#include "System/PC.h"
 
 
 AUser::AUser()
@@ -34,7 +35,12 @@ void AUser::GetExp(const float& value)
 {
 	CurExp += value;
 
-	//if(CurExp > )
+	if (CurExp >= RequiredExp[Level]->RequiredExp)
+	{
+		CurExp -= RequiredExp[Level]->RequiredExp;
+		LevelUp();
+		++Level;
+	}
 }
 
 void AUser::PreInitializeComponents()
@@ -74,6 +80,8 @@ void AUser::BeginPlay()
 	Basic->Init();
 
 	CurHp = Stats.MaxHp;
+	Level = 0;
+	CurExp = 0.0f;
 
 	ExpData->GetAllRows<FExpData>(TEXT(""), RequiredExp);
 #pragma endregion
@@ -89,4 +97,10 @@ void AUser::Tick(float dt)
 	else
 		GetSprite()->SetFlipbook(Flipbooks->Flipbooks["C1_Run"]);
 
+}
+
+void AUser::LevelUp()
+{
+	Managers->Widget->LevelUp();
+	Cast<APC>(GetController())->LevelUp();
 }

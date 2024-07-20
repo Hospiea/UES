@@ -12,6 +12,17 @@ AEnemy::AEnemy()
 	GetCapsuleComponent()->SetCollisionProfileName(TEXT("Enemy"));
 }
 
+void AEnemy::GetDamage(const float& value)
+{
+	CurHp -= value;
+	if (CurHp <= 0.0f)
+	{
+		Target->GetExp(5);
+		++Managers->Game->KillCounts;
+		GetWorld()->DestroyActor(this);
+	}
+}
+
 void AEnemy::PreInitializeComponents()
 {
 	Super::PreInitializeComponents();

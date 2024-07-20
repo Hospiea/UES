@@ -24,4 +24,5 @@ void AGMB::BeginPlay()
 	Super::BeginPlay();
 	Spawner = GetWorld()->SpawnActor<ASpawner>();
 	Managers->Widget = GetWorld()->SpawnActor<AWidgetManager>();
+	Managers->Game->KillCounts = 0;
 }

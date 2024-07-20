@@ -4,9 +4,10 @@
 #include "Subsystems/EngineSubsystem.h"
 #include "DataManager.h"
 #include "GameManager.h"
+#include "WidgetManager.h"
 #include "Manager.generated.h"
 
-class AWidgetManager;
+class APC;
 
 UCLASS()
 class S_API UManager : public UEngineSubsystem
@@ -18,6 +19,10 @@ public:
 	virtual ~UManager() override;
 	TObjectPtr<AWidgetManager> Widget;
 	GameManager* Game;
+
+	UPROPERTY()
+	TObjectPtr<APC> Controller;
+
 	UPROPERTY()
 	TObjectPtr<UDataManager> Data;
 

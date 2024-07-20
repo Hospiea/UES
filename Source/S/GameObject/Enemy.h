@@ -35,14 +35,7 @@ public:
 
 	inline const EnemyState& GetEnemyState() { return State; }
 	inline void SetEnemyState(const EnemyState& state) { State = state; }
-	inline virtual void GetDamage(const float& value) override
-	{
-		CurHp -= value;
-		if (CurHp <= 0.0f)
-		{
-			GetWorld()->DestroyActor(this);
-		}
-	}
+	virtual void GetDamage(const float& value) override;
 protected:
 	virtual void PreInitializeComponents() override;
 	virtual void BeginPlay() override;

@@ -9,6 +9,7 @@
 class UTextBlock;
 class UButton;
 class UProgressBar;
+class AUser;
 
 UCLASS()
 class S_API UBattle : public UUserWidget
@@ -16,9 +17,11 @@ class S_API UBattle : public UUserWidget
 	GENERATED_BODY()
 	
 public:
+	inline void SetPlayer(AUser* user) { User = user; }
 
 protected:
 	virtual void NativeConstruct() override;
+	virtual void NativeTick(const FGeometry& geo, float dt) override;
 
 protected:
 	UPROPERTY(meta=(BindWidget))
@@ -32,4 +35,7 @@ protected:
 
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UProgressBar> EXP_Gauge;
+
+	UPROPERTY()
+	TObjectPtr<AUser> User;
 };

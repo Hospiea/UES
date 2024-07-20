@@ -42,11 +42,17 @@ public:
 	TObjectPtr<UCenter>& GetCenter() { return Center; }
 	TObjectPtr<UBasic>& GetBasicAttack() { return Basic; }
 	void GetExp(const float& value);
+	inline const uint8& GetLevel() { return Level; }
+	inline const float GetExpPercent() {
+		return CurExp / RequiredExp[Level]->RequiredExp;
+	}
+
 
 protected:
 	virtual void PreInitializeComponents() override;
 	virtual void BeginPlay() override;
 	virtual void Tick(float dt) override;
+	void LevelUp();
 
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UCenter> Center;

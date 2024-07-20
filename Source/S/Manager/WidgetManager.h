@@ -15,6 +15,8 @@ class S_API AWidgetManager : public AActor
 	
 public:	
 	AWidgetManager();
+	void LevelUp();
+	void RemovePopupWidget();
 
 protected:
 	virtual void BeginPlay() override;
@@ -25,6 +27,9 @@ protected:
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TObjectPtr<UUserWidget> CurrentWidget;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TObjectPtr<UUserWidget> PopupWidget;
 
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UWidgetAsset> Widgets;

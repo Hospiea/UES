@@ -20,6 +20,7 @@ class S_API APC : public APlayerController
 	
 public:
 	APC(const FObjectInitializer& Init);
+	void LevelUp();
 
 protected:
 	virtual void BeginPlay() override;

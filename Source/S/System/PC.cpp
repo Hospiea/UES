@@ -19,6 +19,11 @@ APC::APC(const FObjectInitializer& Init)
 	PrimaryActorTick.bCanEverTick = true;
 }
 
+void APC::LevelUp()
+{
+	SetInputMode(FInputModeUIOnly());
+}
+
 void APC::BeginPlay()
 {
 	Super::BeginPlay();
@@ -38,6 +43,8 @@ void APC::BeginPlay()
 	Component->BindAction(Move, ETriggerEvent::Triggered, this, &APC::MoveFunc);
 	Component->BindAction(Move, ETriggerEvent::Completed, this, &APC::StopFunc);
 	Component->BindAction(Left, ETriggerEvent::Triggered, this, &APC::LeftFunc);
+
+	Managers->Controller = this;
 
 	Timer = 0.0f;
 }

@@ -6,6 +6,8 @@
 
 GameManager::GameManager()
 {
+	Timer = 0.0f;
+	KillCounts = 0;
 }
 
 GameManager::~GameManager()
