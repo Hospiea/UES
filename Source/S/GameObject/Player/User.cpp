@@ -61,7 +61,7 @@ void AUser::BeginPlay()
 	/*Basic = NewObject<USword>(this);
 	Basic->SetPlayer(this);
 	Basic->SetWorld(GetWorld());*/
-	Basic = NewObject<USword>(this);
+	Basic = NewObject<UStaff>(this);
 	Basic->SetPlayer(this);
 	Basic->SetWorld(GetWorld());
 	Basic->Init();
