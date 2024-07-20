@@ -9,7 +9,7 @@
 class UCenter;
 class UBasic;
 class USWidgetComponent;
-
+class UDetectComponent;
 
 UCLASS()
 class S_API AUser : public AGameObjects
@@ -51,6 +51,9 @@ protected:
 
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UBasic> Basic;
+
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr <UDetectComponent> DetectComponent;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	TObjectPtr<USWidgetComponent> HPBar;

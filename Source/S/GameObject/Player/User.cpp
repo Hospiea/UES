@@ -13,6 +13,8 @@
 #include "Components/SWidgetComponent.h"
 #include "Attacks/Basic/Axe.h"
 #include "Attacks/Basic/Spear.h"
+#include "Attacks/Basic/Staff.h"
+#include "Components/DetectComponent.h"
 
 AUser::AUser()
 {
@@ -22,6 +24,9 @@ AUser::AUser()
 
 	HPBar = CreateDefaultSubobject<USWidgetComponent>(TEXT("HPBar"));
 	HPBar->SetupAttachment(RootComponent);
+
+	DetectComponent = CreateDefaultSubobject<UDetectComponent>(TEXT("DetectComponent"));
+	DetectComponent->SetupAttachment(RootComponent);
 }
 
 void AUser::PreInitializeComponents()
@@ -43,7 +48,8 @@ void AUser::PreInitializeComponents()
 	Stats.ProjectileSpeed = Managers->Data->PlayerStats->FindRow<FPlayerStats>(TEXT("1"), TEXT(""))->ProjectileSpeed;
 	Stats.ProjectileSize = Managers->Data->PlayerStats->FindRow<FPlayerStats>(TEXT("1"), TEXT(""))->ProjectileSize;
 	Stats.ProjectileDuration = Managers->Data->PlayerStats->FindRow<FPlayerStats>(TEXT("1"), TEXT(""))->ProjectileDuration;
-
+	
+	DetectComponent->SetPlayer(this);
 }
 
 void AUser::BeginPlay()
@@ -61,7 +67,6 @@ void AUser::BeginPlay()
 	Basic->Init();
 
 	CurHp = Stats.MaxHp;
-
 }
 
 void AUser::Tick(float dt)
