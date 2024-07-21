@@ -6,9 +6,11 @@
 #include "GameObject/GameObjects.h"
 #include "Projectiles.generated.h"
 
-
-struct WeaponData
+USTRUCT()
+struct FProjectileData
 {
+	GENERATED_BODY()
+
 	float Damage;
 	float Rate;
 	float Range;
@@ -19,7 +21,7 @@ struct WeaponData
 
 
 
-UCLASS(Abstract)
+UCLASS()
 class S_API AProjectiles : public AGameObjects
 {
 	GENERATED_BODY()

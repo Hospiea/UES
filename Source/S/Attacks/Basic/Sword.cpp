@@ -8,7 +8,7 @@
 #include "Data/WeaponAsset.h"
 #include "System/GMB.h"
 
-WeaponData APSword::Data;
+FProjectileData APSword::Data;
 
 
 

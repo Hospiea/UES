@@ -40,6 +40,6 @@ void UBasic::BasicAttack(const FVector2D& Dir)
 
 void UBasic::Init()
 {
-	Data = new WeaponData;
+	Data = new FProjectileData;
 	SetWeaponData();
 }

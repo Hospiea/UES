@@ -6,7 +6,7 @@
 #include "GameObject/Enemy.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
-WeaponData APSheild::Data;
+FProjectileData APSheild::Data;
 
 APSheild::APSheild()
 {

@@ -6,6 +6,7 @@
 #include "GameObject/Player/User.h"
 #include "GameObject/Projectiles/PArmor.h"
 #include "Components/Center.h"
+#include "GameObject/Projectiles.h"
 
 void UArmor::Init()
 {

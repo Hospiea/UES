@@ -6,6 +6,7 @@
 UManager::~UManager()
 {
 	delete Game;
+	delete Pool;
 }
 
 void UManager::Initialize(FSubsystemCollectionBase& Collection)

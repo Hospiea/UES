@@ -4,7 +4,7 @@
 #include "GameObject/Projectiles/PAxe.h"
 #include "System/GMB.h"
 
-WeaponData APAxe::Data;
+FProjectileData APAxe::Data;
 
 APAxe::APAxe()
 {

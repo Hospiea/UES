@@ -5,6 +5,7 @@
 #include "Data/EnemyAsset.h"
 #include "GameObject/Enemy/Enemy1.h"
 #include "GameObject/Enemy/Enemy2.h"
+#include "GMB.h"
 
 // Sets default values
 ASpawner::ASpawner()
@@ -44,8 +45,14 @@ void ASpawner::Tick(float DeltaTime)
 		else
 			Pos = -250.0f;
 
+
+
 		auto temp = GetWorld()->SpawnActor<AEnemy1>(EnemyClasses->Enemies["Enemy1"], FVector(Pos, 10.0f, -Pos), FRotator::ZeroRotator);
 		auto temp2 = GetWorld()->SpawnActor<AEnemy2>(EnemyClasses->Enemies["Enemy2"], FVector(-Pos, 10.0f, -Pos), FRotator::ZeroRotator);
+		//auto temp = Managers->GetPoolManager<AEnemy1>()->Get();
+		
 	}
 }
+
+
 

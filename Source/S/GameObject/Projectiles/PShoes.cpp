@@ -5,7 +5,7 @@
 #include "System/GMB.h"
 #include "GameObject/Enemy.h"
 
-WeaponData APShoes::Data;
+FProjectileData APShoes::Data;
 
 APShoes::APShoes()
 {

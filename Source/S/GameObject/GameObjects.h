@@ -15,13 +15,16 @@ class S_API AGameObjects : public APaperCharacter
 	GENERATED_BODY()
 	
 public:
+	inline const bool& ActiveSelf() { return IsActive; }
+	inline void SetActive(const bool& flag) { IsActive = flag; }
 	AGameObjects();
 	virtual void GetDamage(const float& value) {};
 
 protected:
 	virtual void BeginPlay() override;
 
-	
+	UPROPERTY()
+	bool IsActive = true;
 
 	UPROPERTY(VisibleAnywhere, Category = "Flipbook Assets")
 	TObjectPtr<UFlipbookAsset> Flipbooks;

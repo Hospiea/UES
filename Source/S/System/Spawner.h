@@ -32,4 +32,11 @@ public:
 
 	UPROPERTY()
 	TObjectPtr<UEnemyAsset> EnemyClasses;
+
+	UPROPERTY()
+	TArray<TObjectPtr<AEnemy>> EnemyPool;
+
+private:
+
+
 };

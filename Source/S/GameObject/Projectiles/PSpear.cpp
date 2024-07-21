@@ -4,7 +4,7 @@
 #include "GameObject/Projectiles/PSpear.h"
 #include "System/GMB.h"
 
-WeaponData APSpear::Data;
+FProjectileData APSpear::Data;
 
 APSpear::APSpear()
 {

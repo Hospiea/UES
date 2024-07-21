@@ -7,6 +7,7 @@
 #include "PaperFlipbookComponent.h"
 #include "System/GMB.h"
 #include "EnemyProjectiles.h"
+#include "System/AIC.h"
 
 
 AProjectiles::AProjectiles()
@@ -19,7 +20,7 @@ void AProjectiles::BeginPlay()
 {
 	Super::BeginPlay();
 	GetCapsuleComponent()->SetCollisionProfileName(TEXT("Projectile"));
-	Controller = NewObject<AController>(this);
+	Controller = NewObject<AAIC>(this);
 	Controller->UnPossess();
 	Controller->Possess(this);
 	GetCapsuleComponent()->OnComponentBeginOverlap.AddDynamic(this, &AProjectiles::OnOverlap);

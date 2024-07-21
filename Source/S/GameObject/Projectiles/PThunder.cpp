@@ -6,7 +6,7 @@
 #include "PaperFlipbookComponent.h"
 #include "PaperFlipbook.h"
 
-WeaponData APThunder::Data;
+FProjectileData APThunder::Data;
 
 APThunder::APThunder()
 {

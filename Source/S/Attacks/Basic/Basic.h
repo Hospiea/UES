@@ -3,13 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameObject/Projectiles.h"
 #include "UObject/NoExportTypes.h"
 #include "Basic.generated.h"
 
 class AUser;
 class UWorld;
 class UWeaponAsset;
-class AProjectiles;
 struct WeaponData;
 
 UCLASS()
@@ -25,7 +25,7 @@ public:
 	inline void SetWorld(UWorld* world) { World = world; }
 	virtual void Init();
 	const float& GetRate() { return Rate; }
-	inline WeaponData& GetData() { return *Data; }
+	inline FProjectileData& GetData() { return *Data; }
 
 protected:
 	virtual void SetWeaponData() {};
@@ -45,7 +45,7 @@ protected:
 	UPROPERTY()
 	FVector SpawnLocation;
 
-	WeaponData* Data;
+	FProjectileData* Data;
 	
 	UPROPERTY()
 	TObjectPtr<UWeaponAsset> Weapons;

@@ -5,7 +5,7 @@
 #include "System/GMB.h"
 #include "GameObject/Enemy.h"
 
-WeaponData APArmor::Data;
+FProjectileData APArmor::Data;
 
 APArmor::APArmor()
 {

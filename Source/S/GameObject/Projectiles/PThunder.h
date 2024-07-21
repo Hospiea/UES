@@ -16,7 +16,7 @@ class S_API APThunder : public ARangeBase
 
 public:
 	APThunder();
-	inline const WeaponData& GetData()
+	inline const FProjectileData& GetData()
 	{
 		return Data;
 	}
@@ -25,7 +25,7 @@ protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float dt) override;
 
-	static WeaponData Data;
+	static FProjectileData Data;
 
 private:
 	friend class UStaff;
