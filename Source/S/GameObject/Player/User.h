@@ -11,6 +11,7 @@ class UCenter;
 class UBasic;
 class USWidgetComponent;
 class UDetectComponent;
+class UAttackComponent;
 
 UCLASS()
 class S_API AUser : public AGameObjects
@@ -41,6 +42,8 @@ public:
 	inline const PlayerStats& GetStats() { return Stats; }
 	TObjectPtr<UCenter>& GetCenter() { return Center; }
 	TObjectPtr<UBasic>& GetBasicAttack() { return Basic; }
+	inline TObjectPtr <UDetectComponent>& GetDetectComponent() { return DetectComponent; }
+
 	void GetExp(const float& value);
 	inline const uint8& GetLevel() { return Level; }
 	inline const float GetExpPercent() {
@@ -68,6 +71,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TObjectPtr<UDataTable> ExpData;
+
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr<UAttackComponent> AttackComponent;
 
 	TArray<FExpData*> RequiredExp;
 

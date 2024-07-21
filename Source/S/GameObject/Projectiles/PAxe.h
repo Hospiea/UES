@@ -26,4 +26,6 @@ protected:
 
 	static WeaponData Data;
 
+private:
+	friend class UAxe;
 };

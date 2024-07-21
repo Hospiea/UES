@@ -13,6 +13,11 @@ UBasic::UBasic(const FObjectInitializer& Init)
 	Weapons = weapons.Object;
 }
 
+UBasic::~UBasic()
+{
+	delete Data;
+}
+
 void UBasic::BasicAttack(const FVector2D& Dir)
 {
 	FVector2D NewDir = Dir * 50.0f;
@@ -28,4 +33,13 @@ void UBasic::BasicAttack(const FVector2D& Dir)
 	FVector CrossProduct = FVector::CrossProduct(NormalizedSpawnLocation, NormalizedBase);
 	if (CrossProduct.Y < 0)
 		Angle = -Angle;
+
+	if (Data == nullptr)
+		Init();
+}
+
+void UBasic::Init()
+{
+	Data = new WeaponData;
+	SetWeaponData();
 }

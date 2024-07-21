@@ -16,6 +16,7 @@
 #include "Attacks/Basic/Staff.h"
 #include "Components/DetectComponent.h"
 #include "System/PC.h"
+#include "Components/AttackComponent.h"
 
 
 AUser::AUser()
@@ -29,6 +30,8 @@ AUser::AUser()
 
 	DetectComponent = CreateDefaultSubobject<UDetectComponent>(TEXT("DetectComponent"));
 	DetectComponent->SetupAttachment(RootComponent);
+
+	AttackComponent = CreateDefaultSubobject<UAttackComponent>(TEXT("AttackComponent"));
 }
 
 void AUser::GetExp(const float& value)

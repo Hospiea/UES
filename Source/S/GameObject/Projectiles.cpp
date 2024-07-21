@@ -18,6 +18,7 @@ void AProjectiles::BeginPlay()
 {
 	Super::BeginPlay();
 	Controller = NewObject<AController>(this);
+	Controller->UnPossess();
 	Controller->Possess(this);
 	GetCapsuleComponent()->OnComponentBeginOverlap.AddDynamic(this, &AProjectiles::OnOverlap);
 

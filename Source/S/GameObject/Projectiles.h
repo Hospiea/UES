@@ -14,6 +14,7 @@ struct WeaponData
 	float Range;
 	float Speed;
 	float Duration;
+	float Timer;
 };
 
 

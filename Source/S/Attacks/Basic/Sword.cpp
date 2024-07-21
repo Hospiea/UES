@@ -6,14 +6,11 @@
 #include "GameObject/Player/User.h"
 #include "Components/Center.h"
 #include "Data/WeaponAsset.h"
+#include "System/GMB.h"
 
 WeaponData APSword::Data;
 
-USword::USword(const FObjectInitializer& Init)
-	:Super(Init)
-{
 
-}
 
 void USword::Init()
 {
@@ -27,4 +24,16 @@ void USword::BasicAttack(const FVector2D& Dir)
 	APSword* temp = World->SpawnActor<APSword>(WeaponClass, SpawnLocation, FRotator(Angle, 0.0f, 0.0f));
 	temp->AttachToComponent(User->GetCenter(), FAttachmentTransformRules::KeepWorldTransform);
 	temp->SetLifeSpan(temp->GetData().Duration * User->GetStats().ProjectileDuration);
+}
+
+void USword::SetWeaponData()
+{
+	FName str = TEXT("Sword");
+
+
+	Data->Damage = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Damage;
+	Data->Rate = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Rate;
+	Data->Range = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Range;
+	Data->Duration = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Duration;
+	Data->Speed = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Speed;
 }

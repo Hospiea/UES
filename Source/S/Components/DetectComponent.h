@@ -8,6 +8,7 @@
 
 class AUser;
 class UBoxComponent;
+class AEnemy;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class S_API UDetectComponent : public USceneComponent
@@ -27,8 +28,8 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-		
-
+	const TObjectPtr<AEnemy> GetClosetEnemy();
+	inline const int32& GetDetectedEnemyNumber() { return EnemyNumbers; }
 
 protected:
 	UPROPERTY(VisibleAnywhere)
@@ -39,4 +40,15 @@ protected:
 
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UBoxComponent> ObtainRange;
+
+	UPROPERTY()
+	TArray<TObjectPtr<AEnemy>> Enemylist;
+
+	UFUNCTION()
+	void OnDetecting(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+	UFUNCTION()
+	void EndDetecting(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
+	int32 EnemyNumbers;
 };

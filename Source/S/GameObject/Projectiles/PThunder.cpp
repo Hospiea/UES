@@ -3,11 +3,14 @@
 
 #include "GameObject/Projectiles/PThunder.h"
 #include "System/GMB.h"
+#include "PaperFlipbookComponent.h"
+#include "PaperFlipbook.h"
 
 WeaponData APThunder::Data;
 
 APThunder::APThunder()
 {
+	PrimaryActorTick.bCanEverTick = true;
 	str = TEXT("Thunder");
 }
 
@@ -28,4 +31,9 @@ void APThunder::Tick(float dt)
 {
 	Super::Tick(dt);
 
+
+	if ((GetSprite()->GetPlaybackPosition()/GetSprite()->GetFlipbook()->GetTotalDuration()) >= 0.9f)
+	{
+		GetWorld()->DestroyActor(this);
+	}
 }

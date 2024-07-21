@@ -17,8 +17,6 @@ class S_API UAxe : public UBasic
 protected:
 	virtual void Init() override;
 	virtual void BasicAttack(const FVector2D& Dir) override;
-	
+	virtual void SetWeaponData() override;
 
-	UPROPERTY()
-	TSubclassOf<APAxe> AxeClass;
 };

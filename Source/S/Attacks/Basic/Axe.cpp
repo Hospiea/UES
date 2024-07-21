@@ -7,10 +7,12 @@
 #include "Components/Center.h"
 #include "Data/WeaponAsset.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "System/GMB.h"
 
 
 void UAxe::Init()
 {
+	Super::Init();
 	WeaponClass = Weapons->Weapons["Axe"];
 }
 
@@ -24,4 +26,15 @@ void UAxe::BasicAttack(const FVector2D& Dir)
 	temp->GetCharacterMovement()->Velocity = Vel * User->GetStats().ProjectileSpeed;
 	temp->SetLifeSpan(temp->GetData().Duration * User->GetStats().ProjectileDuration);
 
+}
+
+void UAxe::SetWeaponData()
+{
+	FName str = TEXT("Axe");
+
+	Data->Damage = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Damage;
+	Data->Rate = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Rate;
+	Data->Range = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Range;
+	Data->Duration = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Duration;
+	Data->Speed = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Speed;
 }

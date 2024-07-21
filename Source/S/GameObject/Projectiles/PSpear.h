@@ -25,4 +25,7 @@ protected:
 	virtual void Tick(float dt) override;
 
 	static WeaponData Data;
+
+private:
+	friend class USpear;
 };
