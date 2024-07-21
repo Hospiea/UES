@@ -36,6 +36,9 @@ public:
 	inline const EnemyState& GetEnemyState() { return State; }
 	inline void SetEnemyState(const EnemyState& state) { State = state; }
 	virtual void GetDamage(const float& value) override;
+	inline const bool& GetArmorDamaged() { return IsArmored; }
+	void SetArmorDamaged();
+
 protected:
 	virtual void PreInitializeComponents() override;
 	virtual void BeginPlay() override;
@@ -57,4 +60,7 @@ protected:
 
 	UPROPERTY()
 	float CurHp;
+
+	UPROPERTY()
+	bool IsArmored;
 };

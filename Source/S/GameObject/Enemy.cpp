@@ -23,6 +23,15 @@ void AEnemy::GetDamage(const float& value)
 	}
 }
 
+void AEnemy::SetArmorDamaged()
+{
+	IsArmored = true;
+	FTimerHandle Handle;
+	FTimerManagerTimerParameters Params;
+	Params.bLoop = false;
+	GetWorld()->GetTimerManager().SetTimer(Handle, [this]()->void {IsArmored = false; }, 0.5f, Params);
+}
+
 void AEnemy::PreInitializeComponents()
 {
 	Super::PreInitializeComponents();
@@ -44,5 +53,5 @@ void AEnemy::BeginPlay()
 
 void AEnemy::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	
+
 }

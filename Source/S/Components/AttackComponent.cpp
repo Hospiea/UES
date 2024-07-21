@@ -9,6 +9,7 @@
 #include "GameObject/Enemy.h"
 #include "GameObject/Projectiles.h"
 #include "Attacks/Basic/Sheild.h"
+#include "Attacks/Basic/Armor.h"
 
 // Sets default values for this component's properties
 UAttackComponent::UAttackComponent()
@@ -29,6 +30,11 @@ void UAttackComponent::BeginPlay()
 	Attacks[0]->SetWorld(GetWorld());
 	Attacks[0]->SetPlayer(Cast<AUser>(GetOwner()));
 	Attacks[0]->Init();
+
+	Attacks.Add(NewObject<UArmor>(this));
+	Attacks[1]->SetWorld(GetWorld());
+	Attacks[1]->SetPlayer(Cast<AUser>(GetOwner()));
+	Attacks[1]->Init();
 
 	Detection = Cast<AUser>(GetOwner())->GetDetectComponent();
 }
