@@ -17,8 +17,11 @@ class S_API UManager : public UEngineSubsystem
 
 public:
 	virtual ~UManager() override;
+	UPROPERTY()
 	TObjectPtr<AWidgetManager> Widget;
+	
 	GameManager* Game;
+
 
 	UPROPERTY()
 	TObjectPtr<APC> Controller;

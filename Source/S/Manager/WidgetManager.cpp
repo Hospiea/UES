@@ -17,11 +17,21 @@ void AWidgetManager::LevelUp()
 {
 	PopupWidget = CreateWidget(GetWorld(), Widgets->Widgets["LevelUp"]);
 	PopupWidget->AddToViewport();
+	
+
+	UGameplayStatics::SetGlobalTimeDilation(GetWorld(), 0.0f);
+}
+
+void AWidgetManager::Pause()
+{
+	PopupWidget = CreateWidget(GetWorld(), Widgets->Widgets["Pause"]);
+	PopupWidget->AddToViewport();
 	UGameplayStatics::SetGlobalTimeDilation(GetWorld(), 0.0f);
 }
 
 void AWidgetManager::RemovePopupWidget()
 {
+	UGameplayStatics::SetGlobalTimeDilation(GetWorld(), 1.0f);
 	PopupWidget->RemoveFromParent();
 }
 
@@ -33,4 +43,3 @@ void AWidgetManager::BeginPlay()
 	
 
 }
-

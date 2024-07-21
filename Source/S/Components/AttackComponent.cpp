@@ -10,6 +10,8 @@
 #include "GameObject/Projectiles.h"
 #include "Attacks/Basic/Sheild.h"
 #include "Attacks/Basic/Armor.h"
+#include "Attacks/Basic/Shoes.h"
+
 
 // Sets default values for this component's properties
 UAttackComponent::UAttackComponent()
@@ -31,7 +33,7 @@ void UAttackComponent::BeginPlay()
 	Attacks[0]->SetPlayer(Cast<AUser>(GetOwner()));
 	Attacks[0]->Init();
 
-	Attacks.Add(NewObject<UArmor>(this));
+	Attacks.Add(NewObject<UShoes>(this));
 	Attacks[1]->SetWorld(GetWorld());
 	Attacks[1]->SetPlayer(Cast<AUser>(GetOwner()));
 	Attacks[1]->Init();

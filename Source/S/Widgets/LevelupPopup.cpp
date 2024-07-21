@@ -18,6 +18,5 @@ void ULevelupPopup::NativeConstruct()
 void ULevelupPopup::OnClicked()
 {
 	Managers->Controller->SetInputMode(FInputModeGameAndUI());
-	UGameplayStatics::SetGlobalTimeDilation(GetWorld(), 1.0f);
 	Managers->Widget->RemovePopupWidget();
 }

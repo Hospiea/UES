@@ -16,12 +16,11 @@ class S_API AWidgetManager : public AActor
 public:	
 	AWidgetManager();
 	void LevelUp();
+	void Pause();
 	void RemovePopupWidget();
 
 protected:
 	virtual void BeginPlay() override;
-
-
 
 
 protected:
@@ -33,4 +32,7 @@ protected:
 
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UWidgetAsset> Widgets;
+
+
+
 };

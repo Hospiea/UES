@@ -36,6 +36,12 @@ protected:
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UProgressBar> EXP_Gauge;
 
+	UPROPERTY(meta=(BindWidget))
+	TObjectPtr<UButton> Pause_Game;
+
 	UPROPERTY()
 	TObjectPtr<AUser> User;
+
+	UFUNCTION()
+	void PauseButton();
 };
