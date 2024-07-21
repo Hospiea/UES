@@ -4,29 +4,19 @@
 
 #include "CoreMinimal.h"
 #include "GameObject/GameObjects.h"
-#include "Projectiles.generated.h"
+#include "EnemyProjectiles.generated.h"
 
-
-struct WeaponData
-{
-	float Damage;
-	float Rate;
-	float Range;
-	float Speed;
-	float Duration;
-	float Timer;
-};
-
-
-
-UCLASS(Abstract)
-class S_API AProjectiles : public AGameObjects
+/**
+ * 
+ */
+UCLASS()
+class S_API AEnemyProjectiles : public AGameObjects
 {
 	GENERATED_BODY()
 
 public:
-	AProjectiles();
-	
+	AEnemyProjectiles();
+
 
 protected:
 	virtual void BeginPlay() override;
@@ -34,8 +24,4 @@ protected:
 	UFUNCTION()
 	virtual void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
-	bool Deletable;
-	FName str;
 };
-
-

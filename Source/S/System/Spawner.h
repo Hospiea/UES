@@ -7,6 +7,7 @@
 #include "Spawner.generated.h"
 
 class AEnemy1;
+class UEnemyAsset;
 
 UCLASS()
 class S_API ASpawner : public AActor
@@ -30,5 +31,5 @@ public:
 	float Timer;
 
 	UPROPERTY()
-	TSubclassOf<AEnemy1> Enemy1Class;
+	TObjectPtr<UEnemyAsset> EnemyClasses;
 };
