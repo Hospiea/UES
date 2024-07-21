@@ -39,7 +39,6 @@ void AProjectiles::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* O
 	{
 		if (AEnemyProjectiles* ebullet = Cast<AEnemyProjectiles>(OtherActor))
 		{
-			UE_LOG(LogTemp, Warning, TEXT("DD"));
 			GetWorld()->DestroyActor(ebullet);
 		}
 	}

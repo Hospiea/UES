@@ -14,4 +14,12 @@ class S_API AEnemyRangeBase : public AEnemyProjectiles
 {
 	GENERATED_BODY()
 	
+protected:
+	virtual void BeginPlay() override;
+	virtual void Tick(float dt) override;
+
+public:
+	UPROPERTY()
+	float Timer;
+
 };

@@ -30,9 +30,10 @@ void AEnemy2::Tick(float dt)
 		FVector Dir = Managers->Game->Player->GetActorLocation() - GetActorLocation();
 		Dir.Normalize();
 		Dir *= 200.0f;
-		
-		bullet->GetCharacterMovement()->Velocity = Dir;
 		Timer = 0.0f;
+		if(bullet)
+			bullet->GetCharacterMovement()->Velocity = Dir;
+		
 	}
 
 	switch (State)
