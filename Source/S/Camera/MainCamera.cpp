@@ -13,7 +13,7 @@ AMainCamera::AMainCamera()
 	CameraComponent = CreateDefaultSubobject<UCamera>(TEXT("CameraComponent"));
 	RootComponent = CameraComponent;
 	CameraComponent->SetProjectionMode(ECameraProjectionMode::Orthographic);
-	CameraComponent->SetOrthoWidth(800.0f);
+	CameraComponent->SetOrthoWidth(500.0f);
 
 }
 
@@ -22,6 +22,8 @@ void AMainCamera::BeginPlay()
 {
 	Super::BeginPlay();
 	SetActorLocationAndRotation(FVector(0.0f, 50.0f, 0.0f), FRotator(0.0f, -90.0f, 0.0f));
+	CameraComponent->bConstrainAspectRatio = true;
+	CameraComponent->AspectRatio = 0.6f;
 }
 
 // Called every frame

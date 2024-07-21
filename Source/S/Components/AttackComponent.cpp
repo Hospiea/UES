@@ -37,7 +37,6 @@ void UAttackComponent::BeginPlay()
 void UAttackComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-	//GEngine->AddOnScreenDebugMessage(0, 1.0f, FColor::Cyan, FString::Printf(TEXT("%d"), Detection->GetDetectedEnemyNumber()));
 
 	if (Detection->GetDetectedEnemyNumber() == 0)
 		return;

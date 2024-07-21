@@ -28,10 +28,20 @@ void ASpawner::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	Timer += DeltaTime;
 
-	if (Timer > 1.0f)
+	if (Timer > 0.5f)
 	{
 		Timer = 0.0f;
-		auto temp = GetWorld()->SpawnActor<AEnemy1>(Enemy1Class, FVector(0.0f, 10.0f, 0.0f), FRotator::ZeroRotator);
+
+		float Pos = 0.0f;
+		auto judge = FMath::RandBool();
+		
+		if (judge)
+			Pos = 250.0f;
+
+		else
+			Pos = -250.0f;
+
+		auto temp = GetWorld()->SpawnActor<AEnemy1>(Enemy1Class, FVector(Pos, 10.0f, -Pos), FRotator::ZeroRotator);
 
 	}
 }

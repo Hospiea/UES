@@ -28,9 +28,11 @@ public:
 
 
 private:
-	const uint8 MaxWeapon = 3;
+	const uint8 MaxWeapon = 5;
+
 	UPROPERTY()
 	TArray<TObjectPtr<UBasic>> Attacks;
 
+	UPROPERTY()
 	TObjectPtr<UDetectComponent> Detection;
 };
