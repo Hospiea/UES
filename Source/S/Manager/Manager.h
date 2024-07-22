@@ -6,6 +6,8 @@
 #include "GameManager.h"
 #include "WidgetManager.h"
 #include "PoolManager.h"
+#include <memory>
+#include <unordered_map>
 #include "Manager.generated.h"
 
 class APC;
@@ -26,18 +28,22 @@ public:
 	
 	GameManager* Game;
 	
+	inline void PoolClear() { Pool.reset(); }
+	
 
 	template<typename T>
 	PoolManager<T>* GetPoolManager()
 	{
 		if (Pool == nullptr)
 		{
-			Pool = new PoolManager<T>;
-			static_cast<PoolManager<T>*>(Pool)->SetWorld(World);
+			Pool = std::make_shared<PoolManager<T>>();
+			static_cast<PoolManager<T>*>(Pool.get())->SetWorld(World);
 		}
 			
-		return static_cast<PoolManager<T>*>(Pool);
+		return static_cast<PoolManager<T>*>(Pool.get());
 	}
+
+
 
 	UPROPERTY()
 	TObjectPtr<APC> Controller;
@@ -55,5 +61,5 @@ protected:
 	UWorld* World;
 
 private:
-	void* Pool;
+	std::shared_ptr<void> Pool;
 };

@@ -27,3 +27,9 @@ void AGMB::BeginPlay()
 	Managers->Widget = GetWorld()->SpawnActor<AWidgetManager>();
 	Managers->Game->KillCounts = 0;
 }
+
+void AGMB::EndPlay(const EEndPlayReason::Type reason)
+{
+	Super::EndPlay(reason);
+	Managers->PoolClear();
+}

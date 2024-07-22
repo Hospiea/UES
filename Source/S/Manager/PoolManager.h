@@ -15,18 +15,18 @@ template<typename T>
 class S_API PoolManager
 {
 	static_assert(std::is_base_of<AGameObjects, T>::value, "T must be derieved from AGameObjects");
-	friend class UManager;
-	PoolManager();
-	~PoolManager();
 
 public:
+	PoolManager();
+	~PoolManager();
 	inline void SetWorld(UWorld* world) { World = world; }
 	T* Get(UClass* Class, const FVector& Pos = FVector::ZeroVector, const FRotator& Rot = FRotator::ZeroRotator);
 
 
 private:
+	UPROPERTY()
+	TArray<TObjectPtr<T>> Pool;
 
-	TArray<T*> Pool;
 	UWorld* World;
 
 };

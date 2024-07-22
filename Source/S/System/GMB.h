@@ -21,6 +21,7 @@ public:
 protected:
 	virtual void InitGame(const FString& MapName, const FString& Options, FString& ErrorMessage) override;
 	virtual void BeginPlay() override;
+	virtual void EndPlay(const EEndPlayReason::Type reason) override;
 
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
 	TObjectPtr<ASpawner> Spawner;
