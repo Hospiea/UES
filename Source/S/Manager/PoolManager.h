@@ -14,22 +14,19 @@ class UWorld;
 template<typename T>
 class S_API PoolManager
 {
+	static_assert(std::is_base_of<AGameObjects, T>::value, "T must be derieved from AGameObjects");
 	friend class UManager;
 	PoolManager();
 	~PoolManager();
 
 public:
 	inline void SetWorld(UWorld* world) { World = world; }
-	T* Get();
+	T* Get(UClass* Class, const FVector& Pos = FVector::ZeroVector, const FRotator& Rot = FRotator::ZeroRotator);
 
 
 private:
-	T* CreateFunc();
 
 	TArray<T*> Pool;
-
-	TSubclassOf<T> Class;
-
 	UWorld* World;
 
 };
@@ -46,37 +43,28 @@ inline PoolManager<T>::~PoolManager()
 }
 
 template<typename T>
-inline T* PoolManager<T>::Get()
+inline T* PoolManager<T>::Get(UClass* Class, const FVector& Pos, const FRotator& Rot)
 {
 	if (Pool.Num() == 0)
-		return CreateFunc();
-
+	{
+		auto enemy = World->SpawnActor<T>(Class, Pos, Rot);
+		Pool.Add(enemy);
+		return enemy;
+	}
 	else
 	{
-		for (T* temp : Pool)
+		for (auto& temp : Pool)
 		{
-			if (temp == nullptr)
+			if (!temp->AGameObjects::ActiveSelf())
 			{
-				Pool.Remove(temp);
-				continue;
-			}
-				
-			if (!temp->ActiveSelf())
-			{
-				return temp;
+				temp->AGameObjects::SetActive(true);
+				temp->AGameObjects::SetActorLocationAndRotation(Pos, Rot);
+				return Cast<T>(temp);
 			}
 		}
-
-		return CreateFunc();
+		auto enemy = World->SpawnActor<T>(Class, Pos, Rot);
+		Pool.Add(enemy);
+		return enemy;
 	}
-
-	return nullptr;
 }
 
-template<typename T>
-inline T* PoolManager<T>::CreateFunc()
-{
-	T* temp = World->SpawnActor<T>();
-	Pool.Add(temp);
-	return temp;
-}

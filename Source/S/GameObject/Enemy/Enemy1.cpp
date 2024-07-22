@@ -45,3 +45,17 @@ void AEnemy1::RecoverFromKnockBack()
 	State = EnemyState::Normal;
 	GetSprite()->SetSpriteColor(FLinearColor::White);
 }
+
+void AEnemy1::OnEnable()
+{
+	Super::OnEnable();
+	GetSprite()->SetSpriteColor(FLinearColor::White);
+}
+
+void AEnemy1::OnDisable()
+{
+	Super::OnDisable();
+	CurHp = Stats.MaxHp;
+	SetEnemyState(EnemyState::Normal);
+}
+

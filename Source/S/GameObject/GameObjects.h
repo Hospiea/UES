@@ -16,9 +16,13 @@ class S_API AGameObjects : public APaperCharacter
 	
 public:
 	inline const bool& ActiveSelf() { return IsActive; }
-	inline void SetActive(const bool& flag) { IsActive = flag; }
+	void SetActive(bool flag);
+	virtual void OnEnable() {};
+	virtual void OnDisable() {};
+
 	AGameObjects();
 	virtual void GetDamage(const float& value) {};
+	
 
 protected:
 	virtual void BeginPlay() override;

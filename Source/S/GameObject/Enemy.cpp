@@ -19,7 +19,8 @@ void AEnemy::GetDamage(const float& value)
 	{
 		Target->GetExp(5);
 		++Managers->Game->KillCounts;
-		GetWorld()->DestroyActor(this);
+		//GetWorld()->DestroyActor(this);
+		SetActive(false);
 	}
 }
 

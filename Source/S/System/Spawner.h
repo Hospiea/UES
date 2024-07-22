@@ -37,6 +37,38 @@ public:
 	TArray<TObjectPtr<AEnemy>> EnemyPool;
 
 private:
-
+	template<typename T>
+	T* Get(UClass* Class, const FVector& Pos, const FRotator& Rot);
 
 };
+
+
+
+
+#pragma region ObjectPoolTest
+template<typename T>
+inline T* ASpawner::Get(UClass* Class, const FVector& Pos, const FRotator& Rot)
+{
+	if (EnemyPool.Num() == 0)
+	{
+		auto enemy = GetWorld()->SpawnActor<T>(Class, Pos, Rot);
+		EnemyPool.Add(enemy);
+		return enemy;
+	}
+	else
+	{
+		for (auto& temp : EnemyPool)
+		{
+			if (!temp->ActiveSelf())
+			{
+				temp->SetActive(true);
+				temp->SetActorLocationAndRotation(Pos, Rot);
+				return Cast<T>(temp);
+			}
+		}
+		auto enemy = GetWorld()->SpawnActor<T>(Class, Pos, Rot);
+		EnemyPool.Add(enemy);
+		return enemy;
+	}
+}
+#pragma endregion

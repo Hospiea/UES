@@ -17,7 +17,7 @@ void AGMB::InitGame(const FString& MapName, const FString& Options, FString& Err
 {
 	Super::InitGame(MapName, Options, ErrorMessage);
 	Manager = GEngine->GetEngineSubsystem<UManager>();
-	Managers->World = GetWorld();
+	Managers->SetWorld(GetWorld());
 }
 
 void AGMB::BeginPlay()

@@ -18,7 +18,7 @@ void UShoes::BasicAttack(const FVector2D& Dir)
 	if (Data == nullptr)
 		Init();
 
-	SpawnLocation = User->GetActorLocation();
+	SpawnLocation = User->GetActorLocation() - FVector(0.0f, 1.0f, 0.0f);
 
 	APShoes* temp = World->SpawnActor<APShoes>(WeaponClass, SpawnLocation, FRotator(0.0f, 0.0f, 0.0f));
 }

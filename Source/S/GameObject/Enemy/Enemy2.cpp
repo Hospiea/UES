@@ -26,7 +26,8 @@ void AEnemy2::Tick(float dt)
 
 	if (Timer > 1.0f)
 	{
-		auto bullet = GetWorld()->SpawnActor<AERange>(RangeClass, GetActorLocation(), GetActorRotation());
+		//auto bullet = GetWorld()->SpawnActor<AERange>(RangeClass, GetActorLocation(), GetActorRotation());
+		auto bullet = Managers->GetPoolManager<AERange>()->Get(RangeClass, GetActorLocation(), GetActorRotation());
 		FVector Dir = Managers->Game->Player->GetActorLocation() - GetActorLocation();
 		Dir.Normalize();
 		Dir *= 200.0f;

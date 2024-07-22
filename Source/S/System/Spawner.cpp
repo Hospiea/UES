@@ -47,12 +47,12 @@ void ASpawner::Tick(float DeltaTime)
 
 
 
-		auto temp = GetWorld()->SpawnActor<AEnemy1>(EnemyClasses->Enemies["Enemy1"], FVector(Pos, 10.0f, -Pos), FRotator::ZeroRotator);
-		auto temp2 = GetWorld()->SpawnActor<AEnemy2>(EnemyClasses->Enemies["Enemy2"], FVector(-Pos, 10.0f, -Pos), FRotator::ZeroRotator);
-		//auto temp = Managers->GetPoolManager<AEnemy1>()->Get();
+
+		//auto temp = Get<AEnemy1>(EnemyClasses->Enemies["Enemy1"], FVector(Pos, 10.0f, -Pos), FRotator::ZeroRotator);
+		//auto temp2 = Get<AEnemy2>(EnemyClasses->Enemies["Enemy2"], FVector(-Pos, 10.0f, -Pos), FRotator::ZeroRotator);
 		
+		auto temp = Managers->GetPoolManager<AEnemy1>()->Get(EnemyClasses->Enemies["Enemy1"], FVector(Pos, 10.0f, -Pos));
+		auto temp2 = Managers->GetPoolManager<AEnemy2>()->Get(EnemyClasses->Enemies["Enemy2"], FVector(-Pos, 10.0f, -Pos));
 	}
 }
-
-
 

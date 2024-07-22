@@ -16,6 +16,8 @@ void AEnemyRangeBase::Tick(float dt)
 
 	if (Timer > 5.0f)
 	{
-		GetWorld()->DestroyActor(this);
+		//GetWorld()->DestroyActor(this);
+		SetActive(false);
+		Timer = 0.0f;
 	}
 }

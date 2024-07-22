@@ -6,6 +6,20 @@
 #include "Components/AnimationComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
+void AGameObjects::SetActive(bool flag)
+{
+	IsActive = flag;
+	SetActorHiddenInGame(!flag);
+	//SetActorEnableCollision(flag);
+	SetActorTickEnabled(flag);
+
+	if (flag)
+		OnEnable();
+
+	else if (!flag)
+		OnDisable();
+}
+
 AGameObjects::AGameObjects()
 {
 	GetCapsuleComponent()->SetCapsuleRadius(10.0f);

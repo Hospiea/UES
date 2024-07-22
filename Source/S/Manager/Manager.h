@@ -18,6 +18,9 @@ class S_API UManager : public UEngineSubsystem
 
 public:
 	virtual ~UManager() override;
+
+	inline void SetWorld(UWorld* world) { World = world; }
+
 	UPROPERTY()
 	TObjectPtr<AWidgetManager> Widget;
 	
@@ -42,13 +45,14 @@ public:
 	UPROPERTY()
 	TObjectPtr<UDataManager> Data;
 
-	UPROPERTY()
-	UWorld* World;
+	
 
 protected:
 	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
 	virtual void Deinitialize() override;
-
+	
+	UPROPERTY()
+	UWorld* World;
 
 private:
 	void* Pool;
