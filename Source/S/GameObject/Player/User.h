@@ -40,9 +40,10 @@ public:
 
 	AUser();
 	inline const PlayerStats& GetStats() { return Stats; }
-	TObjectPtr<UCenter>& GetCenter() { return Center; }
-	TObjectPtr<UBasic>& GetBasicAttack() { return Basic; }
+	inline TObjectPtr<UCenter>& GetCenter() { return Center; }
+	inline TObjectPtr<UBasic>& GetBasicAttack() { return Basic; }
 	inline TObjectPtr <UDetectComponent>& GetDetectComponent() { return DetectComponent; }
+	inline TObjectPtr<UAttackComponent>& GetAttackComponent() { return AttackComponent; }
 
 	void GetExp(const float& value);
 	inline const uint8& GetLevel() { return Level; }

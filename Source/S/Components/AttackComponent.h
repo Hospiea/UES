@@ -17,6 +17,7 @@ class S_API UAttackComponent : public UActorComponent
 public:	
 	// Sets default values for this component's properties
 	UAttackComponent();
+	inline const TArray<TObjectPtr<UBasic>>& GetAttackTypes() { return Attacks; }
 
 protected:
 	// Called when the game starts

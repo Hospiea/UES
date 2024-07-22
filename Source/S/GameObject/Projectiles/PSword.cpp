@@ -18,6 +18,7 @@ APSword::APSword()
 void APSword::BeginPlay()
 {
 	Super::BeginPlay();
+	Level = 0;
 	if (Data.Damage == 0.0f)
 	{
 		Data.Damage = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Damage[Level];

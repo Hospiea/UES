@@ -16,6 +16,17 @@ UCLASS()
 class S_API UBasic : public UObject
 {
 	GENERATED_BODY()
+public:
+	enum class AttackType
+	{
+		Sword,
+		Axe,
+		Sheild,
+		Armor,
+		Shoes,
+		Spear,
+		Staff,
+	};
 	
 public:
 	UBasic(const FObjectInitializer& Init);
@@ -26,6 +37,8 @@ public:
 	virtual void Init();
 	const float& GetRate() { return Rate; }
 	inline FProjectileData& GetData() { return *Data; }
+	inline const AttackType& GetAttackType() { return Type; }
+	inline virtual uint8& GetLevel() { return dummy; };
 
 protected:
 	virtual void SetWeaponData() {};
@@ -52,4 +65,8 @@ protected:
 
 	UPROPERTY()
 	TSubclassOf<AProjectiles> WeaponClass;
+
+	AttackType Type;
+
+	uint8 dummy;
 };

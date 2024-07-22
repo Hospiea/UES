@@ -18,5 +18,9 @@ public:
 	virtual void BasicAttack(const FVector2D& Dir) override;
 	virtual void SetWeaponData() override;
 
+	inline virtual uint8& GetLevel() override { return Level; }
 
+
+protected:
+	uint8& Level = APSword::Level;
 };
