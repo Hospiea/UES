@@ -22,18 +22,18 @@ struct S_API FWeaponData : public FTableRowBase
 	GENERATED_BODY()
 
 	UPROPERTY(VisibleAnywhere)
-	float Damage;
+	float Damage[5];
 
 	UPROPERTY(VisibleAnywhere)
-	float Rate;
+	float Rate[5];
 
 	UPROPERTY(VisibleAnywhere)
-	float Range;
+	float Range[5];
 
 	UPROPERTY(VisibleAnywhere)
-	float Speed;
+	float Speed[5];
 
 	UPROPERTY(VisibleAnywhere)
-	float Duration;
+	float Duration[5];
 	
 };

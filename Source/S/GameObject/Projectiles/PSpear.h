@@ -23,7 +23,8 @@ public:
 protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float dt) override;
-
+	
+	inline static uint8 Level = 0;
 	static FProjectileData Data;
 
 private:
