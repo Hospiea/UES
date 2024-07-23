@@ -22,6 +22,9 @@ public:
 	APC(const FObjectInitializer& Init);
 	void LevelUp();
 
+	void Pause();
+	void Resume();
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float dt) override;
@@ -44,8 +47,13 @@ protected:
 	UPROPERTY(EditAnywhere)
 	TObjectPtr<UInputMappingContext> Context;
 
+	UPROPERTY()
+	UEnhancedInputComponent* Component;
+
 	UPROPERTY(VisibleAnywhere)
 	float Timer;
+
+	bool bPaused;
 
 	void MoveFunc(const FInputActionValue& value);
 	void StopFunc(const FInputActionValue& value);

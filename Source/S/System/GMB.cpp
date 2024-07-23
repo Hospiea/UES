@@ -4,6 +4,8 @@
 #include "System/GMB.h"
 #include "Spawner.h"
 #include "Manager/Manager.h"
+#include "Attacks/Basic/Basic.h"
+#include "Components/AttackComponent.h"
 #include "Blueprint/UserWidget.h"
 
 AGMB* AGMB::Instance = nullptr;
@@ -26,10 +28,19 @@ void AGMB::BeginPlay()
 	Spawner = GetWorld()->SpawnActor<ASpawner>();
 	Managers->Widget = GetWorld()->SpawnActor<AWidgetManager>();
 	Managers->Game->KillCounts = 0;
+	
+	
 }
 
 void AGMB::EndPlay(const EEndPlayReason::Type reason)
 {
 	Super::EndPlay(reason);
 	Managers->PoolClear();
+	Managers->Game->Player->GetBasicAttack()->GetLevel() = 0;
+
+
+	for (auto& temp : Managers->Game->Player->GetAttackComponent()->GetAttackTypes())
+	{
+		temp->GetLevel() = 0;
+	}
 }

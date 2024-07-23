@@ -4,9 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "Attacks/Basic/Basic.h"
+#include "GameObject/Projectiles/PSword.h"
 #include "Sword.generated.h"
 
-class APSword;
 
 UCLASS()
 class S_API USword : public UBasic
@@ -18,9 +18,9 @@ public:
 	virtual void BasicAttack(const FVector2D& Dir) override;
 	virtual void SetWeaponData() override;
 
-	inline virtual uint8& GetLevel() override { return Level; }
+	virtual uint8& GetLevel() override { return APSword::Level; }
 
 
 protected:
-	uint8& Level = APSword::Level;
+	
 };

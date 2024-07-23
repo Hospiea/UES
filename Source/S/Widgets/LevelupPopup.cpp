@@ -17,6 +17,5 @@ void ULevelupPopup::NativeConstruct()
 
 void ULevelupPopup::OnClicked()
 {
-	Managers->Controller->SetInputMode(FInputModeGameAndUI());
 	Managers->Widget->RemovePopupWidget();
 }

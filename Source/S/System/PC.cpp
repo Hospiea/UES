@@ -21,7 +21,19 @@ APC::APC(const FObjectInitializer& Init)
 
 void APC::LevelUp()
 {
-	SetInputMode(FInputModeUIOnly());
+
+}
+
+void APC::Pause()
+{
+	Subsystem->RemoveMappingContext(Context);
+	User->GetCharacterMovement()->StopMovementImmediately();
+	bPaused = true;
+}
+
+void APC::Resume()
+{
+	Subsystem->AddMappingContext(Context, 0);
 }
 
 void APC::BeginPlay()
@@ -38,11 +50,13 @@ void APC::BeginPlay()
 	Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
 	Subsystem->AddMappingContext(Context, 0);
 
-	UEnhancedInputComponent* Component = Cast<UEnhancedInputComponent>(InputComponent);
+	Component = Cast<UEnhancedInputComponent>(InputComponent);
 
 	Component->BindAction(Move, ETriggerEvent::Triggered, this, &APC::MoveFunc);
 	Component->BindAction(Move, ETriggerEvent::Completed, this, &APC::StopFunc);
 	Component->BindAction(Left, ETriggerEvent::Triggered, this, &APC::LeftFunc);
+
+
 
 	Managers->Controller = this;
 
@@ -59,10 +73,22 @@ void APC::MoveFunc(const FInputActionValue& value)
 {
 	FVector2D Dir = value.Get<FVector2D>();
 
+
 	Dir.Normalize();
 	Dir *= User->GetStats().Speed;
+	if (bPaused)
+	{
+		Dir = FVector2D::ZeroVector;
+		Component->ClearBindingValues();
+		bPaused = false;
+	}
+		
+
+	GEngine->AddOnScreenDebugMessage(0, 1.0f, FColor::Cyan, FString::Printf(TEXT("%f, %f"), Dir.X, Dir.Y));
 
 	User->GetCharacterMovement()->Velocity = FVector(Dir.X, 0.0f, Dir.Y);
+
+
 }
 
 void APC::StopFunc(const FInputActionValue& value)
@@ -84,8 +110,6 @@ void APC::StopFunc(const FInputActionValue& value)
 
 void APC::LeftFunc(const FInputActionValue& value)
 {
-	
-
 	FVector2D Location;
 	GetMousePosition(Location.X, Location.Y);
 	int32 CenterX, CenterY;

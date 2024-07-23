@@ -38,7 +38,7 @@ public:
 	const float& GetRate() { return Rate; }
 	inline FProjectileData& GetData() { return *Data; }
 	inline const AttackType& GetAttackType() { return Type; }
-	inline virtual uint8& GetLevel() { return dummy; };
+	virtual uint8& GetLevel() { return dummy; };
 
 protected:
 	virtual void SetWeaponData() {};

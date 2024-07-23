@@ -6,8 +6,9 @@
 #include "Engine/Texture2D.h"
 #include "System/GMB.h"
 #include "Components/AttackComponent.h"
-#include "Attacks/Basic/Basic.h"
 #include "Components/CanvasPanel.h"
+#include "System/PC.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 ULevelUpSelectCard::ULevelUpSelectCard(const FObjectInitializer& Init)
 	:Super(Init)
@@ -34,7 +35,6 @@ void ULevelUpSelectCard::NativeConstruct()
 	Attacks = User->GetAttackComponent()->GetAttackTypes();
 	
 	
-	
 	switch (User->GetBasicAttack()->GetLevel())
 	{
 	case 0:
@@ -48,49 +48,34 @@ void ULevelUpSelectCard::NativeConstruct()
 		Skill_LV_Star->SetBrushFromTexture(Lv1);
 		break;
 	}
-	}
 
-
-	/*for (auto& temp : Attacks)
+	case 2:
 	{
-		if (temp->GetAttackType() == UBasic::AttackType::Sword)
-		{
-
-		}
-	}*/
-
-	/*uint8 rand = FMath::Rand() % 7;
-	CardType = static_cast<UBasic::AttackType>(rand);
-
-
-	switch (CardType)
-	{
-	case UBasic::AttackType::Sword:
-	{
-
+		Skill_LV_Star->SetBrushFromTexture(Lv2);
 		break;
 	}
-	}*/
+
+	case 3:
+	{
+		Skill_LV_Star->SetBrushFromTexture(Lv3);
+		break;
+	}
+
+	case 4:
+	{
+		Skill_LV_Star->SetBrushFromTexture(Lv4);
+		break;
+	}
+	}
+
+
+	
 }
 
 FReply ULevelUpSelectCard::NativeOnMouseButtonDown(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
 {
 	FReply Reply = Super::NativeOnMouseButtonDown(InGeometry, InMouseEvent);
 	++User->GetBasicAttack()->GetLevel();
-
-	switch (User->GetBasicAttack()->GetLevel())
-	{
-	case 0:
-	{
-		Skill_LV_Star->SetBrushFromTexture(Lv0);
-		break;
-	}
-
-	case 1:
-	{
-		Skill_LV_Star->SetBrushFromTexture(Lv1);
-		break;
-	}
-	}
+	Managers->Widget->RemovePopupWidget();
 	return Reply;
 }

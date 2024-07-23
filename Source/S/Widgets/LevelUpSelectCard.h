@@ -4,12 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "Widgets/WidgetBase.h"
+#include "Attacks/Basic/Basic.h"
 #include "LevelUpSelectCard.generated.h"
 
 class UImage;
 class UTexture2D;
 class AUser;
-class UBasic;
 class UCanvasPanel;
 
 UCLASS()
