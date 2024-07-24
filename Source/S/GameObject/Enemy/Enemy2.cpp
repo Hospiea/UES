@@ -25,14 +25,22 @@ void AEnemy2::Tick(float dt)
 
 	if (Timer > 1.0f)
 	{
-		//auto bullet = GetWorld()->SpawnActor<AERange>(RangeClass, GetActorLocation(), GetActorRotation());
 		auto bullet = Managers->GetPoolManager<AERange>()->Get(RangeClass, GetActorLocation(), GetActorRotation());
 		FVector Dir = Managers->Game->Player->GetActorLocation() - GetActorLocation();
+
 		Dir.Normalize();
 		Dir *= 200.0f;
+
+		float angle = FMath::Atan2(Dir.Z, Dir.X);
+		angle = FMath::RadiansToDegrees(angle);
+
 		Timer = 0.0f;
-		if(bullet)
+		if (bullet)
+		{
 			bullet->GetCharacterMovement()->Velocity = Dir;
+			bullet->SetActorRotation(FRotator(angle - 90.0f, 0.0f, 0.0f));
+		}
+			
 		
 	}
 
