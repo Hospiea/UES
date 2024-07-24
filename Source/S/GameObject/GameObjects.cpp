@@ -5,6 +5,7 @@
 #include "Components/CapsuleComponent.h"
 #include "Components/AnimationComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "PaperFlipbookComponent.h"
 
 void AGameObjects::SetActive(bool flag)
 {
@@ -33,12 +34,14 @@ AGameObjects::AGameObjects()
 	GetCharacterMovement()->SetPlaneConstraintAxisSetting(EPlaneConstraintAxisSetting::Y);
 	GetCharacterMovement()->SetPlaneConstraintEnabled(true);
 	GetCharacterMovement()->GravityScale = 0.0f;
+	++Order;
 }
 
 void AGameObjects::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	GetSprite()->SetRelativeLocation(FVector(0.0f, Order, 0.0f));
+
 	AnimationComponent->SetOwningGameObject(this);
 	AnimationComponent->SetSprite(GetSprite());
 	AnimationComponent->SetMovementComponent(GetCharacterMovement());

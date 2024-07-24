@@ -12,6 +12,7 @@ class UInputMappingContext;
 class UEnhancedInputLocalPlayerSubsystem;
 struct FInputActionValue;
 class AUser;
+class UEnhancedInputComponent;
 
 UCLASS()
 class S_API APC : public APlayerController

@@ -26,6 +26,7 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
+	inline static uint8 Order = 0;
 
 	UPROPERTY()
 	bool IsActive = true;

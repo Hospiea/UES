@@ -84,7 +84,6 @@ void APC::MoveFunc(const FInputActionValue& value)
 	}
 		
 
-	GEngine->AddOnScreenDebugMessage(0, 1.0f, FColor::Cyan, FString::Printf(TEXT("%f, %f"), Dir.X, Dir.Y));
 
 	User->GetCharacterMovement()->Velocity = FVector(Dir.X, 0.0f, Dir.Y);
 

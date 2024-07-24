@@ -15,7 +15,6 @@ AEnemy2::AEnemy2()
 	static ConstructorHelpers::FClassFinder<AERange> rangeclass(TEXT("/Script/Engine.Blueprint'/Game/Assets/Blueprints/GameObjects/EnemyProjectile/BP_ERange.BP_ERange_C'"));
 	RangeClass = rangeclass.Class;
 
-
 	Timer = 0.0f;
 }
 
