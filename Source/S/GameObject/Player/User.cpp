@@ -34,6 +34,11 @@ AUser::AUser()
 	AttackComponent = CreateDefaultSubobject<UAttackComponent>(TEXT("AttackComponent"));
 }
 
+TObjectPtr<UBasic>& AUser::GetBasicAttack()
+{
+	return AttackComponent->GetAttackTypes()[0];
+}
+
 void AUser::GetExp(const float& value)
 {
 	CurExp += value;
@@ -78,11 +83,10 @@ void AUser::BeginPlay()
 	Stats.ProjectileSize = Managers->Data->PlayerStats->FindRow<FPlayerStats>(TEXT("1"), TEXT(""))->ProjectileSize;
 	Stats.ProjectileDuration = Managers->Data->PlayerStats->FindRow<FPlayerStats>(TEXT("1"), TEXT(""))->ProjectileDuration;
 	
-	Basic = NewObject<USword>(this);
-	Basic->SetPlayer(this);
-	Basic->SetWorld(GetWorld());
-	Basic->Init();
+	
 
+	AttackComponent->Init(GetWorld());
+	
 	CurHp = Stats.MaxHp;
 	Level = 0;
 	CurExp = 0.0f;

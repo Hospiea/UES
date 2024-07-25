@@ -1,8 +1,8 @@
 Index,Damage,Rate,Range,Speed,Duration
 Sword,10,0.5,50,0,0.1
 Axe,5,0.7,25,200,0.5
-Spear,5,1,25,1000,0.3
+Spear,5,2,1000,1000,2
 Thunder,10,1.5,200,0,5
 Sheild,3,10,30,0,0
 Armor,2,0.5,30,0,0
-Shoes,2,0.5,30,0,1
+Shoes,2,1,30,0,1

@@ -41,9 +41,9 @@ public:
 	AUser();
 	inline const PlayerStats& GetStats() { return Stats; }
 	inline TObjectPtr<UCenter>& GetCenter() { return Center; }
-	inline TObjectPtr<UBasic>& GetBasicAttack() { return Basic; }
 	inline TObjectPtr <UDetectComponent>& GetDetectComponent() { return DetectComponent; }
 	inline TObjectPtr<UAttackComponent>& GetAttackComponent() { return AttackComponent; }
+	TObjectPtr<UBasic>& GetBasicAttack();
 
 	void GetExp(const float& value);
 	inline const uint8& GetLevel() { return Level; }
@@ -61,8 +61,6 @@ protected:
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UCenter> Center;
 
-	UPROPERTY(VisibleAnywhere)
-	TObjectPtr<UBasic> Basic;
 
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr <UDetectComponent> DetectComponent;

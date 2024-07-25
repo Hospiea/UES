@@ -25,19 +25,13 @@ protected:
 
 protected:
 	UPROPERTY(meta=(BindWidget))
-	TObjectPtr<UImage> Skill_LV_Star;
+	TObjectPtr<UImage> Level_Star;
 
 	UPROPERTY(meta=(BindWidget))
-	TObjectPtr<UCanvasPanel> Select_Card_Panel;
+	TObjectPtr<UCanvasPanel> Skill_Card;
 	
 	
 	virtual FReply NativeOnMouseButtonDown(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent) override;
-
-	
-	
-	
-	
-	
 	
 	UPROPERTY()
 	TObjectPtr<UTexture2D> Lv0;
@@ -61,7 +55,10 @@ protected:
 	TObjectPtr<AUser> User;
 
 	UPROPERTY()
-	TArray<TObjectPtr<UBasic>> Attacks;
+	TObjectPtr<UBasic> Attack;
+
+	UPROPERTY()
+	uint8 Level;
 
 	UBasic::AttackType CardType;
 };

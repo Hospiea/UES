@@ -11,6 +11,8 @@
 #include "Attacks/Basic/Sheild.h"
 #include "Attacks/Basic/Armor.h"
 #include "Attacks/Basic/Shoes.h"
+#include "Attacks/Basic/Sword.h"
+#include "Attacks/Basic/Spear.h"
 
 
 // Sets default values for this component's properties
@@ -21,24 +23,46 @@ UAttackComponent::UAttackComponent()
 	PrimaryComponentTick.bCanEverTick = true;
 }
 
+void UAttackComponent::Init(UWorld* world)
+{
+
+
+	Attacks.Add(NewObject<USword>());
+	Attacks[0]->SetWorld(world);
+	Attacks[0]->SetPlayer(Cast<AUser>(GetOwner()));
+	Attacks[0]->Init();
+
+	Attacks.Add(NewObject<USheild>());
+	Attacks[1]->SetWorld(world);
+	Attacks[1]->SetPlayer(Cast<AUser>(GetOwner()));
+	Attacks[1]->Init();
+
+	Attacks.Add(NewObject<UShoes>());
+	Attacks[2]->SetWorld(world);
+	Attacks[2]->SetPlayer(Cast<AUser>(GetOwner()));
+	Attacks[2]->Init();
+
+	Attacks.Add(NewObject<USpear>());
+	Attacks[3]->SetWorld(world);
+	Attacks[3]->SetPlayer(Cast<AUser>(GetOwner()));
+	Attacks[3]->Init();
+
+	Attacks.Add(NewObject<UStaff>());
+	Attacks[4]->SetWorld(world);
+	Attacks[4]->SetPlayer(Cast<AUser>(GetOwner()));
+	Attacks[4]->Init();
+
+	Detection = Cast<AUser>(GetOwner())->GetDetectComponent();
+}
+
 
 // Called when the game starts
 void UAttackComponent::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 	//Attacks.Add(NewObject<UStaff>(this));
-	Attacks.Add(NewObject<USheild>(this));
-	Attacks[0]->SetWorld(GetWorld());
-	Attacks[0]->SetPlayer(Cast<AUser>(GetOwner()));
-	Attacks[0]->Init();
-
-	Attacks.Add(NewObject<UShoes>(this));
-	Attacks[1]->SetWorld(GetWorld());
-	Attacks[1]->SetPlayer(Cast<AUser>(GetOwner()));
-	Attacks[1]->Init();
-
-	Detection = Cast<AUser>(GetOwner())->GetDetectComponent();
+	
 }
 
 
@@ -46,8 +70,7 @@ void UAttackComponent::BeginPlay()
 void UAttackComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	if (Detection->GetDetectedEnemyNumber() == 0)
+	if (Detection->GetDetectedEnemyNumber() == 0 || !Detection || Attacks.Num() == 0)
 		return;
 
 	for (int i = 0; i < Attacks.Num(); ++i)

@@ -7,11 +7,12 @@
 #include "Data/WeaponAsset.h"
 
 
-UBasic::UBasic(const FObjectInitializer& Init)
-	:Super(Init)
+UBasic::UBasic(const FObjectInitializer& Initializer)
+	:Super(Initializer)
 {
 	static ConstructorHelpers::FObjectFinder<UWeaponAsset> weapons(TEXT("/Script/S.WeaponAsset'/Game/Assets/Data/Weapons.Weapons'"));
 	Weapons = weapons.Object;
+	Init();
 }
 
 UBasic::~UBasic()

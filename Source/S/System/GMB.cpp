@@ -36,8 +36,8 @@ void AGMB::EndPlay(const EEndPlayReason::Type reason)
 {
 	Super::EndPlay(reason);
 	Managers->PoolClear();
-	Managers->Game->Player->GetBasicAttack()->GetLevel() = 0;
-
+	
+	
 
 	for (auto& temp : Managers->Game->Player->GetAttackComponent()->GetAttackTypes())
 	{

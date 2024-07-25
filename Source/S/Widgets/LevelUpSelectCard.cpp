@@ -32,38 +32,46 @@ void ULevelUpSelectCard::NativeConstruct()
 {
 	Super::NativeConstruct();
 	User = Managers->Game->Player;
-	Attacks = User->GetAttackComponent()->GetAttackTypes();
 	
-	
-	switch (User->GetBasicAttack()->GetLevel())
+	for (const auto& temp : User->GetAttackComponent()->GetAttackTypes())
+	{
+		if (temp->GetAttackType() == CardType)
+		{
+			Level = temp->GetLevel();
+			Attack = temp;
+		}
+	}
+
+
+	switch (Level)
 	{
 	case 0:
 	{
-		Skill_LV_Star->SetBrushFromTexture(Lv0);
+		Level_Star->SetBrushFromTexture(Lv0);
 		break;
 	}
 
 	case 1:
 	{
-		Skill_LV_Star->SetBrushFromTexture(Lv1);
+		Level_Star->SetBrushFromTexture(Lv1);
 		break;
 	}
 
 	case 2:
 	{
-		Skill_LV_Star->SetBrushFromTexture(Lv2);
+		Level_Star->SetBrushFromTexture(Lv2);
 		break;
 	}
 
 	case 3:
 	{
-		Skill_LV_Star->SetBrushFromTexture(Lv3);
+		Level_Star->SetBrushFromTexture(Lv3);
 		break;
 	}
 
 	case 4:
 	{
-		Skill_LV_Star->SetBrushFromTexture(Lv4);
+		Level_Star->SetBrushFromTexture(Lv4);
 		break;
 	}
 	}
@@ -75,7 +83,7 @@ void ULevelUpSelectCard::NativeConstruct()
 FReply ULevelUpSelectCard::NativeOnMouseButtonDown(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
 {
 	FReply Reply = Super::NativeOnMouseButtonDown(InGeometry, InMouseEvent);
-	++User->GetBasicAttack()->GetLevel();
+	++Attack->GetLevel();
 	Managers->Widget->RemovePopupWidget();
 	return Reply;
 }
