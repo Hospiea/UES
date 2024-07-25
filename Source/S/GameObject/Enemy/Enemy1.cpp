@@ -38,7 +38,6 @@ void AEnemy1::Tick(float dt)
 		break;
 	}
 	}
-	
 }
 
 void AEnemy1::GetDamage(const float& dmg)
@@ -46,7 +45,7 @@ void AEnemy1::GetDamage(const float& dmg)
 	Super::GetDamage(dmg);
 	if (CurHp <= 0.0f && ActiveSelf())
 	{
-		AExpOrb* orb = Managers->GetPoolManager<AExpOrb>()->Get(AExpOrb::StaticClass(), GetActorLocation());
+		AExpOrb* orb = Managers->GetPoolManager<AExpOrb>()->Get(OrbClass, GetActorLocation());
 		orb->SetExpLevel(0);
 		SetActive(false);
 	}
