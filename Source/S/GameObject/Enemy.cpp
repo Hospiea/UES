@@ -5,11 +5,15 @@
 #include "Components/CapsuleComponent.h"
 #include "GameObject/Player/User.h"
 #include "System/GMB.h"
+#include "GameObject/Item/ExpOrb.h"
 #include "System/AIC.h"
 
 AEnemy::AEnemy()
 {
 	GetCapsuleComponent()->SetCollisionProfileName(TEXT("Enemy"));
+	static ConstructorHelpers::FClassFinder<AExpOrb> orbclass(TEXT("/Script/Engine.Blueprint'/Game/Assets/Blueprints/GameObjects/Item/BP_ExpOrb.BP_ExpOrb_C'"));
+	OrbClass = orbclass.Class;
+
 }
 
 void AEnemy::GetDamage(const float& value)
@@ -17,10 +21,7 @@ void AEnemy::GetDamage(const float& value)
 	CurHp -= value;
 	if (CurHp <= 0.0f)
 	{
-		Target->GetExp(5);
 		++Managers->Game->KillCounts;
-		//GetWorld()->DestroyActor(this);
-		SetActive(false);
 	}
 }
 

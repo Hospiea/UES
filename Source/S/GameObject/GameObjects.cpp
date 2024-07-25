@@ -11,14 +11,27 @@ void AGameObjects::SetActive(bool flag)
 {
 	IsActive = flag;
 	SetActorHiddenInGame(!flag);
-	//SetActorEnableCollision(flag);
+	SetActorEnableCollision(flag);
 	SetActorTickEnabled(flag);
+	
+	
 
 	if (flag)
 		OnEnable();
 
 	else if (!flag)
 		OnDisable();
+}
+
+void AGameObjects::OnEnable()
+{
+	GetCapsuleComponent()->SetCollisionProfileName(CollisionProfileName);
+}
+
+void AGameObjects::OnDisable()
+{
+	CollisionProfileName = GetCapsuleComponent()->GetCollisionProfileName();
+	GetCapsuleComponent()->SetCollisionProfileName(TEXT("Dead"));
 }
 
 AGameObjects::AGameObjects()

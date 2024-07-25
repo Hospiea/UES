@@ -24,7 +24,6 @@ public:
 
 
 private:
-	UPROPERTY()
 	TArray<TObjectPtr<T>> Pool;
 
 	UWorld* World;
@@ -59,7 +58,7 @@ inline T* PoolManager<T>::Get(UClass* Class, const FVector& Pos, const FRotator&
 			{
 				temp->AGameObjects::SetActive(true);
 				temp->AGameObjects::SetActorLocationAndRotation(Pos, Rot);
-				return Cast<T>(temp);
+				return static_cast<T*>(temp);
 			}
 		}
 		auto enemy = World->SpawnActor<T>(Class, Pos, Rot);
@@ -67,4 +66,3 @@ inline T* PoolManager<T>::Get(UClass* Class, const FVector& Pos, const FRotator&
 		return enemy;
 	}
 }
-

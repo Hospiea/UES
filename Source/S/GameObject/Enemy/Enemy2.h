@@ -26,4 +26,7 @@ protected:
 	TSubclassOf<AERange> RangeClass;
 
 	float Timer;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Setting")
+	float Distance;
 };

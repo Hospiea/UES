@@ -6,9 +6,8 @@
 #include "GameObject/Enemy.h"
 #include "Enemy1.generated.h"
 
-/**
- * 
- */
+class AExpOrb;
+
 UCLASS()
 class S_API AEnemy1 : public AEnemy
 {
@@ -19,6 +18,7 @@ public:
 
 protected:
 	virtual void Tick(float dt) override;
+	virtual void GetDamage(const float& dmg) override;
 
 	UFUNCTION()
 	void RecoverFromKnockBack();

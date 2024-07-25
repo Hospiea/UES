@@ -61,6 +61,7 @@ void AUser::BeginPlay()
 {
 	Super::BeginPlay();
 	GetSprite()->SetFlipbook(Flipbooks->Flipbooks["C1_Idle"]);
+	GetSprite()->SetRelativeLocation(FVector(0.0f, 1000.0f, 0.0f));
 
 #pragma region Setting
 	Stats.Speed = Managers->Data->PlayerStats->FindRow<FPlayerStats>(TEXT("1"), TEXT(""))->Speed;

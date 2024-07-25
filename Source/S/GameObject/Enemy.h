@@ -9,6 +9,7 @@
 class AUser;
 class AAIC;
 struct EnemyStats;
+class AExpOrb;
 
 UCLASS()
 class S_API AEnemy : public AGameObjects
@@ -63,4 +64,7 @@ protected:
 
 	UPROPERTY()
 	bool IsArmored;
+
+	UPROPERTY()
+	TSubclassOf<AExpOrb> OrbClass;
 };

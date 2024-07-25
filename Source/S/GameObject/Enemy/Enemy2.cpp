@@ -13,6 +13,7 @@ AEnemy2::AEnemy2()
 	PrimaryActorTick.bCanEverTick = true;
 
 	static ConstructorHelpers::FClassFinder<AERange> rangeclass(TEXT("/Script/Engine.Blueprint'/Game/Assets/Blueprints/GameObjects/EnemyProjectile/BP_ERange.BP_ERange_C'"));
+
 	RangeClass = rangeclass.Class;
 
 	Timer = 0.0f;
@@ -23,38 +24,46 @@ void AEnemy2::Tick(float dt)
 	Super::Tick(dt);
 	Timer += dt;
 
-	if (Timer > 1.0f)
-	{
-		auto bullet = Managers->GetPoolManager<AERange>()->Get(RangeClass, GetActorLocation(), GetActorRotation());
-		FVector Dir = Managers->Game->Player->GetActorLocation() - GetActorLocation();
-
-		Dir.Normalize();
-		Dir *= 200.0f;
-
-		float angle = FMath::Atan2(Dir.Z, Dir.X);
-		angle = FMath::RadiansToDegrees(angle);
-
-		Timer = 0.0f;
-		if (bullet)
-		{
-			bullet->GetCharacterMovement()->Velocity = Dir;
-			bullet->SetActorRotation(FRotator(angle - 90.0f, 0.0f, 0.0f));
-		}
-			
-		
-	}
+	
 
 	switch (State)
 	{
 	case EnemyState::Normal:
 	{
 		FVector Location = Target->GetActorLocation() - GetActorLocation();
-		Location.Normalize();
+		FVector2D Vel = FVector2D(Location.X, Location.Z);
 
-		FVector2D Dir = FVector2D(Location.X, Location.Z);
-		Dir *= Managers->Data->EnemyStats->FindRow<FEnemyStats>(TEXT("1"), TEXT(""))->Speed;
+		if (Vel.Size() < Distance)
+		{
+			if (Timer > 1.0f)
+			{
+				auto bullet = Managers->GetPoolManager<AERange>()->Get(RangeClass, GetActorLocation(), GetActorRotation());
+				FVector Dir = Managers->Game->Player->GetActorLocation() - GetActorLocation();
 
-		GetCharacterMovement()->Velocity = FVector(Dir.X, 0.0f, Dir.Y);
+				Dir.Normalize();
+				Dir *= 200.0f;
+
+				float angle = FMath::Atan2(Dir.Z, Dir.X);
+				angle = FMath::RadiansToDegrees(angle);
+
+				Timer = 0.0f;
+				if (bullet)
+				{
+					bullet->GetCharacterMovement()->Velocity = Dir;
+					bullet->SetActorRotation(FRotator(angle - 90.0f, 0.0f, 0.0f));
+				}
+			}
+
+			GetCharacterMovement()->Velocity = FVector::ZeroVector;
+			return;
+		}
+			
+
+		Vel.Normalize();
+
+		Vel *= Managers->Data->EnemyStats->FindRow<FEnemyStats>(TEXT("1"), TEXT(""))->Speed;
+
+		GetCharacterMovement()->Velocity = FVector(Vel.X, 0.0f, Vel.Y);
 		break;
 	}
 

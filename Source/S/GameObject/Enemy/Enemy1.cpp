@@ -5,6 +5,7 @@
 #include "GameObject/Player/User.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "PaperFlipbookComponent.h"
+#include "GameObject/Item/ExpOrb.h"
 #include "System/GMB.h"
 
 AEnemy1::AEnemy1()
@@ -38,6 +39,17 @@ void AEnemy1::Tick(float dt)
 	}
 	}
 	
+}
+
+void AEnemy1::GetDamage(const float& dmg)
+{
+	Super::GetDamage(dmg);
+	if (CurHp <= 0.0f && ActiveSelf())
+	{
+		AExpOrb* orb = Managers->GetPoolManager<AExpOrb>()->Get(AExpOrb::StaticClass(), GetActorLocation());
+		orb->SetExpLevel(0);
+		SetActive(false);
+	}
 }
 
 void AEnemy1::RecoverFromKnockBack()

@@ -17,9 +17,8 @@ class S_API AGameObjects : public APaperCharacter
 public:
 	inline const bool& ActiveSelf() { return IsActive; }
 	void SetActive(bool flag);
-	virtual void OnEnable() {};
-	virtual void OnDisable() {};
-
+	virtual void OnEnable();
+	virtual void OnDisable();
 	AGameObjects();
 	virtual void GetDamage(const float& value) {};
 	
@@ -37,5 +36,7 @@ protected:
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UAnimationComponent> AnimationComponent;
 
+	UPROPERTY()
+	FName CollisionProfileName;
 	
 };

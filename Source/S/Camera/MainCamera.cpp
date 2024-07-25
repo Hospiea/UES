@@ -21,7 +21,7 @@ AMainCamera::AMainCamera()
 void AMainCamera::BeginPlay()
 {
 	Super::BeginPlay();
-	SetActorLocationAndRotation(FVector(0.0f, 50.0f, 0.0f), FRotator(0.0f, -90.0f, 0.0f));
+	SetActorLocationAndRotation(FVector(0.0f, 5000.0f, 0.0f), FRotator(0.0f, -90.0f, 0.0f));
 	CameraComponent->bConstrainAspectRatio = true;
 	CameraComponent->AspectRatio = 0.6f;
 }
@@ -32,6 +32,6 @@ void AMainCamera::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	FVector Location = User->GetActorLocation();
 
-	SetActorLocation(FVector(Location.X, 50.0f, Location.Z));
+	SetActorLocation(FVector(Location.X, 5000.0f, Location.Z));
 }
 

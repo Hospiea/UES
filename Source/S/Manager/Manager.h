@@ -28,21 +28,33 @@ public:
 	
 	GameManager* Game;
 	
-	inline void PoolClear() { Pool.reset(); }
-	
+	inline void PoolClear() { PoolMap.Empty(); }
+
+	//template<typename T>
+	//PoolManager<T>* GetPoolManager()
+	//{
+	//	if (Pool == nullptr)
+	//	{
+	//		Pool = MakeShared<PoolManager<T>>();
+	//		static_cast<PoolManager<T>*>(Pool.Get())->SetWorld(World);
+	//	}
+	//		
+	//	return static_cast<PoolManager<T>*>(Pool.Get());
+	//}
 
 	template<typename T>
 	PoolManager<T>* GetPoolManager()
 	{
-		if (Pool == nullptr)
+		UClass* Class = T::StaticClass();
+		if (!PoolMap.Contains(Class))
 		{
-			Pool = std::make_shared<PoolManager<T>>();
-			static_cast<PoolManager<T>*>(Pool.get())->SetWorld(World);
+			TSharedPtr<PoolManager<T>> poolManager = MakeShared<PoolManager<T>>();
+			poolManager->SetWorld(World);
+			PoolMap.Add(Class, poolManager);
 		}
-			
-		return static_cast<PoolManager<T>*>(Pool.get());
-	}
 
+		return static_cast<PoolManager<T>*>(PoolMap[Class].Get());
+	}
 
 
 	UPROPERTY()
@@ -61,5 +73,6 @@ protected:
 	UWorld* World;
 
 private:
-	std::shared_ptr<void> Pool;
+	TMap<UClass*, TSharedPtr<void>> PoolMap;
+
 };
