@@ -30,7 +30,8 @@ public:
 		Electricted,
 		Slowed,
 		Poisoned,
-		Recovering
+		Recovering,
+		Attacking
 	};
 	AEnemy();
 
@@ -43,6 +44,7 @@ public:
 protected:
 	virtual void PreInitializeComponents() override;
 	virtual void BeginPlay() override;
+	virtual void Tick(float dt) override;
 	
 	FTimerHandle TimerHandle;
 
@@ -64,6 +66,9 @@ protected:
 
 	UPROPERTY()
 	bool IsArmored;
+
+	UPROPERTY()
+	uint8 ExpLv;
 
 	UPROPERTY()
 	TSubclassOf<AExpOrb> OrbClass;

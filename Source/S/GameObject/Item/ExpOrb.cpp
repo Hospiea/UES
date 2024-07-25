@@ -30,6 +30,12 @@ void AExpOrb::SetExpLevel(const uint8& lv)
 		GetSprite()->SetFlipbook(ExpSprites->Flipbooks[TEXT("Exp0")]);
 		break;
 	}
+	case 1:
+	{
+		GetSprite()->SetFlipbook(ExpSprites->Flipbooks[TEXT("Exp1")]);
+		break;
+	}
+
 	}
 }
 
@@ -41,6 +47,12 @@ void AExpOrb::BeginPlay()
 
 void AExpOrb::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	Cast<AUser>(OtherActor)->GetExp(5);
-	SetActive(false);
+	if (AUser* user = Cast<AUser>(OtherActor))
+	{
+		user->GetExp(Lv+5);
+		SetActive(false);
+	}
+
+	
+	
 }

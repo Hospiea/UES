@@ -18,7 +18,6 @@ public:
 
 protected:
 	virtual void Tick(float dt) override;
-	virtual void GetDamage(const float& dmg) override;
 
 	UFUNCTION()
 	void RecoverFromKnockBack();

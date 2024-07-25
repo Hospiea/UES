@@ -11,11 +11,13 @@
 AEnemy1::AEnemy1()
 {
 	PrimaryActorTick.bCanEverTick = true;
+	ExpLv = 0;
 }
 
 void AEnemy1::Tick(float dt)
 {
 	Super::Tick(dt);
+	
 
 	switch (State)
 	{
@@ -40,16 +42,6 @@ void AEnemy1::Tick(float dt)
 	}
 }
 
-void AEnemy1::GetDamage(const float& dmg)
-{
-	Super::GetDamage(dmg);
-	if (CurHp <= 0.0f && ActiveSelf())
-	{
-		AExpOrb* orb = Managers->GetPoolManager<AExpOrb>()->Get(OrbClass, GetActorLocation());
-		orb->SetExpLevel(0);
-		SetActive(false);
-	}
-}
 
 void AEnemy1::RecoverFromKnockBack()
 {

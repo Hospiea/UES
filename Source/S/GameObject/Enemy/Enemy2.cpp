@@ -15,6 +15,7 @@ AEnemy2::AEnemy2()
 	static ConstructorHelpers::FClassFinder<AERange> rangeclass(TEXT("/Script/Engine.Blueprint'/Game/Assets/Blueprints/GameObjects/EnemyProjectile/BP_ERange.BP_ERange_C'"));
 
 	RangeClass = rangeclass.Class;
+	ExpLv = 1;
 
 	Timer = 0.0f;
 }
@@ -22,7 +23,6 @@ AEnemy2::AEnemy2()
 void AEnemy2::Tick(float dt)
 {
 	Super::Tick(dt);
-	Timer += dt;
 
 	
 
@@ -35,25 +35,8 @@ void AEnemy2::Tick(float dt)
 
 		if (Vel.Size() < Distance)
 		{
-			if (Timer > 1.0f)
-			{
-				auto bullet = Managers->GetPoolManager<AERange>()->Get(RangeClass, GetActorLocation(), GetActorRotation());
-				FVector Dir = Managers->Game->Player->GetActorLocation() - GetActorLocation();
-
-				Dir.Normalize();
-				Dir *= 200.0f;
-
-				float angle = FMath::Atan2(Dir.Z, Dir.X);
-				angle = FMath::RadiansToDegrees(angle);
-
-				Timer = 0.0f;
-				if (bullet)
-				{
-					bullet->GetCharacterMovement()->Velocity = Dir;
-					bullet->SetActorRotation(FRotator(angle - 90.0f, 0.0f, 0.0f));
-				}
-			}
-
+			SetEnemyState(EnemyState::Attacking);
+			GetSprite()->SetFlipbook(Flipbooks->Flipbooks[TEXT("E2_Attack")]);
 			GetCharacterMovement()->Velocity = FVector::ZeroVector;
 			return;
 		}
@@ -71,6 +54,41 @@ void AEnemy2::Tick(float dt)
 	{
 		GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &ThisClass::RecoverFromKnockBack, 0.05f);
 		SetEnemyState(EnemyState::Recovering);
+		break;
+	}
+
+	case EnemyState::Attacking:
+	{
+		FVector Location = Target->GetActorLocation() - GetActorLocation();
+		FVector2D Vel = FVector2D(Location.X, Location.Z);
+		Timer += dt;
+
+		if (Vel.Size() > Distance)
+		{
+			SetEnemyState(EnemyState::Normal);
+			GetSprite()->SetFlipbook(Flipbooks->Flipbooks[TEXT("E2_Idle")]);
+			return;
+		}
+
+		if (Timer > 1.0f)
+		{
+			auto bullet = Managers->GetPoolManager<AERange>()->Get(RangeClass, GetActorLocation(), GetActorRotation());
+			FVector Dir = Managers->Game->Player->GetActorLocation() - GetActorLocation();
+
+			Dir.Normalize();
+			Dir *= 200.0f;
+
+			float angle = FMath::Atan2(Dir.Z, Dir.X);
+			angle = FMath::RadiansToDegrees(angle);
+
+			Timer = 0.0f;
+			if (bullet)
+			{
+				bullet->GetCharacterMovement()->Velocity = Dir;
+				bullet->SetActorRotation(FRotator(angle - 90.0f, 0.0f, 0.0f));
+			}
+		}
+
 		break;
 	}
 	}
