@@ -16,6 +16,7 @@
 #include "Attacks/Basic/Staff.h"
 #include "Components/DetectComponent.h"
 #include "System/PC.h"
+#include "Components/AnimationComponent.h"
 #include "Components/AttackComponent.h"
 
 
@@ -32,6 +33,9 @@ AUser::AUser()
 	DetectComponent->SetupAttachment(RootComponent);
 
 	AttackComponent = CreateDefaultSubobject<UAttackComponent>(TEXT("AttackComponent"));
+
+	AnimationComponent = CreateDefaultSubobject<UAnimationComponent>(TEXT("AnimationComponent"));
+
 }
 
 TObjectPtr<UBasic>& AUser::GetBasicAttack()
@@ -83,7 +87,9 @@ void AUser::BeginPlay()
 	Stats.ProjectileSize = Managers->Data->PlayerStats->FindRow<FPlayerStats>(TEXT("1"), TEXT(""))->ProjectileSize;
 	Stats.ProjectileDuration = Managers->Data->PlayerStats->FindRow<FPlayerStats>(TEXT("1"), TEXT(""))->ProjectileDuration;
 	
-	
+	AnimationComponent->SetOwningGameObject(this);
+	AnimationComponent->SetSprite(GetSprite());
+	AnimationComponent->SetMovementComponent(GetCharacterMovement());
 
 	AttackComponent->Init(GetWorld());
 	

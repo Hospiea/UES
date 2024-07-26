@@ -7,6 +7,7 @@
 #include "System/GMB.h"
 #include "GameObject/Item/ExpOrb.h"
 #include "PaperFlipbookComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "System/AIC.h"
 
 AEnemy::AEnemy()
@@ -17,6 +18,15 @@ AEnemy::AEnemy()
 
 }
 
+void AEnemy::SetEnemyState(const EnemyState& state)
+{
+	State = state;
+
+	if (state == EnemyState::KnockBacked)
+		GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &ThisClass::RecoverColor, 0.05f);
+	
+}
+
 void AEnemy::GetDamage(const float& value)
 {
 	CurHp -= value;
@@ -24,6 +34,7 @@ void AEnemy::GetDamage(const float& value)
 	{
 		++Managers->Game->KillCounts;
 		SetActive(false);
+		
 		AExpOrb* orb = Managers->GetPoolManager<AExpOrb>()->Get(OrbClass, GetActorLocation());
 		orb->SetExpLevel(ExpLv);
 	}
@@ -80,4 +91,5 @@ void AEnemy::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherAc
 void AEnemy::RecoverColor()
 {
 	GetSprite()->SetSpriteColor(FLinearColor::White);
+	SetEnemyState(EnemyState::Normal);
 }

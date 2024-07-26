@@ -13,7 +13,7 @@ void AGameObjects::SetActive(bool flag)
 	SetActorHiddenInGame(!flag);
 	SetActorEnableCollision(flag);
 	SetActorTickEnabled(flag);
-	
+	GetSprite()->SetVisibility(flag);
 	
 
 	if (flag)
@@ -43,7 +43,6 @@ AGameObjects::AGameObjects()
 	static ConstructorHelpers::FObjectFinder<UFlipbookAsset> flipbooks(TEXT("/Script/S.FlipbookAsset'/Game/Assets/Data/Flipbooks.Flipbooks'"));
 	Flipbooks = flipbooks.Object;
 
-	AnimationComponent = CreateDefaultSubobject<UAnimationComponent>(TEXT("AnimationComponent"));
 	
 	GetCharacterMovement()->SetPlaneConstraintAxisSetting(EPlaneConstraintAxisSetting::Y);
 	GetCharacterMovement()->SetPlaneConstraintEnabled(true);
@@ -56,7 +55,5 @@ void AGameObjects::BeginPlay()
 	Super::BeginPlay();
 	GetSprite()->SetRelativeLocation(FVector(0.0f, Order, 0.0f));
 
-	AnimationComponent->SetOwningGameObject(this);
-	AnimationComponent->SetSprite(GetSprite());
-	AnimationComponent->SetMovementComponent(GetCharacterMovement());
+	
 }

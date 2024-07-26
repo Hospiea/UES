@@ -36,7 +36,7 @@ public:
 	AEnemy();
 
 	inline const EnemyState& GetEnemyState() { return State; }
-	inline void SetEnemyState(const EnemyState& state) { State = state; }
+	void SetEnemyState(const EnemyState& state);
 	virtual void GetDamage(const float& value) override;
 	inline const bool& GetArmorDamaged() { return IsArmored; }
 	void SetArmorDamaged();

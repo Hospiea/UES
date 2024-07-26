@@ -71,6 +71,10 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TObjectPtr<UDataTable> ExpData;
 
+
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr<UAnimationComponent> AnimationComponent;
+
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UAttackComponent> AttackComponent;
 

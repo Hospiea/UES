@@ -33,8 +33,6 @@ protected:
 	UPROPERTY(VisibleAnywhere, Category = "Flipbook Assets")
 	TObjectPtr<UFlipbookAsset> Flipbooks;
 
-	UPROPERTY(VisibleAnywhere)
-	TObjectPtr<UAnimationComponent> AnimationComponent;
 
 	UPROPERTY()
 	FName CollisionProfileName;
