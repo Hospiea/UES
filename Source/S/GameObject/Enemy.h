@@ -72,4 +72,7 @@ protected:
 
 	UPROPERTY()
 	TSubclassOf<AExpOrb> OrbClass;
+
+	UFUNCTION()
+	void RecoverColor();
 };

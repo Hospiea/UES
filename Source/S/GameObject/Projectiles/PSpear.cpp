@@ -29,3 +29,12 @@ void APSpear::Tick(float dt)
 	Super::Tick(dt);
 
 }
+
+void APSpear::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	Super::OnOverlap(OverlappedComponent, OtherActor, OtherComp, OtherBodyIndex, bFromSweep, SweepResult);
+	if (AEnemy* enemy = Cast<AEnemy>(OtherActor))
+	{
+		enemy->GetDamage(Data.Damage);
+	}
+}
