@@ -1,6 +1,6 @@
 Index,Damage,Rate,Range,Speed,Duration
 Sword,10,0.5,50,0,0.1
-Axe,5,0.7,25,200,10
+Axe,5,2,25,200,10
 Hammer,10,1.5,500,50,10
 Spear,5,2,1000,1000,2
 Thunder,10,5,200,0,5
