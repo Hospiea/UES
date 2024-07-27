@@ -15,7 +15,7 @@ class S_API APSword : public AMelee
 
 public:
 	APSword();
-	inline const FProjectileData& GetData()
+	virtual inline FProjectileData& GetData() override
 	{
 		return Data;
 	}

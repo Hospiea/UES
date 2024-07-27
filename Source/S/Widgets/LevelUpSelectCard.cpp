@@ -14,6 +14,11 @@
 #include "Attacks/Basic/Staff.h"
 #include "Attacks/Basic/Axe.h"
 #include "Attacks/Basic/Spear.h"
+#include "Attacks/Basic/Passive/Fire.h"
+#include "Attacks/Basic/Passive/Life.h"
+#include "Attacks/Basic/Passive/Magnetic.h"
+#include "Attacks/Basic/Passive/Will.h"
+#include "Attacks/Basic/Passive/Wind.h"
 #include "LevelUpSkillSlot.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
@@ -54,7 +59,7 @@ void ULevelUpSelectCard::NativeConstruct()
 	User = Managers->Game->Player;
 
 	RandIndex = FMath::Rand() % 5;
-	//IsPassive = FMath::RandBool();
+	IsPassive = FMath::RandBool();
 
 	WeaponType = static_cast<UBasic::AttackType>(RandIndex);
 	PassiveType = static_cast<UBasic::PassiveType>(RandIndex);
@@ -252,5 +257,50 @@ void ULevelUpSelectCard::WeaponFactory(const UBasic::AttackType& attack)
 
 void ULevelUpSelectCard::PassiveFactory(const UBasic::PassiveType& passive)
 {
+	switch (passive)
+	{
+	case UBasic::PassiveType::Fire:
+	{
+		auto temp = NewObject<UFire>(User);
+		temp->SetPassiveType(passive);
+		temp->SetPassive(true);
+		User->GetAttackComponent()->AddAttack(temp);
+		break;
+	}
 
+	case UBasic::PassiveType::Wind:
+	{
+		auto temp = NewObject<UWind>(User);
+		temp->SetPassiveType(passive);
+		temp->SetPassive(true);
+		User->GetAttackComponent()->AddAttack(temp);
+		break;
+	}
+
+	case UBasic::PassiveType::Will:
+	{
+		/*auto temp = NewObject<UHammer>(User);
+		temp->SetAttackType(attack);
+		User->GetAttackComponent()->AddAttack(temp);*/
+		break;
+	}
+
+	case UBasic::PassiveType::Magnetic:
+	{
+		auto temp = NewObject<UMagnetic>(User);
+		temp->SetPassiveType(passive);
+		temp->SetPassive(true);
+		User->GetAttackComponent()->AddAttack(temp);
+		break;
+	}
+
+	case UBasic::PassiveType::Life:
+	{
+		auto temp = NewObject<ULife>(User);
+		temp->SetPassiveType(passive);
+		temp->SetPassive(true);
+		User->GetAttackComponent()->AddAttack(temp);
+		break;
+	}
+	}
 }

@@ -16,7 +16,7 @@ class S_API APThunder : public ARangeBase
 
 public:
 	APThunder();
-	inline const FProjectileData& GetData()
+	virtual inline FProjectileData& GetData() override
 	{
 		return Data;
 	}

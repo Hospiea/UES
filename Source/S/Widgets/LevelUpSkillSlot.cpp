@@ -42,4 +42,9 @@ void ULevelUpSkillSlot::NativeConstruct()
 	{
 		WeaponImages[i]->SetImage(Managers->Widget->GetWeaponImages()[i]);
 	}
+
+	for (int i = 0; i < Managers->Widget->GetPassiveImages().Num(); ++i)
+	{
+		PassiveImages[i]->SetImage(Managers->Widget->GetPassiveImages()[i]);
+	}
 }

@@ -39,7 +39,7 @@ public:
 
 
 	AUser();
-	inline const PlayerStats& GetStats() { return Stats; }
+	inline PlayerStats& GetStats() { return Stats; }
 	inline TObjectPtr<UCenter>& GetCenter() { return Center; }
 	inline TObjectPtr <UDetectComponent>& GetDetectComponent() { return DetectComponent; }
 	inline TObjectPtr<UAttackComponent>& GetAttackComponent() { return AttackComponent; }

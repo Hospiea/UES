@@ -16,7 +16,7 @@ class S_API APSheild : public AMelee
 
 public:
 	APSheild();
-	inline const FProjectileData& GetData()
+	virtual inline FProjectileData& GetData() override
 	{
 		return Data;
 	}

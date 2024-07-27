@@ -15,7 +15,7 @@ class S_API APSpear : public ARangeBase
 	GENERATED_BODY()
 public:
 	APSpear();
-	inline const FProjectileData& GetData()
+	virtual inline FProjectileData& GetData() override
 	{
 		return Data;
 	}

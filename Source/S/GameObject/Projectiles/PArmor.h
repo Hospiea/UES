@@ -16,7 +16,7 @@ class S_API APArmor : public AMelee
 	
 public:
 	APArmor();
-	inline const FProjectileData& GetData()
+	virtual inline FProjectileData& GetData() override
 	{
 		return Data;
 	}

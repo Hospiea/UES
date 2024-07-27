@@ -16,7 +16,7 @@ class S_API APShoes : public AMelee
 	
 public:
 	APShoes();
-	inline const FProjectileData& GetData()
+	virtual inline FProjectileData& GetData() override
 	{
 		return Data;
 	}

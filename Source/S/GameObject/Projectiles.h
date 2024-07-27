@@ -28,6 +28,7 @@ class S_API AProjectiles : public AGameObjects
 
 public:
 	AProjectiles();
+	virtual inline FProjectileData& GetData() { return Data; }
 	
 
 protected:
@@ -38,6 +39,9 @@ protected:
 
 	bool Deletable;
 	FName str;
+
+private:
+	FProjectileData Data;
 };
 
 

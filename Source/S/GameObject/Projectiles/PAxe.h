@@ -15,7 +15,7 @@ class S_API APAxe : public ARangeBase
 	GENERATED_BODY()
 public:
 	APAxe();
-	inline const FProjectileData& GetData()
+	virtual inline FProjectileData& GetData() override
 	{
 		return Data;
 	}
