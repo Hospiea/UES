@@ -25,7 +25,7 @@ void AGMB::InitGame(const FString& MapName, const FString& Options, FString& Err
 void AGMB::BeginPlay()
 {
 	Super::BeginPlay();
-	Spawner = GetWorld()->SpawnActor<ASpawner>();
+	//Spawner = GetWorld()->SpawnActor<ASpawner>();
 	Managers->Widget = GetWorld()->SpawnActor<AWidgetManager>();
 	Managers->Game->KillCounts = 0;
 	

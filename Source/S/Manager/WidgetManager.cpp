@@ -43,10 +43,18 @@ void AWidgetManager::RemovePopupWidget()
 	Managers->Controller->Resume();
 }
 
+void AWidgetManager::EndOpening()
+{
+	CurrentWidget->RemoveFromParent();
+	CurrentWidget = CreateWidget(GetWorld(), Widgets->Widgets["Intro"]);
+	CurrentWidget->AddToViewport();
+}
+
 void AWidgetManager::BeginPlay()
 {
 	Super::BeginPlay();
-	CurrentWidget = CreateWidget(GetWorld(), Widgets->Widgets["Battle"]);
+	//CurrentWidget = CreateWidget(GetWorld(), Widgets->Widgets["Battle"]);
+	CurrentWidget = CreateWidget(GetWorld(), Widgets->Widgets["Opening"]);
 	CurrentWidget->AddToViewport();
 
 	
