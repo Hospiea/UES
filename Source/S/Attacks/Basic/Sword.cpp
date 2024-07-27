@@ -8,10 +8,6 @@
 #include "Data/WeaponAsset.h"
 #include "System/GMB.h"
 
-
-
-
-
 USword::USword(const FObjectInitializer& Init)
 	:Super(Init)
 {
@@ -20,6 +16,7 @@ USword::USword(const FObjectInitializer& Init)
 
 void USword::Init()
 {
+	Super::Init();
 	WeaponClass = Weapons->Weapons["Sword"];
 	SetWeaponData();
 }

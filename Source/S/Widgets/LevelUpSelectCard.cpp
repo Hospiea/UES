@@ -20,6 +20,7 @@
 #include "Attacks/Basic/Passive/Will.h"
 #include "Attacks/Basic/Passive/Wind.h"
 #include "Attacks/Basic/Hammer.h"
+#include "Attacks/Basic/Shoes.h"
 #include "LevelUpSkillSlot.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
@@ -60,7 +61,7 @@ void ULevelUpSelectCard::NativeConstruct()
 	IsAlreadyHave = false;
 	User = Managers->Game->Player;
 
-	RandIndex = FMath::Rand() % 5;
+	RandIndex = FMath::Rand() % 13;
 	IsPassive = FMath::RandBool();
 
 	WeaponType = static_cast<UBasic::AttackType>(RandIndex);
@@ -257,6 +258,60 @@ void ULevelUpSelectCard::WeaponFactory(const UBasic::AttackType& attack)
 		temp->SetAttackType(attack);
 		temp->SetPassive(false);
 		User->GetAttackComponent()->AddAttack(temp);
+		break;
+	}
+
+	case UBasic::AttackType::Dagger:
+	{
+
+		break;
+	}
+
+	case UBasic::AttackType::Shield:
+	{
+		auto temp = NewObject<USheild>(User);
+		temp->SetAttackType(attack);
+		temp->SetPassive(false);
+		User->GetAttackComponent()->AddAttack(temp);
+		break;
+	}
+
+	case UBasic::AttackType::Armor:
+	{
+		
+		break;
+	}
+
+	case UBasic::AttackType::Helmet:
+	{
+		
+		break;
+	}
+
+	case UBasic::AttackType::Robe:
+	{
+
+		break;
+	}
+
+	case UBasic::AttackType::Shoes:
+	{
+		auto temp = NewObject<UShoes>(User);
+		temp->SetAttackType(attack);
+		temp->SetPassive(false);
+		User->GetAttackComponent()->AddAttack(temp);
+		break;
+	}
+
+	case UBasic::AttackType::Negative:
+	{
+
+		break;
+	}
+
+	case UBasic::AttackType::Positive:
+	{
+
 		break;
 	}
 	}

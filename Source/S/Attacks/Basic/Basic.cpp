@@ -14,7 +14,6 @@ UBasic::UBasic(const FObjectInitializer& Initializer)
 {
 	static ConstructorHelpers::FObjectFinder<UWeaponAsset> weapons(TEXT("/Script/S.WeaponAsset'/Game/Assets/Data/Weapons.Weapons'"));
 	Weapons = weapons.Object;
-	Init();
 }
 
 UBasic::~UBasic()
@@ -42,5 +41,5 @@ void UBasic::BasicAttack(const FVector2D& Dir)
 
 void UBasic::Init()
 {
-
+	User = Managers->Game->Player;
 }
