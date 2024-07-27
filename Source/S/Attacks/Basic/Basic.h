@@ -21,11 +21,34 @@ public:
 	{
 		Sword,
 		Axe,
-		Sheild,
-		Armor,
-		Shoes,
+		Hammer,
 		Spear,
 		Staff,
+		Dagger,
+		Shield,
+		Armor,
+		Helmet,
+		Robe,
+		Shoes,
+		Negative,
+		Positive
+	};
+
+	enum class PassiveType
+	{
+		Fire,
+		Wind,
+		Will,
+		Magnetic,
+		Life,
+		Iron,
+		Time,
+		Circular,
+		Thunder,
+		Rock,
+		Belief,
+		Experience,
+		Rich
 	};
 	
 public:
@@ -38,7 +61,12 @@ public:
 	const float& GetRate() { return Rate; }
 	inline FProjectileData& GetData() { return *Data; }
 	inline const AttackType& GetAttackType() { return Type; }
+	inline void SetAttackType(const AttackType& type) { Type = type; }
+	inline const PassiveType& GetPassiveType() { return PType; }
+	inline void SetPassiveType(const PassiveType& type) { PType = type; }
 	virtual uint8& GetLevel() { return dummy; };
+	inline void SetPassive(const bool& flag) { bIsPassive = flag; }
+	inline const bool& IsPassive() { return bIsPassive; }
 
 protected:
 	virtual void SetWeaponData() {};
@@ -56,6 +84,9 @@ protected:
 	float Rate;
 
 	UPROPERTY()
+	bool bIsPassive;
+
+	UPROPERTY()
 	FVector SpawnLocation;
 
 	FProjectileData* Data;
@@ -67,6 +98,7 @@ protected:
 	TSubclassOf<AProjectiles> WeaponClass;
 
 	AttackType Type;
+	PassiveType PType;
 
 	uint8 dummy;
 };

@@ -8,6 +8,7 @@
 
 class UBasic;
 class UDetectComponent;
+class UWorld;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class S_API UAttackComponent : public UActorComponent
@@ -18,7 +19,11 @@ public:
 	// Sets default values for this component's properties
 	UAttackComponent();
 	inline TArray<TObjectPtr<UBasic>>& GetAttackTypes() { return Attacks; }
+	inline TArray<TObjectPtr<UBasic>>& GetPassiveTypes() { return Passives; }
 	void Init(UWorld* world);
+	void AddAttack(UBasic* attack);
+	inline const bool& IsWeaponMax() { return bWeaponMax; }
+	inline const bool& IsPassiveMax() { return bPassiveMax; }
 
 protected:
 	// Called when the game starts
@@ -30,11 +35,20 @@ public:
 
 
 private:
-	const uint8 MaxWeapon = 5;
+	const uint8 MaxWeapon = 6;
+
+	bool bWeaponMax = false;
+	bool bPassiveMax = false;
 
 	UPROPERTY()
 	TArray<TObjectPtr<UBasic>> Attacks;
 
 	UPROPERTY()
+	TArray<TObjectPtr<UBasic>> Passives;
+
+	UPROPERTY()
 	TObjectPtr<UDetectComponent> Detection;
+
+	UPROPERTY()
+	UWorld* World;
 };

@@ -11,6 +11,8 @@ class UImage;
 class UTexture2D;
 class AUser;
 class UCanvasPanel;
+class UTextureAsset;
+class UTextBlock;
 
 UCLASS()
 class S_API ULevelUpSelectCard : public UWidgetBase
@@ -29,6 +31,12 @@ protected:
 
 	UPROPERTY(meta=(BindWidget))
 	TObjectPtr<UCanvasPanel> Skill_Card;
+
+	UPROPERTY(meta=(BindWidget))
+	TObjectPtr<UImage> Item_Image;
+
+	UPROPERTY(meta=(BindWidget))
+	TObjectPtr<UTextBlock> Skill_Name;
 	
 	
 	virtual FReply NativeOnMouseButtonDown(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent) override;
@@ -58,7 +66,20 @@ protected:
 	TObjectPtr<UBasic> Attack;
 
 	UPROPERTY()
-	uint8 Level;
+	TObjectPtr<UTextureAsset> Textures;
 
-	UBasic::AttackType CardType;
+	UPROPERTY()
+	int32 Level;
+
+	UBasic::AttackType WeaponType;
+	UBasic::PassiveType PassiveType;
+
+	bool IsFirst;
+	bool IsPassive;
+	int32 RandIndex;
+	bool IsAlreadyHave;
+
+private:
+	void WeaponFactory(const UBasic::AttackType& attack);
+	void PassiveFactory(const UBasic::PassiveType& passive);
 };

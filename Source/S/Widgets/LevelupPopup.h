@@ -7,18 +7,24 @@
 #include "LevelupPopup.generated.h"
 
 class UButton;
+class ULevelUpSkillSlot;
 
 UCLASS()
 class S_API ULevelupPopup : public UWidgetBase
 {
 	GENERATED_BODY()
-	
+
+public:
+
 
 protected:
 	virtual void NativeConstruct() override;
 
 
 protected:
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<ULevelUpSkillSlot> Skill_Slot;
+
 	UPROPERTY(meta=(BindWidget))
 	TObjectPtr<UButton> Button0;
 

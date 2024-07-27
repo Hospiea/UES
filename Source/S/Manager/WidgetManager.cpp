@@ -7,12 +7,14 @@
 #include "System/GMB.h"
 #include "System/PC.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Widgets/LevelUpSkillSlot.h"
 #include "Kismet/GameplayStatics.h"
 
 AWidgetManager::AWidgetManager()
 {
 	PrimaryActorTick.bCanEverTick = false;
 	static ConstructorHelpers::FObjectFinder<UWidgetAsset> widgets(TEXT("/Script/S.WidgetAsset'/Game/Assets/Data/Widgets.Widgets'"));
+
 	Widgets = widgets.Object;
 }
 
@@ -46,4 +48,7 @@ void AWidgetManager::BeginPlay()
 	Super::BeginPlay();
 	CurrentWidget = CreateWidget(GetWorld(), Widgets->Widgets["Battle"]);
 	CurrentWidget->AddToViewport();
+
+	
+
 }

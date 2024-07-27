@@ -7,6 +7,7 @@
 #include "WidgetManager.generated.h"
 
 class UWidgetAsset;
+class ULevelUpSkillSlot;
 
 UCLASS()
 class S_API AWidgetManager : public AActor
@@ -18,6 +19,8 @@ public:
 	void LevelUp();
 	void Pause();
 	void RemovePopupWidget();
+	inline TArray<TObjectPtr<UTexture2D>>& GetWeaponImages() { return WeaponImages; }
+	inline TArray<TObjectPtr<UTexture2D>>& GetPassiveImages() { return PassiveImages; }
 
 protected:
 	virtual void BeginPlay() override;
@@ -33,6 +36,9 @@ protected:
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UWidgetAsset> Widgets;
 
+	UPROPERTY()
+	TArray<TObjectPtr<UTexture2D>> WeaponImages;
 
-
+	UPROPERTY()
+	TArray<TObjectPtr<UTexture2D>> PassiveImages;
 };

@@ -4,6 +4,7 @@
 #include "Attacks/Basic/Basic.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "GameObject/Player/User.h"
+#include "System/GMB.h"
 #include "Data/WeaponAsset.h"
 
 

@@ -116,5 +116,4 @@ void AUser::Tick(float dt)
 void AUser::LevelUp()
 {
 	Managers->Widget->LevelUp();
-	Cast<APC>(GetController())->LevelUp();
 }

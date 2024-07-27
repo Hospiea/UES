@@ -21,7 +21,6 @@ class S_API APC : public APlayerController
 	
 public:
 	APC(const FObjectInitializer& Init);
-	void LevelUp();
 
 	void Pause();
 	void Resume();

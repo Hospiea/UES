@@ -19,10 +19,6 @@ APC::APC(const FObjectInitializer& Init)
 	PrimaryActorTick.bCanEverTick = true;
 }
 
-void APC::LevelUp()
-{
-
-}
 
 void APC::Pause()
 {
