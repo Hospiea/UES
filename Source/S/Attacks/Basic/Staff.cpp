@@ -9,6 +9,12 @@
 #include "System/GMB.h"
 
 
+UStaff::UStaff(const FObjectInitializer& Init)
+	:Super(Init)
+{
+	APThunder::Basic = this;
+}
+
 void UStaff::Init()
 {
 	Super::Init();
@@ -19,15 +25,12 @@ void UStaff::Init()
 
 void UStaff::BasicAttack(const FVector2D& Dir)
 {
-	
 	SpawnLocation = FVector(Dir.X, 10.0f, Dir.Y);
 	APThunder* temp = World->SpawnActor<APThunder>(WeaponClass, SpawnLocation, FRotator(0.0f, 0.0f, 0.0f));
-	temp->SetBasic(this);
 }
 
 void UStaff::SetWeaponData()
 {
-	//Data = APThunder::Data;
 	FName str = TEXT("Thunder");
 
 	Data.Damage = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Damage;

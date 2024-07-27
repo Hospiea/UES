@@ -8,6 +8,12 @@
 #include "Data/WeaponAsset.h"
 
 
+USheild::USheild(const FObjectInitializer& Init)
+	:Super(Init)
+{
+	APSheild::Basic = this;
+}
+
 void USheild::Init()
 {
 	Super::Init();
@@ -30,7 +36,6 @@ void USheild::Init()
 
 	APSheild* temp = World->SpawnActor<APSheild>(WeaponClass, SpawnLocation, FRotator(Angle, 0.0f, 0.0f));
 	temp->AttachToComponent(User->GetCenter(), FAttachmentTransformRules::KeepWorldTransform);
-	temp->SetBasic(this);
 }
 
 void USheild::BasicAttack(const FVector2D& Dir)

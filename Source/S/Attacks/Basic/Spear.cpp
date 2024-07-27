@@ -9,6 +9,12 @@
 #include "System/GMB.h"
 
 
+USpear::USpear(const FObjectInitializer& Init)
+	:Super(Init)
+{
+	APSpear::Basic = this;
+}
+
 void USpear::Init()
 {
 	Super::Init();
@@ -18,10 +24,8 @@ void USpear::Init()
 
 void USpear::BasicAttack(const FVector2D& Dir)
 {
-	//Super::BasicAttack(Dir);
 	SpawnLocation = User->GetActorLocation();
 	APSpear* temp = World->SpawnActor<APSpear>(WeaponClass, SpawnLocation, FRotator(Angle -90.0f, 0.0f, 0.0f));
-	temp->SetBasic(this);
 	FVector Vel = FVector(Dir.X, temp->GetActorLocation().Y, Dir.Y) - temp->GetActorLocation();
 	Vel.Normalize();
 	Vel *= Data.Speed;

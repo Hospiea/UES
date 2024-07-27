@@ -12,6 +12,12 @@
 
 
 
+USword::USword(const FObjectInitializer& Init)
+	:Super(Init)
+{
+	APSword::Basic = this;
+}
+
 void USword::Init()
 {
 	WeaponClass = Weapons->Weapons["Sword"];

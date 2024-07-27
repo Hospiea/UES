@@ -8,6 +8,12 @@
 #include "System/GMB.h"
 
 
+UShoes::UShoes(const FObjectInitializer& Init)
+	:Super(Init)
+{
+	APShoes::Basic = this;
+}
+
 void UShoes::Init()
 {
 	Super::Init();
@@ -17,12 +23,8 @@ void UShoes::Init()
 
 void UShoes::BasicAttack(const FVector2D& Dir)
 {
-	
-
 	SpawnLocation = User->GetActorLocation() - FVector(0.0f, 1.0f, 0.0f);
-
 	APShoes* temp = World->SpawnActor<APShoes>(WeaponClass, SpawnLocation, FRotator(0.0f, 0.0f, 0.0f));
-	temp->SetBasic(this);
 }
 
 void UShoes::SetWeaponData()
