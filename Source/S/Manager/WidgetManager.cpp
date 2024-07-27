@@ -9,6 +9,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Widgets/LevelUpSkillSlot.h"
 #include "Kismet/GameplayStatics.h"
+#include "System/Spawner.h"
 
 AWidgetManager::AWidgetManager()
 {
@@ -48,6 +49,14 @@ void AWidgetManager::EndOpening()
 	CurrentWidget->RemoveFromParent();
 	CurrentWidget = CreateWidget(GetWorld(), Widgets->Widgets["Intro"]);
 	CurrentWidget->AddToViewport();
+}
+
+void AWidgetManager::ClickToStart()
+{
+	CurrentWidget->RemoveFromParent();
+	CurrentWidget = CreateWidget(GetWorld(), Widgets->Widgets["Battle"]);
+	CurrentWidget->AddToViewport();
+	GetWorld()->SpawnActor<ASpawner>();
 }
 
 void AWidgetManager::BeginPlay()

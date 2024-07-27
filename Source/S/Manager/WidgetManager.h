@@ -22,6 +22,7 @@ public:
 	inline TArray<TObjectPtr<UTexture2D>>& GetWeaponImages() { return WeaponImages; }
 	inline TArray<TObjectPtr<UTexture2D>>& GetPassiveImages() { return PassiveImages; }
 	void EndOpening();
+	void ClickToStart();
 
 protected:
 	virtual void BeginPlay() override;
