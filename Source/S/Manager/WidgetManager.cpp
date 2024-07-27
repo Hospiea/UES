@@ -62,10 +62,6 @@ void AWidgetManager::ClickToStart()
 void AWidgetManager::BeginPlay()
 {
 	Super::BeginPlay();
-	//CurrentWidget = CreateWidget(GetWorld(), Widgets->Widgets["Battle"]);
 	CurrentWidget = CreateWidget(GetWorld(), Widgets->Widgets["Opening"]);
 	CurrentWidget->AddToViewport();
-
-	
-
 }
