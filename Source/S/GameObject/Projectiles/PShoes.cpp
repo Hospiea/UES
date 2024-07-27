@@ -3,9 +3,10 @@
 
 #include "GameObject/Projectiles/PShoes.h"
 #include "System/GMB.h"
+#include "Attacks/Basic/Shoes.h"
 #include "GameObject/Enemy.h"
 
-FProjectileData APShoes::Data;
+UShoes* APShoes::Basic;
 
 APShoes::APShoes()
 {
@@ -13,17 +14,15 @@ APShoes::APShoes()
 	str = TEXT("Shoes");
 }
 
+void APShoes::SetBasic(UBasic* basic)
+{
+	Basic = Cast<UShoes>(basic);
+}
+
 void APShoes::BeginPlay()
 {
 	Super::BeginPlay();
-	if (Data.Damage == 0.0f)
-	{
-		Data.Damage = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Damage;
-		Data.Rate = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Rate;
-		Data.Range = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Range;
-		Data.Duration = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Duration;
-		Data.Speed = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Speed;
-	}
+
 
 	Timer = 0.0f;
 }
@@ -32,7 +31,7 @@ void APShoes::Tick(float dt)
 {
 	Super::Tick(dt);
 	Timer += dt;
-	if (Timer >= Data.Duration)
+	if (Timer >= Basic->GetData().Duration)
 	{
 		GetWorld()->DestroyActor(this);
 	}

@@ -13,6 +13,8 @@
 #include "Attacks/Basic/Shoes.h"
 #include "Attacks/Basic/Sword.h"
 #include "Attacks/Basic/Spear.h"
+#include "System/GMB.h"
+#include "Data/TextureAsset.h"
 
 
 // Sets default values for this component's properties
@@ -21,18 +23,27 @@ UAttackComponent::UAttackComponent()
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
+
+	static ConstructorHelpers::FObjectFinder <UTextureAsset> texture(TEXT("/Script/S.TextureAsset'/Game/Assets/Data/Textures.Textures'"));
+
+	Textures = texture.Object;
 }
 
 void UAttackComponent::Init(UWorld* world)
 {
 	World = world;
 
-	Attacks.Add(NewObject<USword>());
+	/*Attacks.Add(NewObject<USword>());
 	Attacks[0]->SetWorld(world);
 	Attacks[0]->SetPlayer(Cast<AUser>(GetOwner()));
-	Attacks[0]->Init();
+	Attacks[0]->Init();*/
 
-	
+	auto temp = NewObject<USword>(GetOwner());
+	temp->SetAttackType(UBasic::AttackType::Sword);
+	temp->SetPassive(false);
+	AddAttack(temp);
+	Managers->Widget->GetWeaponImages().Add(Textures->MainWeapons[0]);
+
 
 	Detection = Cast<AUser>(GetOwner())->GetDetectComponent();
 }

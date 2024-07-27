@@ -6,9 +6,9 @@
 #include "GameObject/Projectiles/Melee.h"
 #include "PArmor.generated.h"
 
-/**
- * 
- */
+class UArmor;
+class UBasic;
+
 UCLASS()
 class S_API APArmor : public AMelee
 {
@@ -16,20 +16,16 @@ class S_API APArmor : public AMelee
 	
 public:
 	APArmor();
-	virtual inline FProjectileData& GetData() override
-	{
-		return Data;
-	}
+	virtual void SetBasic(UBasic* basic) override;
 
 protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float dt) override;
 
-	inline static uint8 Level = 0;
-	static FProjectileData Data;
 
 	virtual void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) override;
 
 private:
 	friend class UArmor;
+	static UArmor* Basic;
 };

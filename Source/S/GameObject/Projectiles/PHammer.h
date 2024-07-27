@@ -4,28 +4,28 @@
 
 #include "CoreMinimal.h"
 #include "GameObject/Projectiles/Melee.h"
-#include "PSheild.generated.h"
+#include "PHammer.generated.h"
 
 class UBasic;
-class USheild;
+class UHammer;
 
 UCLASS()
-class S_API APSheild : public AMelee
+class S_API APHammer : public AMelee
 {
 	GENERATED_BODY()
+	
 
 public:
-	APSheild();
+	APHammer();
 	virtual void SetBasic(UBasic* basic) override;
 
 protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float dt) override;
-
-
 	virtual void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) override;
 
+
 private:
-	friend class USheild;
-	static USheild* Basic;
+	static UHammer* Basic;
+	friend class UHammer;
 };

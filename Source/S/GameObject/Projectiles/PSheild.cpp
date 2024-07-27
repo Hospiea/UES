@@ -4,9 +4,10 @@
 #include "GameObject/Projectiles/PSheild.h"
 #include "System/GMB.h"
 #include "GameObject/Enemy.h"
+#include "Attacks/Basic/Sheild.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
-FProjectileData APSheild::Data;
+USheild* APSheild::Basic;
 
 APSheild::APSheild()
 {
@@ -15,17 +16,15 @@ APSheild::APSheild()
 	Deletable = true;
 }
 
+void APSheild::SetBasic(UBasic* basic)
+{
+	Basic = Cast<USheild>(basic);
+}
+
 void APSheild::BeginPlay()
 {
 	Super::BeginPlay();
-	if (Data.Damage == 0.0f)
-	{
-		Data.Damage = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Damage;
-		Data.Rate = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Rate;
-		Data.Range = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Range;
-		Data.Duration = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Duration;
-		Data.Speed = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Speed;
-	}
+
 }
 
 void APSheild::Tick(float dt)
@@ -42,7 +41,7 @@ void APSheild::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Other
 	{
 		enemy->SetEnemyState(AEnemy::EnemyState::KnockBacked);
 		FVector dir = GetActorLocation() - Managers->Game->Player->GetActorLocation();
-		enemy->GetDamage(Data.Damage);
+		enemy->GetDamage(Basic->GetData().Damage);
 		dir.Y = 0.0f;
 		dir.Normalize();
 		dir *= 200.0f;

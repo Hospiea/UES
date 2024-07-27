@@ -59,12 +59,17 @@ public:
 	inline void SetWorld(UWorld* world) { World = world; }
 	virtual void Init();
 	const float& GetRate() { return Rate; }
-	inline FProjectileData& GetData() { return *Data; }
+	virtual inline FProjectileData& GetData() { return Data; }
 	inline const AttackType& GetAttackType() { return Type; }
 	inline void SetAttackType(const AttackType& type) { Type = type; }
 	inline const PassiveType& GetPassiveType() { return PType; }
 	inline void SetPassiveType(const PassiveType& type) { PType = type; }
-	virtual uint8& GetLevel() { return dummy; };
+	virtual uint8& GetLevel() { return Level; };
+	virtual void LevelUp() 
+	{ 
+		++Level; 
+		Init();
+	}
 	inline void SetPassive(const bool& flag) { bIsPassive = flag; }
 	inline const bool& IsPassive() { return bIsPassive; }
 
@@ -89,7 +94,7 @@ protected:
 	UPROPERTY()
 	FVector SpawnLocation;
 
-	FProjectileData* Data;
+	FProjectileData Data;
 	
 	UPROPERTY()
 	TObjectPtr<UWeaponAsset> Weapons;
@@ -100,5 +105,6 @@ protected:
 	AttackType Type;
 	PassiveType PType;
 
-	uint8 dummy;
+	UPROPERTY()
+	uint8 Level;
 };

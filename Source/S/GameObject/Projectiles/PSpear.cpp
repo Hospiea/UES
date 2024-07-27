@@ -2,26 +2,25 @@
 
 
 #include "GameObject/Projectiles/PSpear.h"
+#include "Attacks/Basic/Spear.h"
 #include "System/GMB.h"
 
-FProjectileData APSpear::Data;
+USpear* APSpear::Basic;
 
 APSpear::APSpear()
 {
 	str = TEXT("Spear");
 }
 
+void APSpear::SetBasic(UBasic* basic)
+{
+	Basic = Cast<USpear>(basic);
+}
+
 void APSpear::BeginPlay()
 {
 	Super::BeginPlay();
-	if (Data.Damage == 0.0f)
-	{
-		Data.Damage = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Damage;
-		Data.Rate = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Rate;
-		Data.Range = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Range;
-		Data.Duration = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Duration;
-		Data.Speed = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Speed;
-	}
+
 }
 
 void APSpear::Tick(float dt)
@@ -35,6 +34,6 @@ void APSpear::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherA
 	Super::OnOverlap(OverlappedComponent, OtherActor, OtherComp, OtherBodyIndex, bFromSweep, SweepResult);
 	if (AEnemy* enemy = Cast<AEnemy>(OtherActor))
 	{
-		enemy->GetDamage(Data.Damage);
+		enemy->GetDamage(Basic->GetData().Damage);
 	}
 }

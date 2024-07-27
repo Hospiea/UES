@@ -4,8 +4,9 @@
 #include "GameObject/Projectiles/PArmor.h"
 #include "System/GMB.h"
 #include "GameObject/Enemy.h"
+#include "Attacks/Basic/Armor.h"
 
-FProjectileData APArmor::Data;
+UArmor* APArmor::Basic;
 
 APArmor::APArmor()
 {
@@ -13,17 +14,15 @@ APArmor::APArmor()
 	str = TEXT("Armor");
 }
 
+void APArmor::SetBasic(UBasic* basic)
+{
+	Basic = Cast<UArmor>(basic);
+}
+
 void APArmor::BeginPlay()
 {
 	Super::BeginPlay();
-	if (Data.Damage == 0.0f)
-	{
-		Data.Damage = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Damage;
-		Data.Rate = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Rate;
-		Data.Range = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Range;
-		Data.Duration = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Duration;
-		Data.Speed = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Speed;
-	}
+
 }
 
 void APArmor::Tick(float dt)

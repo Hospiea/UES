@@ -3,10 +3,12 @@
 
 #include "GameObject/Projectiles/PThunder.h"
 #include "System/GMB.h"
+#include "Attacks/Basic/Staff.h"
 #include "PaperFlipbookComponent.h"
 #include "PaperFlipbook.h"
 
-FProjectileData APThunder::Data;
+
+UStaff* APThunder::Basic;
 
 APThunder::APThunder()
 {
@@ -14,17 +16,15 @@ APThunder::APThunder()
 	str = TEXT("Thunder");
 }
 
+void APThunder::SetBasic(UBasic* basic)
+{
+	Basic = Cast<UStaff>(basic);
+}
+
 void APThunder::BeginPlay()
 {
 	Super::BeginPlay();
-	if (Data.Damage == 0.0f)
-	{
-		Data.Damage = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Damage;
-		Data.Rate = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Rate;
-		Data.Range = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Range;
-		Data.Duration = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Duration;
-		Data.Speed = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Speed;
-	}
+
 }
 
 void APThunder::Tick(float dt)
@@ -43,6 +43,6 @@ void APThunder::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Othe
 	Super::OnOverlap(OverlappedComponent, OtherActor, OtherComp, OtherBodyIndex, bFromSweep, SweepResult);
 	if (AEnemy* enemy = Cast<AEnemy>(OtherActor))
 	{
-		enemy->GetDamage(Data.Damage);
+		enemy->GetDamage(Basic->GetData().Damage);
 	}
 }

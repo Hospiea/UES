@@ -1,35 +1,28 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Attacks/Basic/Shoes.h"
-#include "Data/WeaponAsset.h"
-#include "GameObject/Player/User.h"
-#include "GameObject/Projectiles/PShoes.h"
+#include "Attacks/Basic/Hammer.h"
 #include "System/GMB.h"
+#include "Data/WeaponAsset.h"
 
 
-void UShoes::Init()
+void UHammer::Init()
 {
 	Super::Init();
-	WeaponClass = Weapons->Weapons["Shoes"];
+	WeaponClass = Weapons->Weapons["Hammer"];
 	SetWeaponData();
 }
 
-void UShoes::BasicAttack(const FVector2D& Dir)
+void UHammer::BasicAttack(const FVector2D& Dir)
 {
-	
 
-	SpawnLocation = User->GetActorLocation() - FVector(0.0f, 1.0f, 0.0f);
-
-	APShoes* temp = World->SpawnActor<APShoes>(WeaponClass, SpawnLocation, FRotator(0.0f, 0.0f, 0.0f));
-	temp->SetBasic(this);
 }
 
-void UShoes::SetWeaponData()
+void UHammer::SetWeaponData()
 {
 	Super::SetWeaponData();
+	FName str = TEXT("Hammer");
 
-	FName str = TEXT("Shoes");
 
 	Data.Damage = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Damage;
 	Data.Rate = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Rate;

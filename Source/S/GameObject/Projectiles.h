@@ -19,7 +19,7 @@ struct FProjectileData
 	float Timer;
 };
 
-
+class UBasic;
 
 UCLASS()
 class S_API AProjectiles : public AGameObjects
@@ -28,8 +28,7 @@ class S_API AProjectiles : public AGameObjects
 
 public:
 	AProjectiles();
-	virtual inline FProjectileData& GetData() { return Data; }
-	
+	virtual void SetBasic(UBasic* basic);
 
 protected:
 	virtual void BeginPlay() override;
@@ -40,8 +39,6 @@ protected:
 	bool Deletable;
 	FName str;
 
-private:
-	FProjectileData Data;
 };
 
 

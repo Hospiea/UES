@@ -19,6 +19,7 @@
 #include "Attacks/Basic/Passive/Magnetic.h"
 #include "Attacks/Basic/Passive/Will.h"
 #include "Attacks/Basic/Passive/Wind.h"
+#include "Attacks/Basic/Hammer.h"
 #include "LevelUpSkillSlot.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
@@ -30,7 +31,8 @@ ULevelUpSelectCard::ULevelUpSelectCard(const FObjectInitializer& Init)
 	RandIndex(-1),
 	IsAlreadyHave(false),
 	WeaponType(UBasic::AttackType::Sword),
-	PassiveType(UBasic::PassiveType::Fire)
+	PassiveType(UBasic::PassiveType::Fire),
+	Level(-1)
 {
 	static ConstructorHelpers::FObjectFinder<UTexture2D> lv0(TEXT("/Script/Engine.Texture2D'/Game/Art/UI/UI_Texs/Levelup_PopUp_Tex/LevelUP_Skill_LV0.LevelUP_Skill_LV0'"));
 	static ConstructorHelpers::FObjectFinder<UTexture2D> lv1(TEXT("/Script/Engine.Texture2D'/Game/Art/UI/UI_Texs/Levelup_PopUp_Tex/LevelUP_Skill_LV1.LevelUP_Skill_LV1'"));
@@ -89,7 +91,6 @@ void ULevelUpSelectCard::NativeConstruct()
 		}
 	}
 
-	GEngine->AddOnScreenDebugMessage(0, 1.0f, FColor::Cyan, FString::Printf(TEXT("%d"), Level));
 
 
 	if (Level == -1)
@@ -111,20 +112,28 @@ void ULevelUpSelectCard::NativeConstruct()
 
 
 
-
-	for (const auto& temp : User->GetAttackComponent()->GetAttackTypes())
+	if (!IsPassive)
 	{
-		if (temp->GetAttackType() == WeaponType)
+		for (const auto& temp : User->GetAttackComponent()->GetAttackTypes())
 		{
-			Level = temp->GetLevel();
-			Item_Image->SetBrushFromSoftTexture(Textures->MainWeapons[static_cast<int32>(WeaponType)]);
-			Attack = temp;
-			IsAlreadyHave = true;
+			if (temp->GetAttackType() == WeaponType)
+			{
+				Item_Image->SetBrushFromSoftTexture(Textures->MainWeapons[static_cast<int32>(WeaponType)]);
+				Attack = temp;
+				IsAlreadyHave = true;
+			}
 		}
-
-		else if (temp->GetPassiveType() == PassiveType)
+	}
+	else if (IsPassive)
+	{
+		for (const auto& temp : User->GetAttackComponent()->GetPassiveTypes())
 		{
-
+			if (temp->GetPassiveType() == PassiveType)
+			{
+				Item_Image->SetBrushFromSoftTexture(Textures->Passives[static_cast<int32>(PassiveType)]);
+				Attack = temp;
+				IsAlreadyHave = true;
+			}
 		}
 	}
 
@@ -192,11 +201,10 @@ FReply ULevelUpSelectCard::NativeOnMouseButtonDown(const FGeometry& InGeometry, 
 			WeaponFactory(WeaponType);
 			Managers->Widget->GetWeaponImages().Add(Textures->MainWeapons[RandIndex]);
 		}
-			
 	}
 
 	else
-		++Attack->GetLevel();
+		Attack->LevelUp();
 
 
 		
@@ -229,9 +237,10 @@ void ULevelUpSelectCard::WeaponFactory(const UBasic::AttackType& attack)
 
 	case UBasic::AttackType::Hammer:
 	{
-		/*auto temp = NewObject<UHammer>(User);
+		auto temp = NewObject<UHammer>(User);
 		temp->SetAttackType(attack);
-		User->GetAttackComponent()->AddAttack(temp);*/
+		temp->SetPassive(false);
+		User->GetAttackComponent()->AddAttack(temp);
 		break;
 	}
 

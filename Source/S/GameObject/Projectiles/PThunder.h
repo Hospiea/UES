@@ -6,9 +6,9 @@
 #include "GameObject/Projectiles/RangeBase.h"
 #include "PThunder.generated.h"
 
-/**
- * 
- */
+class UStaff;
+class UBasic;
+
 UCLASS()
 class S_API APThunder : public ARangeBase
 {
@@ -16,19 +16,15 @@ class S_API APThunder : public ARangeBase
 
 public:
 	APThunder();
-	virtual inline FProjectileData& GetData() override
-	{
-		return Data;
-	}
+	virtual void SetBasic(UBasic* basic) override;
 
 protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float dt) override;
 	virtual void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) override;
 
-	inline static uint8 Level = 0;
-	static FProjectileData Data;
 
 private:
+	static UStaff* Basic;
 	friend class UStaff;
 };

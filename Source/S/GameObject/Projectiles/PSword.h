@@ -6,7 +6,8 @@
 #include "GameObject/Projectiles/Melee.h"
 #include "PSword.generated.h"
 
-
+class UBasic;
+class USword;
 
 UCLASS()
 class S_API APSword : public AMelee
@@ -15,20 +16,16 @@ class S_API APSword : public AMelee
 
 public:
 	APSword();
-	virtual inline FProjectileData& GetData() override
-	{
-		return Data;
-	}
+	virtual void SetBasic(UBasic* basic) override;
 
 protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float dt) override;
 
-	static uint8 Level;
-	static FProjectileData Data;
 
 	virtual void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) override;
 
 private:
 	friend class USword;
+	static USword* Basic;
 };

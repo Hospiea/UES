@@ -8,12 +8,18 @@
 #include "System/GMB.h"
 #include "EnemyProjectiles.h"
 #include "System/AIC.h"
+#include "Attacks/Basic/Basic.h"
 
 
 AProjectiles::AProjectiles()
 {
 	GetCapsuleComponent()->SetCollisionProfileName(TEXT("Projectile"));
 	Deletable = false;
+}
+
+void AProjectiles::SetBasic(UBasic* basic)
+{
+
 }
 
 void AProjectiles::BeginPlay()

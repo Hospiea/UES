@@ -6,19 +6,16 @@
 #include "GameObject/Projectiles/RangeBase.h"
 #include "PSpear.generated.h"
 
-/**
- * 
- */
+class UBasic;
+class USpear;
+
 UCLASS()
 class S_API APSpear : public ARangeBase
 {
 	GENERATED_BODY()
 public:
 	APSpear();
-	virtual inline FProjectileData& GetData() override
-	{
-		return Data;
-	}
+	virtual void SetBasic(UBasic* basic) override;
 
 protected:
 	virtual void BeginPlay() override;
@@ -26,9 +23,8 @@ protected:
 	virtual void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) override;
 
 	
-	inline static uint8 Level = 0;
-	static FProjectileData Data;
 
 private:
 	friend class USpear;
+	static USpear* Basic;
 };

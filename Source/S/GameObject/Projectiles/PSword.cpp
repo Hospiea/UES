@@ -5,10 +5,10 @@
 #include "PaperSpriteComponent.h"
 #include "GameObject/Enemy.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Attacks/Basic/Sword.h"
 #include "System/GMB.h"
 
-uint8 APSword::Level = 0;
-
+USword* APSword::Basic;
 
 APSword::APSword()
 {
@@ -16,17 +16,15 @@ APSword::APSword()
 	str = TEXT("Sword");
 }
 
+void APSword::SetBasic(UBasic* basic)
+{
+	Basic = Cast<USword>(basic);
+}
+
 void APSword::BeginPlay()
 {
 	Super::BeginPlay();
-	if (Data.Damage == 0.0f)
-	{
-		Data.Damage = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Damage;
-		Data.Rate = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Rate;
-		Data.Range = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Range;
-		Data.Duration = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Duration;
-		Data.Speed = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Speed;
-	}
+	
 	
 }
 
@@ -45,7 +43,9 @@ void APSword::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherA
 		enemy->SetEnemyState(AEnemy::EnemyState::KnockBacked);
 		FVector dir = GetActorLocation() - Managers->Game->Player->GetActorLocation();
 		dir.Y = 0.0f;
-		enemy->GetDamage(Data.Damage);
+		enemy->GetDamage(Basic->GetData().Damage);
+		//GEngine->AddOnScreenDebugMessage(0, 1.0f, FColor::Cyan, FString::Printf(TEXT("%f"), USword::Data.Damage));
+
 		dir.Normalize();
 		dir *= 200.0f;
 		enemy->GetCharacterMovement()->Velocity = dir;

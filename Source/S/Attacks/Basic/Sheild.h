@@ -19,4 +19,7 @@ public:
 	virtual void BasicAttack(const FVector2D& Dir) override;
 	virtual void SetWeaponData() override;
 
+
+private:
+	friend class APSheild;
 };

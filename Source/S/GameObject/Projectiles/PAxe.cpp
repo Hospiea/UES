@@ -3,8 +3,9 @@
 
 #include "GameObject/Projectiles/PAxe.h"
 #include "System/GMB.h"
+#include "Attacks/Basic/Axe.h"
 
-FProjectileData APAxe::Data;
+UAxe* APAxe::Basic;
 
 APAxe::APAxe()
 {
@@ -12,17 +13,15 @@ APAxe::APAxe()
 
 }
 
+void APAxe::SetBasic(UBasic* basic)
+{
+	Basic = Cast<UAxe>(basic);
+}
+
 void APAxe::BeginPlay()
 {
 	Super::BeginPlay();
-	if (Data.Damage == 0.0f)
-	{
-		Data.Damage = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Damage;
-		Data.Rate = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Rate;
-		Data.Range = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Range;
-		Data.Duration = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Duration;
-		Data.Speed = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Speed;
-	}
+
 
 }
 

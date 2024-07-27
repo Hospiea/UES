@@ -7,9 +7,11 @@
 #include "Components/Center.h"
 #include "Data/WeaponAsset.h"
 
+
 void USheild::Init()
 {
 	Super::Init();
+	SetWeaponData();
 	WeaponClass = Weapons->Weapons["Sheild"];
 	SpawnLocation = User->GetActorLocation() + FVector(50.0f, 0.0f, 0.0f);
 	FVector Base = FVector::ForwardVector;
@@ -24,11 +26,11 @@ void USheild::Init()
 	if (CrossProduct.Y < 0)
 		Angle = -Angle;
 
-	if (Data == nullptr)
-		Init();
+
 
 	APSheild* temp = World->SpawnActor<APSheild>(WeaponClass, SpawnLocation, FRotator(Angle, 0.0f, 0.0f));
 	temp->AttachToComponent(User->GetCenter(), FAttachmentTransformRules::KeepWorldTransform);
+	temp->SetBasic(this);
 }
 
 void USheild::BasicAttack(const FVector2D& Dir)

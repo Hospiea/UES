@@ -9,6 +9,7 @@
 class UBasic;
 class UDetectComponent;
 class UWorld;
+class UTextureAsset;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class S_API UAttackComponent : public UActorComponent
@@ -39,6 +40,9 @@ private:
 
 	bool bWeaponMax = false;
 	bool bPassiveMax = false;
+
+	UPROPERTY()
+	TObjectPtr<UTextureAsset> Textures;
 
 	UPROPERTY()
 	TArray<TObjectPtr<UBasic>> Attacks;

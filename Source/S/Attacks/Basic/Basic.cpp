@@ -9,7 +9,8 @@
 
 
 UBasic::UBasic(const FObjectInitializer& Initializer)
-	:Super(Initializer)
+	:Super(Initializer),
+	Level(0)
 {
 	static ConstructorHelpers::FObjectFinder<UWeaponAsset> weapons(TEXT("/Script/S.WeaponAsset'/Game/Assets/Data/Weapons.Weapons'"));
 	Weapons = weapons.Object;
@@ -18,7 +19,7 @@ UBasic::UBasic(const FObjectInitializer& Initializer)
 
 UBasic::~UBasic()
 {
-	delete Data;
+
 }
 
 void UBasic::BasicAttack(const FVector2D& Dir)
@@ -37,12 +38,9 @@ void UBasic::BasicAttack(const FVector2D& Dir)
 	if (CrossProduct.Y < 0)
 		Angle = -Angle;
 
-	if (Data == nullptr)
-		Init();
 }
 
 void UBasic::Init()
 {
-	Data = new FProjectileData;
-	SetWeaponData();
+
 }

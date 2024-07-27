@@ -11,14 +11,16 @@
 void UArmor::Init()
 {
 	Super::Init();
+	SetWeaponData();
 	WeaponClass = Weapons->Weapons["Armor"];
 	SpawnLocation = User->GetActorLocation();
 
-	if (Data == nullptr)
-		Init();
+
+
 
 	APArmor* temp = World->SpawnActor<APArmor>(WeaponClass, SpawnLocation, FRotator(0.0f, 0.0f, 0.0f));
 	temp->AttachToComponent(User->GetCenter(), FAttachmentTransformRules::KeepWorldTransform);
+	temp->SetBasic(this);
 }
 
 void UArmor::BasicAttack(const FVector2D& Dir)

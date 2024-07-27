@@ -20,4 +20,6 @@ public:
 	virtual void SetWeaponData() override;
 
 
+private:
+	friend class APShoes;
 };
