@@ -17,11 +17,12 @@ public:
 	AEnemy1();
 
 protected:
+	virtual void BeginPlay() override;
 	virtual void Tick(float dt) override;
 
 	UFUNCTION()
 	void RecoverFromKnockBack();
 
-	virtual void OnEnable() override;
-	virtual void OnDisable() override;
+
+	static FEnemyStat Stats;
 };

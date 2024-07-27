@@ -8,10 +8,23 @@
 #include "GameObject/Item/ExpOrb.h"
 #include "System/GMB.h"
 
+FEnemyStat AEnemy1::Stats;
+
 AEnemy1::AEnemy1()
 {
 	PrimaryActorTick.bCanEverTick = true;
 	ExpLv = 0;
+
+	
+}
+
+void AEnemy1::BeginPlay()
+{
+	Super::BeginPlay();
+	Stats.Speed = Managers->Data->EnemyStats->FindRow<FEnemyStats>(TEXT("1"), TEXT(""))->Speed;
+	Stats.MaxHp = Managers->Data->EnemyStats->FindRow<FEnemyStats>(TEXT("1"), TEXT(""))->MaxHp;
+	CurHp = Stats.MaxHp;
+	bIsInitted = true;
 }
 
 void AEnemy1::Tick(float dt)
@@ -49,16 +62,4 @@ void AEnemy1::RecoverFromKnockBack()
 	GetSprite()->SetSpriteColor(FLinearColor::White);
 }
 
-void AEnemy1::OnEnable()
-{
-	Super::OnEnable();
-	GetSprite()->SetSpriteColor(FLinearColor::White);
-}
-
-void AEnemy1::OnDisable()
-{
-	Super::OnDisable();
-	CurHp = Stats.MaxHp;
-	SetEnemyState(EnemyState::Normal);
-}
 

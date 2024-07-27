@@ -17,6 +17,7 @@ public:
 	AEnemy2();
 
 protected:
+	virtual void BeginPlay() override;
 	virtual void Tick(float dt) override;
 
 	UFUNCTION()
@@ -29,4 +30,6 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Setting")
 	float Distance;
+
+	static FEnemyStat Stats;
 };

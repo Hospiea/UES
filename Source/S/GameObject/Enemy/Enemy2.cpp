@@ -8,16 +8,30 @@
 #include "System/GMB.h"
 #include "GameObject/EnemyProjectiles/ERange.h"
 
+FEnemyStat AEnemy2::Stats;
+
+
 AEnemy2::AEnemy2()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
 	static ConstructorHelpers::FClassFinder<AERange> rangeclass(TEXT("/Script/Engine.Blueprint'/Game/Assets/Blueprints/GameObjects/EnemyProjectile/BP_ERange.BP_ERange_C'"));
 
+	
+
 	RangeClass = rangeclass.Class;
 	ExpLv = 1;
 
 	Timer = 0.0f;
+}
+
+void AEnemy2::BeginPlay()
+{
+	Super::BeginPlay();
+	Stats.Speed = Managers->Data->EnemyStats->FindRow<FEnemyStats>(TEXT("1"), TEXT(""))->Speed;
+	Stats.MaxHp = Managers->Data->EnemyStats->FindRow<FEnemyStats>(TEXT("1"), TEXT(""))->MaxHp;
+	CurHp = Stats.MaxHp;
+	bIsInitted = true;
 }
 
 void AEnemy2::Tick(float dt)

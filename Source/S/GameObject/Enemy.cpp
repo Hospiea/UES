@@ -10,6 +10,8 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "System/AIC.h"
 
+bool AEnemy::bIsInitted = false;
+
 AEnemy::AEnemy()
 {
 	GetCapsuleComponent()->SetCollisionProfileName(TEXT("Enemy"));
@@ -29,18 +31,22 @@ void AEnemy::SetEnemyState(const EnemyState& state)
 
 void AEnemy::GetDamage(const float& value)
 {
+	Super::GetDamage(value);
 	CurHp -= value;
 	if (CurHp <= 0.0f)
 	{
 		++Managers->Game->KillCounts;
-		SetActive(false);
-		
+		GetWorld()->GetTimerManager().ClearTimer(TimerHandle);
+		GetWorld()->GetTimerManager().SetTimer(TimerHandle, [this]() {SetActive(false); }, 0.5f, FTimerManagerTimerParameters());
+		SetEnemyState(EnemyState::Dead);
+		GetCapsuleComponent()->SetCollisionProfileName(TEXT("Dead"));
+		GetCharacterMovement()->Velocity = FVector::ZeroVector;
 		AExpOrb* orb = Managers->GetPoolManager<AExpOrb>()->Get(OrbClass, GetActorLocation());
 		orb->SetExpLevel(ExpLv);
 	}
 
 	else
-		GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &ThisClass::RecoverColor, 0.05f);
+		GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &ThisClass::RecoverColor, 0.5f);
 
 }
 
@@ -67,9 +73,7 @@ void AEnemy::BeginPlay()
 	AIController->Possess(this);
 	
 	Target = Managers->Game->Player;
-	Stats.Speed = Managers->Data->EnemyStats->FindRow<FEnemyStats>(TEXT("1"), TEXT(""))->Speed;
-	Stats.MaxHp = Managers->Data->EnemyStats->FindRow<FEnemyStats>(TEXT("1"), TEXT(""))->MaxHp;
-	CurHp = Stats.MaxHp;
+	if (bIsInitted) return;
 }
 
 void AEnemy::Tick(float dt)
@@ -82,6 +86,15 @@ void AEnemy::Tick(float dt)
 	else
 		GetSprite()->SetRelativeRotation(FRotator(0.0f, 0.0f, 0.0f));
 }
+
+void AEnemy::OnEnable()
+{
+	Super::OnEnable();
+	GetCapsuleComponent()->SetCollisionProfileName(TEXT("Enemy"));
+	GetSprite()->SetSpriteColor(FLinearColor::White);
+	SetEnemyState(EnemyState::Normal);
+}
+
 
 void AEnemy::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {

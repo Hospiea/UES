@@ -8,8 +8,15 @@
 
 class AUser;
 class AAIC;
-struct EnemyStats;
 class AExpOrb;
+
+USTRUCT()
+struct FEnemyStat
+{
+	GENERATED_BODY()
+	float Speed;
+	float MaxHp;
+};
 
 UCLASS()
 class S_API AEnemy : public AGameObjects
@@ -17,11 +24,7 @@ class S_API AEnemy : public AGameObjects
 	GENERATED_BODY()
 
 public:
-	struct EnemyStats
-	{
-		float Speed;
-		float MaxHp;
-	};
+	
 
 	enum class EnemyState
 	{
@@ -31,7 +34,8 @@ public:
 		Slowed,
 		Poisoned,
 		Recovering,
-		Attacking
+		Attacking,
+		Dead,
 	};
 	AEnemy();
 
@@ -45,6 +49,7 @@ protected:
 	virtual void PreInitializeComponents() override;
 	virtual void BeginPlay() override;
 	virtual void Tick(float dt) override;
+	virtual void OnEnable() override;
 	
 	FTimerHandle TimerHandle;
 
@@ -59,7 +64,6 @@ protected:
 	UFUNCTION()
 	virtual void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 	
-	EnemyStats Stats;
 
 	UPROPERTY()
 	float CurHp;
@@ -75,4 +79,6 @@ protected:
 
 	UFUNCTION()
 	void RecoverColor();
+
+	static bool bIsInitted;
 };
