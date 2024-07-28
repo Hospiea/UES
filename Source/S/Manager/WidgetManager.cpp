@@ -25,7 +25,6 @@ void AWidgetManager::LevelUp()
 	PopupWidget->AddToViewport();
 	Managers->Controller->Pause();
 
-	CurrentWidget->SetVisibility(ESlateVisibility::HitTestInvisible);
 	
 	UGameplayStatics::SetGlobalTimeDilation(GetWorld(), 0.0f);
 }
@@ -35,7 +34,6 @@ void AWidgetManager::Pause()
 	PopupWidget = CreateWidget(GetWorld(), Widgets->Widgets["Pause"]);
 	PopupWidget->AddToViewport();
 	Managers->Controller->Pause();
-	CurrentWidget->SetVisibility(ESlateVisibility::HitTestInvisible);
 
 	UGameplayStatics::SetGlobalTimeDilation(GetWorld(), 0.0f);
 }
@@ -43,10 +41,8 @@ void AWidgetManager::Pause()
 void AWidgetManager::RemovePopupWidget()
 {
 	UGameplayStatics::SetGlobalTimeDilation(GetWorld(), 1.0f);
+	//Managers->Controller->SetInputMode(FInputModeUIOnly());
 	PopupWidget->RemoveFromParent();
-	Managers->Controller->SetInputMode(FInputModeGameAndUI());
-	CurrentWidget->SetVisibility(ESlateVisibility::Visible);
-
 	Managers->Controller->Resume();
 }
 

@@ -53,7 +53,7 @@ void APC::BeginPlay()
 	Component->BindAction(Left, ETriggerEvent::Triggered, this, &APC::LeftFunc);
 	Component->BindAction(Touch, ETriggerEvent::Triggered, this, &APC::TouchFunc);
 
-
+	SetInputMode(FInputModeUIOnly());
 
 	Managers->Controller = this;
 
