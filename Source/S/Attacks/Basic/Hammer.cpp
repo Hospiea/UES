@@ -2,7 +2,9 @@
 
 
 #include "Attacks/Basic/Hammer.h"
+#include "GameObject/Projectiles/PHammer.h"
 #include "System/GMB.h"
+#include "Components/Center.h"
 #include "Data/WeaponAsset.h"
 
 
@@ -15,7 +17,8 @@ void UHammer::Init()
 
 void UHammer::BasicAttack(const FVector2D& Dir)
 {
-
+	APHammer* Hammer = GetWorld()->SpawnActor<APHammer>(WeaponClass, FVector::ZeroVector, FRotator::ZeroRotator);
+	Hammer->AttachToComponent(User->GetCenter(), FAttachmentTransformRules::KeepRelativeTransform);
 }
 
 void UHammer::SetWeaponData()

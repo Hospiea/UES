@@ -120,6 +120,7 @@ void APC::TouchFunc(const FInputActionValue& value)
 {
 	FVector2D Dir = value.Get<FVector2D>();
 
+	GEngine->AddOnScreenDebugMessage(0, 1.0f, FColor::Cyan, TEXT("DD"));
 
 	Dir.Normalize();
 	Dir *= User->GetStats().Speed;

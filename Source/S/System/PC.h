@@ -24,6 +24,7 @@ public:
 	inline const FVector2D& GetDir() { return Direction; }
 	void Pause();
 	void Resume();
+	inline void SetDir(const FVector2D& dir) { Direction = dir; }
 
 protected:
 	virtual void BeginPlay() override;
