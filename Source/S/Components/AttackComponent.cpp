@@ -15,6 +15,7 @@
 #include "Attacks/Basic/Spear.h"
 #include "System/GMB.h"
 #include "Data/TextureAsset.h"
+#include "Widgets/LevelUpSelectCard.h"
 
 
 // Sets default values for this component's properties
@@ -43,7 +44,7 @@ void UAttackComponent::Init(UWorld* world)
 	temp->SetPassive(false);
 	AddAttack(temp);
 	Managers->Widget->GetWeaponImages().Add(Textures->MainWeapons[0]);
-
+	ULevelUpSelectCard::WeaponIndexes.Add(0);
 
 	Detection = Cast<AUser>(GetOwner())->GetDetectComponent();
 }

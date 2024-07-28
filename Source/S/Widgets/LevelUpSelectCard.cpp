@@ -24,6 +24,11 @@
 #include "LevelUpSkillSlot.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
+bool ULevelUpSelectCard::bIsWeaponMax = false;
+bool ULevelUpSelectCard::bIsPassiveMax = false;
+TArray<int32> ULevelUpSelectCard::WeaponIndexes;
+TArray<int32> ULevelUpSelectCard::PassiveIndexes;
+
 ULevelUpSelectCard::ULevelUpSelectCard(const FObjectInitializer& Init)
 	:
 	Super(Init),
@@ -66,6 +71,18 @@ void ULevelUpSelectCard::NativeConstruct()
 
 	WeaponType = static_cast<UBasic::AttackType>(RandIndex);
 	PassiveType = static_cast<UBasic::PassiveType>(RandIndex);
+
+	if (bIsWeaponMax && !IsPassive)
+	{
+		RandIndex = FMath::Rand() % 6;
+		WeaponType = static_cast<UBasic::AttackType>(WeaponIndexes[RandIndex]);
+	}
+
+	else if (bIsPassiveMax && IsPassive)
+	{
+		RandIndex = FMath::Rand() % 6;
+		PassiveType = static_cast<UBasic::PassiveType>(PassiveIndexes[RandIndex]);
+	}
 
 	if (!IsPassive)
 	{
@@ -193,20 +210,29 @@ FReply ULevelUpSelectCard::NativeOnMouseButtonDown(const FGeometry& InGeometry, 
 		{
 			PassiveFactory(PassiveType);
 			Managers->Widget->GetPassiveImages().Add(Textures->Passives[RandIndex]);
+			PassiveIndexes.Add(RandIndex);
+			if (PassiveIndexes.Num() == 5)
+				bIsPassiveMax = true;
 		}
 
 		else
 		{
 			WeaponFactory(WeaponType);
 			Managers->Widget->GetWeaponImages().Add(Textures->MainWeapons[RandIndex]);
+			WeaponIndexes.Add(RandIndex);
+			if (WeaponIndexes.Num() == 5)
+				bIsWeaponMax = true;
 		}
 	}
 
 	else
+	{
 		Attack->LevelUp();
+	}
 
 
-		
+
+
 
 	Managers->Widget->RemovePopupWidget();
 	return Reply;
@@ -278,13 +304,13 @@ void ULevelUpSelectCard::WeaponFactory(const UBasic::AttackType& attack)
 
 	case UBasic::AttackType::Armor:
 	{
-		
+
 		break;
 	}
 
 	case UBasic::AttackType::Helmet:
 	{
-		
+
 		break;
 	}
 

@@ -79,7 +79,13 @@ protected:
 	int32 RandIndex;
 	bool IsAlreadyHave;
 
+	static bool bIsWeaponMax;
+	static bool bIsPassiveMax;
+	static TArray<int32> WeaponIndexes;
+	static TArray<int32> PassiveIndexes;
+
 private:
 	void WeaponFactory(const UBasic::AttackType& attack);
 	void PassiveFactory(const UBasic::PassiveType& passive);
+	friend class UAttackComponent;
 };
