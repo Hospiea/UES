@@ -23,7 +23,8 @@ UBasic::~UBasic()
 
 void UBasic::BasicAttack(const FVector2D& Dir)
 {
-	FVector2D NewDir = Dir * 50.0f;
+	FVector2D NewDir = Dir.GetSafeNormal();
+	NewDir *= 50.0f;
 	SpawnLocation = User->GetActorLocation() + FVector(NewDir.X, 0.0f, NewDir.Y);
 	FVector Base = FVector::ForwardVector;
 

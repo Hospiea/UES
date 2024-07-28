@@ -19,13 +19,13 @@ void USword::Init()
 	Super::Init();
 	WeaponClass = Weapons->Weapons["Sword"];
 	SetWeaponData();
+
 }
 
 void USword::BasicAttack(const FVector2D& Dir)
 {
 	Super::BasicAttack(Dir);
 	APSword* temp = World->SpawnActor<APSword>(WeaponClass, SpawnLocation, FRotator(Angle, 0.0f, 0.0f));
-	temp->SetBasic(this);
 	temp->AttachToComponent(User->GetCenter(), FAttachmentTransformRules::KeepWorldTransform);
 	temp->SetLifeSpan(Data.Duration * User->GetStats().ProjectileDuration);
 }

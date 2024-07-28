@@ -43,6 +43,8 @@ void UAttackComponent::Init(UWorld* world)
 	auto temp = NewObject<USword>(GetOwner());
 	temp->SetAttackType(UBasic::AttackType::Sword);
 	temp->SetPassive(false);
+	temp->Init();
+	temp->SetPlayer(Cast<AUser>(GetOwner()));
 	AddAttack(temp);
 	Managers->Widget->GetWeaponImages().Add(Textures->MainWeapons[0]);
 	ULevelUpSelectCard::WeaponIndexes.Add(0);
@@ -94,26 +96,21 @@ void UAttackComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 	if (Detection->GetDetectedEnemyNumber() == 0 || !Detection || Attacks.Num() == 0)
 		return;
 
-	for (int i = 0; i < Attacks.Num(); ++i)
+	for (auto& temp : Attacks)
 	{
-		for (auto& temp : Attacks)
+		temp->GetData().Timer += DeltaTime;
+		if (temp->GetData().Timer >= temp->GetData().Rate)
 		{
-			temp->GetData().Timer += DeltaTime;
-			if (temp->GetData().Timer >= temp->GetData().Rate)
-			{
-				auto enemy = Detection->GetClosetEnemy();
-				//if (enemy == nullptr) continue;
-				FVector2D Dir = FVector2D::ZeroVector;
-				
-				if (enemy == nullptr)
-					Dir = Managers->Controller->GetDir();
-				
-				else
-					Dir = FVector2D(enemy->GetActorLocation().X, enemy->GetActorLocation().Z);
+			auto enemy = Detection->GetClosetEnemy();
+			FVector2D Dir = FVector2D::ZeroVector;
 
-				temp->BasicAttack(Dir);
-				temp->GetData().Timer = 0.0f;
-			}
+			if (temp->GetAttackType() == UBasic::AttackType::Sword || enemy == nullptr)
+				Dir = Managers->Controller->GetDir();
+			else
+				Dir = FVector2D(enemy->GetActorLocation().X, enemy->GetActorLocation().Z);
+
+			temp->BasicAttack(Dir);
+			temp->GetData().Timer = 0.0f;
 		}
 	}
 }

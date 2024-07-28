@@ -38,10 +38,7 @@ AUser::AUser()
 
 }
 
-TObjectPtr<UBasic>& AUser::GetBasicAttack()
-{
-	return AttackComponent->GetAttackTypes()[0];
-}
+
 
 void AUser::GetExp(const float& value)
 {

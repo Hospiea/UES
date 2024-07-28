@@ -68,7 +68,7 @@ void APC::Tick(float dt)
 
 void APC::MoveFunc(const FInputActionValue& value)
 {
-	/*FVector2D Dir = value.Get<FVector2D>();
+	FVector2D Dir = value.Get<FVector2D>();
 
 
 	Dir.Normalize();
@@ -80,9 +80,10 @@ void APC::MoveFunc(const FInputActionValue& value)
 		bPaused = false;
 	}
 		
+	if (Dir != FVector2D::ZeroVector)
+		Direction = Dir;
 
-
-	User->GetCharacterMovement()->Velocity = FVector(Dir.X, 0.0f, Dir.Y);*/
+	User->GetCharacterMovement()->Velocity = FVector(Dir.X, 0.0f, Dir.Y);
 
 
 }
@@ -106,13 +107,13 @@ void APC::StopFunc(const FInputActionValue& value)
 
 void APC::LeftFunc(const FInputActionValue& value)
 {
-	FVector2D Location;
+	/*FVector2D Location;
 	GetMousePosition(Location.X, Location.Y);
 	int32 CenterX, CenterY;
 	GetViewportSize(CenterX, CenterY);
 	FVector2D Dir = FVector2D(Location.X - static_cast<double>(CenterX) / 2, static_cast<double>(CenterY) / 2 - Location.Y);
 	Dir.Normalize();
-	User->GetBasicAttack()->BasicAttack(Dir);
+	User->GetBasicAttack()->BasicAttack(Dir);*/
 }
 
 void APC::TouchFunc(const FInputActionValue& value)
@@ -129,7 +130,8 @@ void APC::TouchFunc(const FInputActionValue& value)
 		bPaused = false;
 	}
 
-	Direction = Dir;
+	if (Dir != FVector2D::ZeroVector)
+		Direction = Dir;
 
 	User->GetCharacterMovement()->Velocity = FVector(Dir.X, 0.0f, Dir.Y);
 

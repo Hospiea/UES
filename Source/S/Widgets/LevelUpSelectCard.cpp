@@ -33,11 +33,11 @@ ULevelUpSelectCard::ULevelUpSelectCard(const FObjectInitializer& Init)
 	:
 	Super(Init),
 	IsFirst(false),
-	IsPassive(false),
-	RandIndex(-1),
 	WeaponType(UBasic::AttackType::Sword),
-	PassiveType(UBasic::PassiveType::Fire),
-	Level(-1)
+	IsPassive(false),
+	Level(-1),
+	RandIndex(-1),
+	PassiveType(UBasic::PassiveType::Fire)
 {
 	static ConstructorHelpers::FObjectFinder<UTexture2D> lv0(TEXT("/Script/Engine.Texture2D'/Game/Art/UI/UI_Texs/Levelup_PopUp_Tex/LevelUP_Skill_LV0.LevelUP_Skill_LV0'"));
 	static ConstructorHelpers::FObjectFinder<UTexture2D> lv1(TEXT("/Script/Engine.Texture2D'/Game/Art/UI/UI_Texs/Levelup_PopUp_Tex/LevelUP_Skill_LV1.LevelUP_Skill_LV1'"));
@@ -66,6 +66,8 @@ void ULevelUpSelectCard::NativeConstruct()
 
 	RandIndex = FMath::Rand() % 13;
 	IsPassive = FMath::RandBool();
+
+
 
 	WeaponType = static_cast<UBasic::AttackType>(RandIndex);
 	PassiveType = static_cast<UBasic::PassiveType>(RandIndex);
@@ -204,10 +206,8 @@ FReply ULevelUpSelectCard::NativeOnMouseButtonDown(const FGeometry& InGeometry, 
 		Attack->LevelUp();
 	}
 
+	
 
-
-
-	IsFirst = false;
 	Managers->Widget->RemovePopupWidget();
 	return Reply;
 }
