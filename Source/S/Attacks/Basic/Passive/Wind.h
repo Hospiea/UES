@@ -19,6 +19,4 @@ public:
 	virtual uint8& GetLevel() override { return Level; };
 
 
-protected:
-	uint8 Level;
 };

@@ -35,7 +35,6 @@ ULevelUpSelectCard::ULevelUpSelectCard(const FObjectInitializer& Init)
 	IsFirst(false),
 	IsPassive(false),
 	RandIndex(-1),
-	IsAlreadyHave(false),
 	WeaponType(UBasic::AttackType::Sword),
 	PassiveType(UBasic::PassiveType::Fire),
 	Level(-1)
@@ -63,7 +62,6 @@ void ULevelUpSelectCard::NativeConstruct()
 	Super::NativeConstruct();
 	Level = -1;
 	IsFirst = false;
-	IsAlreadyHave = false;
 	User = Managers->Game->Player;
 
 	RandIndex = FMath::Rand() % 13;
@@ -71,6 +69,8 @@ void ULevelUpSelectCard::NativeConstruct()
 
 	WeaponType = static_cast<UBasic::AttackType>(RandIndex);
 	PassiveType = static_cast<UBasic::PassiveType>(RandIndex);
+
+
 
 	if (bIsWeaponMax && !IsPassive)
 	{
@@ -84,6 +84,8 @@ void ULevelUpSelectCard::NativeConstruct()
 		PassiveType = static_cast<UBasic::PassiveType>(PassiveIndexes[RandIndex]);
 	}
 
+
+
 	if (!IsPassive)
 	{
 		for (const auto& temp : User->GetAttackComponent()->GetAttackTypes())
@@ -96,7 +98,7 @@ void ULevelUpSelectCard::NativeConstruct()
 			}
 		}
 	}
-	else
+	else if(IsPassive)
 	{
 		for (const auto& temp : User->GetAttackComponent()->GetPassiveTypes())
 		{
@@ -121,40 +123,12 @@ void ULevelUpSelectCard::NativeConstruct()
 			WeaponType = static_cast<UBasic::AttackType>(RandIndex);
 		}
 
-		else
+		else if(IsPassive)
 		{
 			Item_Image->SetBrushFromSoftTexture(Textures->Passives[RandIndex]);
 			PassiveType = static_cast<UBasic::PassiveType>(RandIndex);
 		}
 	}
-
-
-
-	if (!IsPassive)
-	{
-		for (const auto& temp : User->GetAttackComponent()->GetAttackTypes())
-		{
-			if (temp->GetAttackType() == WeaponType)
-			{
-				Item_Image->SetBrushFromSoftTexture(Textures->MainWeapons[static_cast<int32>(WeaponType)]);
-				Attack = temp;
-				IsAlreadyHave = true;
-			}
-		}
-	}
-	else if (IsPassive)
-	{
-		for (const auto& temp : User->GetAttackComponent()->GetPassiveTypes())
-		{
-			if (temp->GetPassiveType() == PassiveType)
-			{
-				Item_Image->SetBrushFromSoftTexture(Textures->Passives[static_cast<int32>(PassiveType)]);
-				Attack = temp;
-				IsAlreadyHave = true;
-			}
-		}
-	}
-
 
 
 
@@ -211,7 +185,7 @@ FReply ULevelUpSelectCard::NativeOnMouseButtonDown(const FGeometry& InGeometry, 
 			PassiveFactory(PassiveType);
 			Managers->Widget->GetPassiveImages().Add(Textures->Passives[RandIndex]);
 			PassiveIndexes.Add(RandIndex);
-			if (PassiveIndexes.Num() == 5)
+			if (PassiveIndexes.Num() == 6)
 				bIsPassiveMax = true;
 		}
 
@@ -220,7 +194,7 @@ FReply ULevelUpSelectCard::NativeOnMouseButtonDown(const FGeometry& InGeometry, 
 			WeaponFactory(WeaponType);
 			Managers->Widget->GetWeaponImages().Add(Textures->MainWeapons[RandIndex]);
 			WeaponIndexes.Add(RandIndex);
-			if (WeaponIndexes.Num() == 5)
+			if (WeaponIndexes.Num() == 6)
 				bIsWeaponMax = true;
 		}
 	}
@@ -249,8 +223,8 @@ void ULevelUpSelectCard::WeaponFactory(const UBasic::AttackType& attack)
 		temp->SetPassive(false);
 		User->GetAttackComponent()->AddAttack(temp);
 		break;
-	}
 
+	}
 	case UBasic::AttackType::Axe:
 	{
 		auto temp = NewObject<UAxe>(User);

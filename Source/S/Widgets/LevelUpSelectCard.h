@@ -77,7 +77,6 @@ protected:
 	bool IsFirst;
 	bool IsPassive;
 	int32 RandIndex;
-	bool IsAlreadyHave;
 
 	static bool bIsWeaponMax;
 	static bool bIsPassiveMax;
