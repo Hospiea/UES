@@ -189,7 +189,7 @@ FReply ULevelUpSelectCard::NativeOnMouseButtonDown(const FGeometry& InGeometry, 
 				bIsPassiveMax = true;
 		}
 
-		else
+		else if(!IsPassive)
 		{
 			WeaponFactory(WeaponType);
 			Managers->Widget->GetWeaponImages().Add(Textures->MainWeapons[RandIndex]);
@@ -199,7 +199,7 @@ FReply ULevelUpSelectCard::NativeOnMouseButtonDown(const FGeometry& InGeometry, 
 		}
 	}
 
-	else
+	else if(!IsFirst)
 	{
 		Attack->LevelUp();
 	}
@@ -207,7 +207,7 @@ FReply ULevelUpSelectCard::NativeOnMouseButtonDown(const FGeometry& InGeometry, 
 
 
 
-
+	IsFirst = false;
 	Managers->Widget->RemovePopupWidget();
 	return Reply;
 }
