@@ -21,7 +21,7 @@ class S_API APC : public APlayerController
 	
 public:
 	APC(const FObjectInitializer& Init);
-
+	inline const FVector2D& GetDir() { return Direction; }
 	void Pause();
 	void Resume();
 
@@ -42,10 +42,16 @@ protected:
 	TObjectPtr<UInputAction> Move;
 
 	UPROPERTY(EditAnywhere)
+	TObjectPtr<UInputAction> Touch;
+
+	UPROPERTY(EditAnywhere)
 	TObjectPtr<UInputAction> Left;
 
 	UPROPERTY(EditAnywhere)
 	TObjectPtr<UInputMappingContext> Context;
+
+	UPROPERTY()
+	FVector2D Direction;
 
 	UPROPERTY()
 	UEnhancedInputComponent* Component;
@@ -58,4 +64,5 @@ protected:
 	void MoveFunc(const FInputActionValue& value);
 	void StopFunc(const FInputActionValue& value);
 	void LeftFunc(const FInputActionValue& value);
+	void TouchFunc(const FInputActionValue& value);
 };

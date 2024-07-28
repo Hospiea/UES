@@ -51,6 +51,7 @@ void APC::BeginPlay()
 	Component->BindAction(Move, ETriggerEvent::Triggered, this, &APC::MoveFunc);
 	Component->BindAction(Move, ETriggerEvent::Completed, this, &APC::StopFunc);
 	Component->BindAction(Left, ETriggerEvent::Triggered, this, &APC::LeftFunc);
+	Component->BindAction(Touch, ETriggerEvent::Triggered, this, &APC::TouchFunc);
 
 
 
@@ -67,7 +68,7 @@ void APC::Tick(float dt)
 
 void APC::MoveFunc(const FInputActionValue& value)
 {
-	FVector2D Dir = value.Get<FVector2D>();
+	/*FVector2D Dir = value.Get<FVector2D>();
 
 
 	Dir.Normalize();
@@ -81,7 +82,7 @@ void APC::MoveFunc(const FInputActionValue& value)
 		
 
 
-	User->GetCharacterMovement()->Velocity = FVector(Dir.X, 0.0f, Dir.Y);
+	User->GetCharacterMovement()->Velocity = FVector(Dir.X, 0.0f, Dir.Y);*/
 
 
 }
@@ -112,4 +113,24 @@ void APC::LeftFunc(const FInputActionValue& value)
 	FVector2D Dir = FVector2D(Location.X - static_cast<double>(CenterX) / 2, static_cast<double>(CenterY) / 2 - Location.Y);
 	Dir.Normalize();
 	User->GetBasicAttack()->BasicAttack(Dir);
+}
+
+void APC::TouchFunc(const FInputActionValue& value)
+{
+	FVector2D Dir = value.Get<FVector2D>();
+
+
+	Dir.Normalize();
+	Dir *= User->GetStats().Speed;
+	if (bPaused)
+	{
+		Dir = FVector2D::ZeroVector;
+		Component->ClearBindingValues();
+		bPaused = false;
+	}
+
+	Direction = Dir;
+
+	User->GetCharacterMovement()->Velocity = FVector(Dir.X, 0.0f, Dir.Y);
+
 }

@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameObject/Player/User.h"
 
+class APC;
 
 class S_API GameManager
 {
@@ -22,5 +23,5 @@ public:
 	UPROPERTY()
 	float Timer;
 
-	
+
 };

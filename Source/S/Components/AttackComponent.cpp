@@ -16,6 +16,7 @@
 #include "System/GMB.h"
 #include "Data/TextureAsset.h"
 #include "Widgets/LevelUpSelectCard.h"
+#include "System/PC.h"
 
 
 // Sets default values for this component's properties
@@ -101,8 +102,15 @@ void UAttackComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 			if (temp->GetData().Timer >= temp->GetData().Rate)
 			{
 				auto enemy = Detection->GetClosetEnemy();
-				if (enemy == nullptr) continue;
-				FVector2D Dir = FVector2D(enemy->GetActorLocation().X, enemy->GetActorLocation().Z);
+				//if (enemy == nullptr) continue;
+				FVector2D Dir = FVector2D::ZeroVector;
+				
+				if (enemy == nullptr)
+					Dir = Managers->Controller->GetDir();
+				
+				else
+					Dir = FVector2D(enemy->GetActorLocation().X, enemy->GetActorLocation().Z);
+
 				temp->BasicAttack(Dir);
 				temp->GetData().Timer = 0.0f;
 			}
