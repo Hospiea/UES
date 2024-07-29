@@ -7,6 +7,8 @@
 #include "System/GMB.h"
 #include "Components/CanvasPanelSlot.h"
 #include "Components/CanvasPanel.h"
+#include "Components/GridPanel.h"
+#include "Components/GridSlot.h"
 
 UPause::UPause(const FObjectInitializer& Init)
 	:Super(Init)
@@ -17,11 +19,82 @@ UPause::UPause(const FObjectInitializer& Init)
 
 void UPause::NativeConstruct()
 {
+	Super::NativeConstruct();
 	Button_Continue->OnClicked.AddDynamic(this, &UPause::Resume);
+
+	for (int i = 0; i < 2; ++i)
+	{
+		for (int j = 0; j < 3; ++j)
+		{
+			auto temp = CreateWidget<UPauseCard>(GetOwningPlayer(), CardClass);
+			temp->SetRenderOpacity(0.0f);
+			auto slot = Passive_Grid->AddChildToGrid(temp);
+			slot->SetColumn(j);
+			slot->SetRow(i);
+			PassiveCards.Add(temp);
+
+			if (i == 0 && j == 0)
+				slot->SetPadding(FMargin(FVector4f(0.0f, 0.0f, 30.0f, 14.0f)));
+			
+			else if(i==0 && j==1)
+				slot->SetPadding(FMargin(FVector4f(15.0f, 0.0f, 15.0f, 14.0f)));
+
+			else if (i == 0 && j == 2)
+				slot->SetPadding(FMargin(FVector4f(30.0f, 0.0f, 15.0f, 14.0f)));
+
+			else if (i == 1 && j == 0)
+				slot->SetPadding(FMargin(FVector4f(0.0f, 14.0f, 30.0f, 0.0f)));
+
+			else if (i == 1 && j == 1)
+				slot->SetPadding(FMargin(FVector4f(15.0f, 14.0f, 15.0f, 0.0f)));
+
+			else if (i == 1 && j == 2)
+				slot->SetPadding(FMargin(FVector4f(30.0f, 14.0f, 0.0f, 0.0f)));
+		}
+	}
 
 	for (int i = 0; i < Managers->Widget->GetPassiveImages().Num(); ++i)
 	{
+		PassiveCards[i]->SetRenderOpacity(1.0f);
+		PassiveCards[i]->SetImage(Managers->Widget->GetPassiveImages()[i]);
+	}
 
+
+	for (int i = 0; i < 2; ++i)
+	{
+		for (int j = 0; j < 3; ++j)
+		{
+			auto temp = CreateWidget<UPauseCard>(GetOwningPlayer(), CardClass);
+			auto slot = Weapon_Grid->AddChildToGrid(temp);
+			slot->SetColumn(j);
+			slot->SetRow(i);
+			WeaponCards.Add(temp);
+			temp->SetRenderOpacity(0.0f);
+
+			if (i == 0 && j == 0)
+				slot->SetPadding(FMargin(FVector4f(0.0f, 0.0f, 30.0f, 14.0f)));
+
+			else if (i == 0 && j == 1)
+				slot->SetPadding(FMargin(FVector4f(15.0f, 0.0f, 15.0f, 14.0f)));
+
+			else if (i == 0 && j == 2)
+				slot->SetPadding(FMargin(FVector4f(30.0f, 0.0f, 15.0f, 14.0f)));
+
+			else if (i == 1 && j == 0)
+				slot->SetPadding(FMargin(FVector4f(0.0f, 14.0f, 30.0f, 0.0f)));
+
+			else if (i == 1 && j == 1)
+				slot->SetPadding(FMargin(FVector4f(15.0f, 14.0f, 15.0f, 0.0f)));
+
+			else if (i == 1 && j == 2)
+				slot->SetPadding(FMargin(FVector4f(30.0f, 14.0f, 0.0f, 0.0f)));
+		}
+	}
+
+	for (int i = 0; i < Managers->Widget->GetWeaponImages().Num(); ++i)
+	{
+		WeaponCards[i]->SetRenderOpacity(1.0f);
+		WeaponCards[i]->SetImage(Managers->Widget->GetWeaponImages()[i]);
 	}
 
 }

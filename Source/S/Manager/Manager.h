@@ -6,6 +6,7 @@
 #include "GameManager.h"
 #include "WidgetManager.h"
 #include "PoolManager.h"
+#include "SoundManager.h"
 #include <memory>
 #include <unordered_map>
 #include "Manager.generated.h"
@@ -63,6 +64,8 @@ public:
 	UPROPERTY()
 	TObjectPtr<UDataManager> Data;
 
+	UPROPERTY()
+	TObjectPtr<ASoundManager> Sound;
 	
 
 protected:

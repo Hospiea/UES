@@ -9,7 +9,7 @@
 class UButton;
 class UPauseCard;
 class UCanvasPanel;
-
+class UGridPanel;
 
 UCLASS()
 class S_API UPause : public UWidgetBase
@@ -33,8 +33,17 @@ protected:
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UCanvasPanel> Weapon_Panel;
 
-	
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<UGridPanel> Passive_Grid;
 
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<UGridPanel> Weapon_Grid;
+
+	UPROPERTY()
+	TArray<TObjectPtr<UPauseCard>> WeaponCards;
+
+	UPROPERTY()
+	TArray<TObjectPtr<UPauseCard>> PassiveCards;
 
 
 

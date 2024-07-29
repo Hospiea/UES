@@ -59,6 +59,8 @@ void AWidgetManager::ClickToStart()
 	CurrentWidget = CreateWidget(GetWorld(), Widgets->Widgets["Battle"]);
 	CurrentWidget->AddToViewport();
 	GetWorld()->SpawnActor<ASpawner>();
+
+	Managers->Sound->PlayBgm("Stage1");
 }
 
 void AWidgetManager::ClickToLobby()

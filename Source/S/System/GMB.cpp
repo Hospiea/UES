@@ -7,6 +7,7 @@
 #include "Attacks/Basic/Basic.h"
 #include "Components/AttackComponent.h"
 #include "Blueprint/UserWidget.h"
+#include "Kismet/GameplayStatics.h"
 
 AGMB* AGMB::Instance = nullptr;
 
@@ -25,9 +26,10 @@ void AGMB::InitGame(const FString& MapName, const FString& Options, FString& Err
 void AGMB::BeginPlay()
 {
 	Super::BeginPlay();
-	//Spawner = GetWorld()->SpawnActor<ASpawner>();
 	Managers->Widget = GetWorld()->SpawnActor<AWidgetManager>();
+	Managers->Sound = GetWorld()->SpawnActor<ASoundManager>();
 	Managers->Game->KillCounts = 0;
+	Managers->Sound->PlayBgm("Opening");
 	
 	
 }

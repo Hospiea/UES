@@ -54,7 +54,7 @@ void AEnemy::GetDamage(const float& value)
 		FTimerManagerTimerParameters Params;
 		Params.bLoop = false;
 
-		GetWorld()->GetTimerManager().SetTimer(TimerHandle, [this]() {SetActive(false); }, 0.5f, Params);
+		GetWorld()->GetTimerManager().SetTimer(TimerHandle, [this]() {SetActive(false); }, 1.0f, Params);
 		GetCapsuleComponent()->SetCollisionProfileName(TEXT("Dead"));
 		SetEnemyState(EnemyState::Dead);
 		AExpOrb* orb = Managers->GetPoolManager<AExpOrb>()->Get(OrbClass, GetActorLocation());
@@ -102,6 +102,12 @@ void AEnemy::Tick(float dt)
 
 	else
 		GetSprite()->SetRelativeRotation(FRotator(0.0f, 0.0f, 0.0f));
+
+	if (GetEnemyState() == EnemyState::Dead)
+	{
+		auto color = GetSprite()->GetSpriteColor();
+		GetSprite()->SetSpriteColor(color - FLinearColor(0, 0, 0, dt*3));
+	}
 }
 
 void AEnemy::OnEnable()
