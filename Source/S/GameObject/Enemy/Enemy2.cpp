@@ -118,6 +118,12 @@ void AEnemy2::GetDamage(const float& value)
 	}
 }
 
+void AEnemy2::OnEnable()
+{
+	Super::OnEnable();
+	GetSprite()->SetFlipbook(Flipbooks->Flipbooks[TEXT("E2_Idle")]);
+}
+
 
 void AEnemy2::RecoverFromKnockBack()
 {

@@ -15,6 +15,7 @@ bool AEnemy::bIsInitted = false;
 
 AEnemy::AEnemy()
 {
+	PrimaryActorTick.bCanEverTick = true;
 	GetCapsuleComponent()->SetCollisionProfileName(TEXT("Enemy"));
 	static ConstructorHelpers::FClassFinder<AExpOrb> orbclass(TEXT("/Script/Engine.Blueprint'/Game/Assets/Blueprints/GameObjects/Item/BP_ExpOrb.BP_ExpOrb_C'"));
 	OrbClass = orbclass.Class;
@@ -47,19 +48,22 @@ void AEnemy::GetDamage(const float& value)
 {
 	Super::GetDamage(value);
 	CurHp -= value;
-	if (CurHp <= 0.0f)
+	if (CurHp <= 0.0f && GetEnemyState() != EnemyState::Dead)
 	{
 		++Managers->Game->KillCounts;
 		GetWorld()->GetTimerManager().ClearTimer(TimerHandle);
-		FTimerManagerTimerParameters Params;
-		Params.bLoop = false;
 
-		GetWorld()->GetTimerManager().SetTimer(TimerHandle, [this]() {SetActive(false); }, 1.0f, Params);
+		GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &AEnemy::SetActiveHelper, 1.0f);
 		GetCapsuleComponent()->SetCollisionProfileName(TEXT("Dead"));
 		SetEnemyState(EnemyState::Dead);
 		AExpOrb* orb = Managers->GetPoolManager<AExpOrb>()->Get(OrbClass, GetActorLocation());
 		orb->SetExpLevel(ExpLv);
 		orb->GetSprite()->SetRelativeLocation(FVector(0.0f, GetSprite()->GetRelativeLocation().Y - 1, 0.0f));
+	}
+
+	else if (GetEnemyState() == EnemyState::Dead)
+	{
+
 	}
 
 	else
@@ -91,6 +95,7 @@ void AEnemy::BeginPlay()
 	
 	Target = Managers->Game->Player;
 	if (bIsInitted) return;
+
 }
 
 void AEnemy::Tick(float dt)
@@ -105,8 +110,8 @@ void AEnemy::Tick(float dt)
 
 	if (GetEnemyState() == EnemyState::Dead)
 	{
-		auto color = GetSprite()->GetSpriteColor();
-		GetSprite()->SetSpriteColor(color - FLinearColor(0, 0, 0, dt*3));
+		auto scale = GetSprite()->GetRelativeScale3D();
+		GetSprite()->SetRelativeScale3D(scale - FVector(dt, dt, dt));
 	}
 }
 
@@ -116,6 +121,13 @@ void AEnemy::OnEnable()
 	GetCapsuleComponent()->SetCollisionProfileName(TEXT("Enemy"));
 	GetSprite()->SetSpriteColor(FLinearColor::White);
 	SetEnemyState(EnemyState::Normal);
+	GetSprite()->SetRelativeScale3D(FVector(1, 1, 1));
+
+}
+
+void AEnemy::SetActiveHelper()
+{
+	SetActive(false);
 }
 
 

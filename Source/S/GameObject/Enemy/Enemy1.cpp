@@ -55,6 +55,22 @@ void AEnemy1::Tick(float dt)
 	}
 }
 
+void AEnemy1::GetDamage(const float& value)
+{
+	Super::GetDamage(value);
+
+	if (CurHp <= 0.0f)
+	{
+		GetSprite()->SetFlipbook(Flipbooks->Flipbooks[TEXT("E1_Dead")]);
+	}
+}
+
+void AEnemy1::OnEnable()
+{
+	Super::OnEnable();
+	GetSprite()->SetFlipbook(Flipbooks->Flipbooks[TEXT("E1_Run")]);
+}
+
 
 void AEnemy1::RecoverFromKnockBack()
 {

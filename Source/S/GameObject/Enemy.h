@@ -50,6 +50,7 @@ protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float dt) override;
 	virtual void OnEnable() override;
+	void SetActiveHelper();
 	
 	FTimerHandle TimerHandle;
 

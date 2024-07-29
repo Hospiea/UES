@@ -41,7 +41,6 @@ void AWidgetManager::Pause()
 void AWidgetManager::RemovePopupWidget()
 {
 	UGameplayStatics::SetGlobalTimeDilation(GetWorld(), 1.0f);
-	//Managers->Controller->SetInputMode(FInputModeUIOnly());
 	PopupWidget->RemoveFromParent();
 	Managers->Controller->Resume();
 }

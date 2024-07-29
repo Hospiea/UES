@@ -20,6 +20,8 @@ protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float dt) override;
 	virtual void GetDamage(const float& value) override;
+	virtual void OnEnable() override;
+
 	UFUNCTION()
 	void RecoverFromKnockBack();
 
