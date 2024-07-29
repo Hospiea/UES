@@ -74,4 +74,7 @@ void AWidgetManager::BeginPlay()
 	Super::BeginPlay();
 	CurrentWidget = CreateWidget(GetWorld(), Widgets->Widgets["Opening"]);
 	CurrentWidget->AddToViewport();
+
+	WeaponImages.Empty();
+	PassiveImages.Empty();
 }

@@ -58,6 +58,7 @@ void UAttackComponent::AddAttack(UBasic* attack)
 	{
 		Passives.Add(attack);
 		attack->SetWorld(World);
+		attack->GetLevel() = 0;
 		attack->Init();
 		attack->SetPlayer(Cast<AUser>(GetOwner()));
 		if (Passives.Num() == MaxWeapon)
@@ -70,6 +71,7 @@ void UAttackComponent::AddAttack(UBasic* attack)
 	{
 		Attacks.Add(attack);
 		attack->SetWorld(World);
+		attack->GetLevel() = 0;
 		attack->Init();
 		attack->SetPlayer(Cast<AUser>(GetOwner()));
 		if (Attacks.Num() == MaxWeapon)
