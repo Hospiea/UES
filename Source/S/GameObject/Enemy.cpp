@@ -25,8 +25,18 @@ void AEnemy::SetEnemyState(const EnemyState& state)
 	State = state;
 
 	if (state == EnemyState::KnockBacked)
+	{
+		FVector dir = GetActorLocation() - Managers->Game->Player->GetActorLocation();
+		dir.Y = 0.0f;
+		dir.Normalize();
+		dir *= 200.0f;
+		GetCharacterMovement()->Velocity = dir;
 		GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &ThisClass::RecoverColor, 0.05f);
+
+	}
 	
+	else if(state == EnemyState::Dead)
+		GetCharacterMovement()->Velocity = FVector::ZeroVector;
 }
 
 void AEnemy::GetDamage(const float& value)
@@ -38,9 +48,8 @@ void AEnemy::GetDamage(const float& value)
 		++Managers->Game->KillCounts;
 		GetWorld()->GetTimerManager().ClearTimer(TimerHandle);
 		GetWorld()->GetTimerManager().SetTimer(TimerHandle, [this]() {SetActive(false); }, 0.5f, FTimerManagerTimerParameters());
-		SetEnemyState(EnemyState::Dead);
 		GetCapsuleComponent()->SetCollisionProfileName(TEXT("Dead"));
-		GetCharacterMovement()->Velocity = FVector::ZeroVector;
+		SetEnemyState(EnemyState::Dead);
 		AExpOrb* orb = Managers->GetPoolManager<AExpOrb>()->Get(OrbClass, GetActorLocation());
 		orb->SetExpLevel(ExpLv);
 	}
@@ -104,5 +113,4 @@ void AEnemy::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherAc
 void AEnemy::RecoverColor()
 {
 	GetSprite()->SetSpriteColor(FLinearColor::White);
-	SetEnemyState(EnemyState::Normal);
 }

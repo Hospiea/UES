@@ -39,12 +39,10 @@ void APSheild::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Other
 
 	if (AEnemy* enemy = Cast<AEnemy>(OtherActor))
 	{
+		if (enemy->GetEnemyState() == AEnemy::EnemyState::Dead)
+			return;
 		enemy->SetEnemyState(AEnemy::EnemyState::KnockBacked);
-		FVector dir = GetActorLocation() - Managers->Game->Player->GetActorLocation();
 		enemy->GetDamage(Basic->GetData().Damage);
-		dir.Y = 0.0f;
-		dir.Normalize();
-		dir *= 200.0f;
-		enemy->GetCharacterMovement()->Velocity = dir;
+		
 	}
 }

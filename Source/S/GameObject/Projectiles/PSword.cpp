@@ -43,13 +43,7 @@ void APSword::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherA
 		if (enemy->GetEnemyState() == AEnemy::EnemyState::Dead)
 			return;
 		enemy->SetEnemyState(AEnemy::EnemyState::KnockBacked);
-		FVector dir = GetActorLocation() - Managers->Game->Player->GetActorLocation();
-		dir.Y = 0.0f;
 		enemy->GetDamage(Basic->GetData().Damage);
-		//GEngine->AddOnScreenDebugMessage(0, 1.0f, FColor::Cyan, FString::Printf(TEXT("%f"), USword::Data.Damage));
-
-		dir.Normalize();
-		dir *= 200.0f;
-		enemy->GetCharacterMovement()->Velocity = dir;
+		
 	}
 }
