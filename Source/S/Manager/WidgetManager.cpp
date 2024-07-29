@@ -61,6 +61,13 @@ void AWidgetManager::ClickToStart()
 	GetWorld()->SpawnActor<ASpawner>();
 }
 
+void AWidgetManager::ClickToLobby()
+{
+	CurrentWidget->RemoveFromParent();
+	CurrentWidget = CreateWidget(GetWorld(), Widgets->Widgets["Lobby"]);
+	CurrentWidget->AddToViewport();
+}
+
 void AWidgetManager::BeginPlay()
 {
 	Super::BeginPlay();

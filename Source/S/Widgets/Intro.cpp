@@ -6,5 +6,5 @@
 
 void UIntro::Click()
 {
-	Managers->Widget->ClickToStart();
+	Managers->Widget->ClickToLobby();
 }

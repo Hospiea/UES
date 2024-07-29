@@ -23,6 +23,7 @@ public:
 	inline TArray<TObjectPtr<UTexture2D>>& GetPassiveImages() { return PassiveImages; }
 	void EndOpening();
 	void ClickToStart();
+	void ClickToLobby();
 
 protected:
 	virtual void BeginPlay() override;
