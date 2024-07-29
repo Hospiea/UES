@@ -29,8 +29,7 @@ void UDetectComponent::BeginPlay()
 	ObtainRange->RegisterComponent();
 	ObtainRange->SetCollisionProfileName(TEXT("Obtain"));
 
-	DetectRange->SetBoxExtent(FVector(300.0f, 300.0f, 300.0f));
-	//DetectRange->bHiddenInGame = false;
+	DetectRange->SetBoxExtent(FVector(500.0f, 500.0f, 500.0f));
 
 	DetectRange->OnComponentBeginOverlap.AddDynamic(this, &UDetectComponent::OnDetecting);
 	DetectRange->OnComponentEndOverlap.AddDynamic(this, &UDetectComponent::EndDetecting);

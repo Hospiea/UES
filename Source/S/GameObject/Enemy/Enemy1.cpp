@@ -72,10 +72,3 @@ void AEnemy1::OnEnable()
 }
 
 
-void AEnemy1::RecoverFromKnockBack()
-{
-	State = EnemyState::Normal;
-	GetSprite()->SetSpriteColor(FLinearColor::White);
-}
-
-

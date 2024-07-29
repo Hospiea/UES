@@ -124,9 +124,3 @@ void AEnemy2::OnEnable()
 	GetSprite()->SetFlipbook(Flipbooks->Flipbooks[TEXT("E2_Idle")]);
 }
 
-
-void AEnemy2::RecoverFromKnockBack()
-{
-	State = EnemyState::Normal;
-	GetSprite()->SetSpriteColor(FLinearColor::White);
-}

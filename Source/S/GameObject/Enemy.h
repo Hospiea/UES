@@ -81,5 +81,8 @@ protected:
 	UFUNCTION()
 	void RecoverColor();
 
+	UFUNCTION()
+	void RecoverFromKnockBack();
+
 	static bool bIsInitted;
 };

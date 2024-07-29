@@ -66,6 +66,12 @@ void AEnemy::GetDamage(const float& value)
 
 	}
 
+	else if (GetEnemyState() == EnemyState::KnockBacked)
+	{
+		GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &ThisClass::RecoverFromKnockBack, 0.05f);
+		SetEnemyState(EnemyState::Recovering);
+	}
+
 	else
 		GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &ThisClass::RecoverColor, 0.5f);
 
@@ -138,5 +144,11 @@ void AEnemy::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherAc
 
 void AEnemy::RecoverColor()
 {
+	GetSprite()->SetSpriteColor(FLinearColor::White);
+}
+
+void AEnemy::RecoverFromKnockBack()
+{
+	State = EnemyState::Normal;
 	GetSprite()->SetSpriteColor(FLinearColor::White);
 }

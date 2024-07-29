@@ -108,6 +108,7 @@ void UAttackComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 
 			if (temp->GetAttackType() == UBasic::AttackType::Sword || enemy == nullptr)
 				Dir = Managers->Controller->GetDir();
+			
 			else
 				Dir = FVector2D(enemy->GetActorLocation().X, enemy->GetActorLocation().Z);
 

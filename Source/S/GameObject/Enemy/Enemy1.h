@@ -22,8 +22,7 @@ protected:
 	virtual void GetDamage(const float& value) override;
 	virtual void OnEnable() override;
 
-	UFUNCTION()
-	void RecoverFromKnockBack();
+	
 
 
 	static FEnemyStat Stats;

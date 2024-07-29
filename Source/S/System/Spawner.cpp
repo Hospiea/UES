@@ -5,6 +5,7 @@
 #include "Data/EnemyAsset.h"
 #include "GameObject/Enemy/Enemy1.h"
 #include "GameObject/Enemy/Enemy2.h"
+#include "GameObject/Enemy/Enemy3.h"
 #include "GMB.h"
 
 // Sets default values
@@ -53,6 +54,7 @@ void ASpawner::Tick(float DeltaTime)
 		
 		auto temp = Managers->GetPoolManager<AEnemy1>()->Get(EnemyClasses->Enemies["Enemy1"], FVector(Pos, 10.0f, -Pos));
 		auto temp2 = Managers->GetPoolManager<AEnemy2>()->Get(EnemyClasses->Enemies["Enemy2"], FVector(-Pos, 10.0f, -Pos));
+		auto temp3= Managers->GetPoolManager<AEnemy3>()->Get(EnemyClasses->Enemies["Enemy3"], FVector(-Pos, 10.0f, Pos));
 	}
 }
 

@@ -6,7 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "Spawner.generated.h"
 
-class AEnemy1;
+class AEnemy;
 class UEnemyAsset;
 
 UCLASS()
