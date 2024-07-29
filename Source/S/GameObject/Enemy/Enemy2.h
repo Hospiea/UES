@@ -19,7 +19,7 @@ public:
 protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float dt) override;
-
+	virtual void GetDamage(const float& value) override;
 	UFUNCTION()
 	void RecoverFromKnockBack();
 

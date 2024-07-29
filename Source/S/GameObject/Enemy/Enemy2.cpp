@@ -108,6 +108,17 @@ void AEnemy2::Tick(float dt)
 	}
 }
 
+void AEnemy2::GetDamage(const float& value)
+{
+	Super::GetDamage(value);
+
+	if (CurHp <= 0.0f)
+	{
+		GetSprite()->SetFlipbook(Flipbooks->Flipbooks[TEXT("E2_Dead")]);
+	}
+}
+
+
 void AEnemy2::RecoverFromKnockBack()
 {
 	State = EnemyState::Normal;

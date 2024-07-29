@@ -9,6 +9,7 @@
 #include "PaperFlipbookComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "System/AIC.h"
+#include "GameObject/Item/ExpOrb.h"
 
 bool AEnemy::bIsInitted = false;
 
@@ -35,8 +36,11 @@ void AEnemy::SetEnemyState(const EnemyState& state)
 
 	}
 	
-	else if(state == EnemyState::Dead)
+	else if (state == EnemyState::Dead)
+	{
 		GetCharacterMovement()->Velocity = FVector::ZeroVector;
+		GetSprite()->SetSpriteColor(FLinearColor::White);
+	}
 }
 
 void AEnemy::GetDamage(const float& value)
@@ -47,11 +51,15 @@ void AEnemy::GetDamage(const float& value)
 	{
 		++Managers->Game->KillCounts;
 		GetWorld()->GetTimerManager().ClearTimer(TimerHandle);
-		GetWorld()->GetTimerManager().SetTimer(TimerHandle, [this]() {SetActive(false); }, 0.5f, FTimerManagerTimerParameters());
+		FTimerManagerTimerParameters Params;
+		Params.bLoop = false;
+
+		GetWorld()->GetTimerManager().SetTimer(TimerHandle, [this]() {SetActive(false); }, 0.5f, Params);
 		GetCapsuleComponent()->SetCollisionProfileName(TEXT("Dead"));
 		SetEnemyState(EnemyState::Dead);
 		AExpOrb* orb = Managers->GetPoolManager<AExpOrb>()->Get(OrbClass, GetActorLocation());
 		orb->SetExpLevel(ExpLv);
+		orb->GetSprite()->SetRelativeLocation(FVector(0.0f, GetSprite()->GetRelativeLocation().Y - 1, 0.0f));
 	}
 
 	else
