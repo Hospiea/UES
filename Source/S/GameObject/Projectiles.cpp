@@ -40,13 +40,28 @@ void AProjectiles::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* O
 	if (AEnemy* enemy = Cast<AEnemy>(OtherActor))
 	{
 		enemy->GetSprite()->SetSpriteColor(FLinearColor::Red);
+		int32 rand = FMath::Rand() % 3;
+		switch (rand)
+		{
+		case 0:
+			Managers->Sound->PlaySfx(TEXT("Hit1"));
+			break;
+
+		case 1:
+			Managers->Sound->PlaySfx(TEXT("Hit2"));
+			break;
+
+		case 2:
+			Managers->Sound->PlaySfx(TEXT("Hit3"));
+			break;
+		}
+		
 	}
 
 	if (Deletable)
 	{
 		if (AEnemyProjectiles* ebullet = Cast<AEnemyProjectiles>(OtherActor))
 		{
-			//GetWorld()->DestroyActor(ebullet);
 
 			ebullet->SetActive(false);
 		}

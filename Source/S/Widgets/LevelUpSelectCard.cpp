@@ -21,6 +21,7 @@
 #include "Attacks/Basic/Passive/Wind.h"
 #include "Attacks/Basic/Hammer.h"
 #include "Attacks/Basic/Shoes.h"
+#include "Attacks/Basic/Chakram.h"
 #include "LevelUpSkillSlot.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
@@ -32,12 +33,12 @@ TArray<int32> ULevelUpSelectCard::PassiveIndexes;
 ULevelUpSelectCard::ULevelUpSelectCard(const FObjectInitializer& Init)
 	:
 	Super(Init),
-	IsFirst(false),
-	WeaponType(UBasic::AttackType::Sword),
-	IsPassive(false),
 	Level(-1),
-	RandIndex(-1),
-	PassiveType(UBasic::PassiveType::Fire)
+	WeaponType(UBasic::AttackType::Sword),
+	PassiveType(UBasic::PassiveType::Fire),
+	IsFirst(false),
+	IsPassive(false),
+	RandIndex(-1)
 {
 	static ConstructorHelpers::FObjectFinder<UTexture2D> lv0(TEXT("/Script/Engine.Texture2D'/Game/Art/UI/UI_Texs/Levelup_PopUp_Tex/LevelUP_Skill_LV0.LevelUP_Skill_LV0'"));
 	static ConstructorHelpers::FObjectFinder<UTexture2D> lv1(TEXT("/Script/Engine.Texture2D'/Game/Art/UI/UI_Texs/Levelup_PopUp_Tex/LevelUP_Skill_LV1.LevelUP_Skill_LV1'"));
@@ -288,9 +289,12 @@ void ULevelUpSelectCard::WeaponFactory(const UBasic::AttackType& attack)
 		break;
 	}
 
-	case UBasic::AttackType::Robe:
+	case UBasic::AttackType::Chakram:
 	{
-
+		auto temp = NewObject<UChakram>(User);
+		temp->SetAttackType(attack);
+		temp->SetPassive(false);
+		User->GetAttackComponent()->AddAttack(temp);
 		break;
 	}
 

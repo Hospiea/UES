@@ -18,9 +18,17 @@ ASoundManager::ASoundManager()
 	BgmPlayer->bAutoActivate = false;
 	BgmPlayer->SetupAttachment(RootComponent);
 
-	SfxPlayer = CreateDefaultSubobject<UAudioComponent>(TEXT("SfxPlayer"));
-	SfxPlayer->bAutoActivate = false;
-	SfxPlayer->SetupAttachment(RootComponent);
+	for (int i = 0; i < 32; ++i)
+	{
+		FString ComponentName = FString::Printf(TEXT("AudioComponent_%d"), i);
+		auto temp = CreateDefaultSubobject<UAudioComponent>(*ComponentName);
+		SfxPlayer.Add(temp);
+		temp->SetupAttachment(RootComponent);
+		temp->bAutoActivate = false;
+		temp->VolumeMultiplier = 32.0f;
+	}
+
+	
 }
 
 void ASoundManager::PlayBgm(const FString& str, const float& Volume, const float& FadeIn, const bool& bLoop)
@@ -38,8 +46,28 @@ void ASoundManager::PlayBgm(const FString& str, const float& Volume, const float
 
 void ASoundManager::PlaySfx(const FString& str)
 {
-	SfxPlayer->SetSound(Sounds->Sfx[str]);
-	SfxPlayer->Play();
+	
+
+	float total = SfxPlayer.Num();
+	float volume = 32.0f / total;
+	bool bIsSet = false;
+
+	for (auto it = SfxPlayer.begin(); it != SfxPlayer.end(); ++it)
+	{
+		if ((*it)->IsPlaying())
+		{
+			(*it)->SetVolumeMultiplier(volume);
+			continue;
+		}
+		if (!bIsSet)
+		{
+			(*it)->SetSound(Sounds->Sfx[str]);
+			(*it)->SetVolumeMultiplier(volume);
+			(*it)->Play();
+			bIsSet = true;
+		}
+
+	}
 }
 
 

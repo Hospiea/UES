@@ -13,6 +13,7 @@
 #include "Attacks/Basic/Shoes.h"
 #include "Attacks/Basic/Sword.h"
 #include "Attacks/Basic/Spear.h"
+#include "Attacks/Basic/Chakram.h"
 #include "System/GMB.h"
 #include "Data/TextureAsset.h"
 #include "Widgets/LevelUpSelectCard.h"

@@ -28,7 +28,7 @@ public:
 		Shield,
 		Armor,
 		Helmet,
-		Robe,
+		Chakram,
 		Shoes,
 		Negative,
 		Positive

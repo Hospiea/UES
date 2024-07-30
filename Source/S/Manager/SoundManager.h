@@ -28,6 +28,7 @@ private:
 	TObjectPtr<UAudioComponent> BgmPlayer;
 
 	UPROPERTY()
-	TObjectPtr<UAudioComponent> SfxPlayer;
+	TArray<TObjectPtr<UAudioComponent>> SfxPlayer;
+
 
 };

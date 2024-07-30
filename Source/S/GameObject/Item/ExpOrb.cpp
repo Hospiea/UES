@@ -6,6 +6,7 @@
 #include "Components/CapsuleComponent.h"
 #include "GameObject/Player/User.h"
 #include "PaperFlipbookComponent.h"
+#include "System/GMB.h"
 
 TObjectPtr<UFlipbookAsset> AExpOrb::ExpSprites;
 
@@ -51,6 +52,7 @@ void AExpOrb::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherA
 	{
 		user->GetExp(Lv+5);
 		SetActive(false);
+		Managers->Sound->PlaySfx(TEXT("Exp"));
 	}
 
 	
