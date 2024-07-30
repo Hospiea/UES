@@ -21,15 +21,15 @@ void AGMB::InitGame(const FString& MapName, const FString& Options, FString& Err
 	Super::InitGame(MapName, Options, ErrorMessage);
 	Manager = GEngine->GetEngineSubsystem<UManager>();
 	Managers->SetWorld(GetWorld());
+	Managers->Widget = GetWorld()->SpawnActor<AWidgetManager>();
+	Managers->Sound = GetWorld()->SpawnActor<ASoundManager>();
 }
 
 void AGMB::BeginPlay()
 {
 	Super::BeginPlay();
-	Managers->Widget = GetWorld()->SpawnActor<AWidgetManager>();
-	Managers->Sound = GetWorld()->SpawnActor<ASoundManager>();
 	Managers->Game->KillCounts = 0;
-	Managers->Sound->PlayBgm("Opening");
+	//Managers->Sound->PlayBgm("Opening");
 	
 	
 }
