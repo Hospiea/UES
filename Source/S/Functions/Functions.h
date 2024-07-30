@@ -16,5 +16,5 @@ class S_API UFunctions : public UBlueprintFunctionLibrary
 	
 public:
 	UFUNCTION(BlueprintCallable)
-	static void PlayBgm(const FString& str);
+	static void PlayBgm(const FString& str, float Volume = 1.0f, float FadeIn = 0.0f, bool bLoop = true);
 };

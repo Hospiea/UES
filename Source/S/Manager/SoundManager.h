@@ -16,7 +16,7 @@ class S_API ASoundManager : public AActor
 	
 public:	
 	ASoundManager();
-	void PlayBgm(const FString& str);
+	void PlayBgm(const FString& str, const float& Volume = (1.0f), const float& FadeIn = (0.0f), const bool& bLoop = true);
 	void PlaySfx(const FString& str);
 
 

@@ -6,7 +6,7 @@
 #include "Data/Asset.h"
 #include "SoundAsset.generated.h"
 
-class USoundBase;
+class USoundWave;
 
 UCLASS()
 class S_API USoundAsset : public UAsset
@@ -15,8 +15,8 @@ class S_API USoundAsset : public UAsset
 	
 public:
 	UPROPERTY(EditAnywhere)
-	TMap<FString, TObjectPtr<USoundBase>> Bgm;
+	TMap<FString, TObjectPtr<USoundWave>> Bgm;
 
 	UPROPERTY(EditAnywhere)
-	TMap<FString, TObjectPtr<USoundBase>> Sfx;
+	TMap<FString, TObjectPtr<USoundWave>> Sfx;
 };

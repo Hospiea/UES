@@ -23,12 +23,17 @@ ASoundManager::ASoundManager()
 	SfxPlayer->SetupAttachment(RootComponent);
 }
 
-void ASoundManager::PlayBgm(const FString& str)
+void ASoundManager::PlayBgm(const FString& str, const float& Volume, const float& FadeIn, const bool& bLoop)
 {
 	//UGameplayStatics::PlaySound2D(GetWorld(), Sounds->Bgm[str]);
 	BgmPlayer->Stop();
+	Sounds->Bgm[str]->bLooping = bLoop;
+	Sounds->Bgm[str]->Volume = Volume;
+	BgmPlayer->FadeIn(FadeIn);
 	BgmPlayer->SetSound(Sounds->Bgm[str]);
+	
 	BgmPlayer->Play();
+	
 }
 
 void ASoundManager::PlaySfx(const FString& str)
