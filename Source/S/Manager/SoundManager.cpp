@@ -39,7 +39,6 @@ void ASoundManager::PlayBgm(const FString& str, const float& Volume, const float
 	Sounds->Bgm[str]->Volume = Volume;
 	BgmPlayer->FadeIn(FadeIn);
 	BgmPlayer->SetSound(Sounds->Bgm[str]);
-	
 	BgmPlayer->Play();
 	
 }
@@ -66,8 +65,14 @@ void ASoundManager::PlaySfx(const FString& str)
 			(*it)->Play();
 			bIsSet = true;
 		}
+	}
 
+	if (bIsSet == false)
+	{
+		auto temp = NewObject<UAudioComponent>(this);
+		SfxPlayer.Add(temp);
+		temp->SetSound(Sounds->Sfx[str]);
+		temp->SetVolumeMultiplier(volume);
+		temp->Play();
 	}
 }
-
-
