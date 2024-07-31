@@ -8,6 +8,12 @@
 #include "Data/WeaponAsset.h"
 
 
+UHammer::UHammer(const FObjectInitializer& Init)
+	:Super(Init)
+{
+	APHammer::Basic = this;
+}
+
 void UHammer::Init()
 {
 	Super::Init();

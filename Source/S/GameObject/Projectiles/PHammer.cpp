@@ -12,10 +12,7 @@ APHammer::APHammer()
 	str = TEXT("Hammer");
 }
 
-void APHammer::SetBasic(UBasic* basic)
-{
-	Basic = Cast<UHammer>(basic);
-}
+
 
 void APHammer::BeginPlay()
 {

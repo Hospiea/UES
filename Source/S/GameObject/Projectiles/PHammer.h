@@ -17,7 +17,6 @@ class S_API APHammer : public AMelee
 
 public:
 	APHammer();
-	virtual void SetBasic(UBasic* basic) override;
 
 protected:
 	virtual void BeginPlay() override;
