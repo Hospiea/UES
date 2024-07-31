@@ -23,7 +23,7 @@ void UHammer::Init()
 
 void UHammer::BasicAttack(const FVector2D& Dir)
 {
-	APHammer* Hammer = GetWorld()->SpawnActor<APHammer>(WeaponClass, FVector::ZeroVector, FRotator::ZeroRotator);
+	APHammer* Hammer = Managers->GetPoolManager<APHammer>()->Get(WeaponClass, FVector::ForwardVector, FRotator::ZeroRotator);
 	Hammer->AttachToComponent(User->GetCenter(), FAttachmentTransformRules::KeepRelativeTransform);
 }
 

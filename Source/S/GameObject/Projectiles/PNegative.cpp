@@ -5,6 +5,7 @@
 #include "GameObject/Enemy.h"
 #include "Attacks/Basic/Negative.h"
 #include "Components/CapsuleComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 UNegative* APNegative::Basic;
 
@@ -38,6 +39,7 @@ void APNegative::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Oth
 	if (AEnemy* enemy = Cast<AEnemy>(OtherActor))
 	{
 		enemy->GetDamage(Basic->GetData().Damage);
+		enemy->Hold(GetActorLocation());
 	}
 
 	SetActive(false);
@@ -48,6 +50,14 @@ void APNegative::OnEnable()
 	Super::OnEnable();
 	GetCapsuleComponent()->SetCapsuleRadius(10.0f);
 	GetCapsuleComponent()->SetCapsuleHalfHeight(10.0f);
+}
+
+void APNegative::OnDisable()
+{
+	Super::OnDisable();
+	GetCapsuleComponent()->SetCapsuleRadius(0.1f);
+	GetCapsuleComponent()->SetCapsuleHalfHeight(0.1f);
+	GetCharacterMovement()->Velocity = FVector::ZeroVector;
 
 	bIsFirst = true;
 }

@@ -17,12 +17,17 @@ APHammer::APHammer()
 void APHammer::BeginPlay()
 {
 	Super::BeginPlay();
+	Timer = 0.0f;
 }
 
 void APHammer::Tick(float dt)
 {
 	Super::Tick(dt);
+	Timer += dt;
 	SetActorLocation(GetActorLocation() + GetActorForwardVector());
+
+	if (Timer > 10.0f)
+		SetActive(false);
 }
 
 void APHammer::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)

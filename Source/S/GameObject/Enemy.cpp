@@ -10,6 +10,8 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "System/AIC.h"
 #include "GameObject/Item/ExpOrb.h"
+#include "PhysicsEngine/PhysicsConstraintComponent.h"
+#include "Components/StaticMeshComponent.h"
 
 bool AEnemy::bIsInitted = false;
 
@@ -20,6 +22,8 @@ AEnemy::AEnemy()
 	static ConstructorHelpers::FClassFinder<AExpOrb> orbclass(TEXT("/Script/Engine.Blueprint'/Game/Assets/Blueprints/GameObjects/Item/BP_ExpOrb.BP_ExpOrb_C'"));
 	OrbClass = orbclass.Class;
 	CollisionProfileName = TEXT("Enemy");
+
+	
 }
 
 void AEnemy::SetEnemyState(const EnemyState& state)
@@ -86,6 +90,15 @@ void AEnemy::SetArmorDamaged()
 	GetWorld()->GetTimerManager().SetTimer(Handle, [this]()->void {IsArmored = false; }, 0.5f, Params);
 }
 
+void AEnemy::Hold(const FVector& pos)
+{
+	if (GetEnemyState() == EnemyState::Dead)
+		return;
+	SetEnemyState(EnemyState::Hold);
+	HoldPos = pos;
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &ThisClass::RecoverFromKnockBack, 1.0f);
+}
+
 void AEnemy::PreInitializeComponents()
 {
 	Super::PreInitializeComponents();
@@ -114,10 +127,21 @@ void AEnemy::Tick(float dt)
 	else
 		GetSprite()->SetRelativeRotation(FRotator(0.0f, 0.0f, 0.0f));
 
-	if (GetEnemyState() == EnemyState::Dead)
+	switch (GetEnemyState())
+	{
+	case EnemyState::Dead:
 	{
 		auto scale = GetSprite()->GetRelativeScale3D();
 		GetSprite()->SetRelativeScale3D(scale - FVector(dt, dt, dt));
+		break;
+	}
+
+	case EnemyState::Hold:
+	{
+		FVector Dir = HoldPos - GetActorLocation();
+		GetCharacterMovement()->Velocity = Dir * 3;
+		break;
+	}
 	}
 }
 

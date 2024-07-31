@@ -6,9 +6,6 @@
 #include "GameObject/GameObjects.h"
 #include "Enemy.generated.h"
 
-class AUser;
-class AAIC;
-class AExpOrb;
 
 USTRUCT()
 struct FEnemyStat
@@ -17,6 +14,14 @@ struct FEnemyStat
 	float Speed;
 	float MaxHp;
 };
+
+
+class AUser;
+class AAIC;
+class AExpOrb;
+class UPhysicsConstraintComponent;
+
+
 
 UCLASS()
 class S_API AEnemy : public AGameObjects
@@ -45,6 +50,7 @@ public:
 	virtual void GetDamage(const float& value) override;
 	inline const bool& GetArmorDamaged() { return IsArmored; }
 	void SetArmorDamaged();
+	void Hold(const FVector& pos);
 
 protected:
 	virtual void PreInitializeComponents() override;
@@ -84,6 +90,8 @@ protected:
 
 	UFUNCTION()
 	void RecoverFromKnockBack();
+
+	FVector HoldPos;
 
 	static bool bIsInitted;
 };
