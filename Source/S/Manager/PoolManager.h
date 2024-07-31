@@ -10,6 +10,8 @@
 #include "GameObject/Projectiles.h"
 
 class UWorld;
+class AEnemy;
+
 
 template<typename T>
 class S_API PoolManager
@@ -54,11 +56,11 @@ inline T* PoolManager<T>::Get(UClass* Class, const FVector& Pos, const FRotator&
 	{
 		for (auto& temp : Pool)
 		{
-			if (!temp->AGameObjects::ActiveSelf())
+			if (!temp->AGameObjects::ActiveSelf() && temp->IsA(T::StaticClass()))
 			{
 				temp->AGameObjects::SetActive(true);
 				temp->AGameObjects::SetActorLocationAndRotation(Pos, Rot);
-				return static_cast<T*>(temp);
+				return Cast<T>(temp);
 			}
 		}
 		auto enemy = World->SpawnActor<T>(Class, Pos, Rot);

@@ -14,7 +14,7 @@ void AEnemyRangeBase::Tick(float dt)
 	Super::Tick(dt);
 	Timer += dt;
 
-	if (Timer > 3.0f)
+	if (Timer > 2.5f)
 	{
 		SetActive(false);
 		Timer = 0.0f;
