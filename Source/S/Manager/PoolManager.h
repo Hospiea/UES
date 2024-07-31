@@ -16,7 +16,7 @@ class AEnemy;
 template<typename T>
 class S_API PoolManager
 {
-	static_assert(std::is_base_of<AGameObjects, T>::value, "T must be derieved from AGameObjects");
+	static_assert(!std::is_base_of<T, AGameObjects>::value, "T must be derieved from AGameObjects");
 
 public:
 	PoolManager();
@@ -48,7 +48,7 @@ inline T* PoolManager<T>::Get(UClass* Class, const FVector& Pos, const FRotator&
 {
 	if (Pool.Num() == 0)
 	{
-		auto enemy = World->SpawnActor<T>(Class, Pos, Rot);
+		auto&& enemy = World->SpawnActor<T>(Class, Pos, Rot);
 		Pool.Add(enemy);
 		return enemy;
 	}
@@ -56,14 +56,14 @@ inline T* PoolManager<T>::Get(UClass* Class, const FVector& Pos, const FRotator&
 	{
 		for (auto& temp : Pool)
 		{
-			if (!temp->AGameObjects::ActiveSelf() && (temp->IsA(T::StaticClass()) || temp->IsA(Class)))
+			if (!temp->ActiveSelf() && (temp->IsA(T::StaticClass()) || temp->IsA(Class)))
 			{
-				temp->AGameObjects::SetActive(true);
-				temp->AGameObjects::SetActorLocationAndRotation(Pos, Rot);
+				temp->SetActive(true);
+				temp->SetActorLocationAndRotation(Pos, Rot);
 				return Cast<T>(temp);
 			}
 		}
-		auto enemy = World->SpawnActor<T>(Class, Pos, Rot);
+		auto&& enemy = World->SpawnActor<T>(Class, Pos, Rot);
 		Pool.Add(enemy);
 		return enemy;
 	}

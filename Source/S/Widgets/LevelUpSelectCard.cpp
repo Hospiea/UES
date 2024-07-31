@@ -222,6 +222,7 @@ void ULevelUpSelectCard::WeaponFactory(const UBasic::AttackType& attack)
 		auto temp = NewObject<USword>(User);
 		temp->SetAttackType(attack);
 		temp->SetPassive(false);
+		temp->GetLevel() = 0;
 		User->GetAttackComponent()->AddAttack(temp);
 		break;
 
@@ -231,6 +232,7 @@ void ULevelUpSelectCard::WeaponFactory(const UBasic::AttackType& attack)
 		auto temp = NewObject<UAxe>(User);
 		temp->SetAttackType(attack);
 		temp->SetPassive(false);
+		temp->GetLevel() = 0;
 		User->GetAttackComponent()->AddAttack(temp);
 		break;
 	}
@@ -240,6 +242,7 @@ void ULevelUpSelectCard::WeaponFactory(const UBasic::AttackType& attack)
 		auto temp = NewObject<UHammer>(User);
 		temp->SetAttackType(attack);
 		temp->SetPassive(false);
+		temp->GetLevel() = 0;
 		User->GetAttackComponent()->AddAttack(temp);
 		break;
 	}
@@ -249,6 +252,7 @@ void ULevelUpSelectCard::WeaponFactory(const UBasic::AttackType& attack)
 		auto temp = NewObject<USpear>(User);
 		temp->SetAttackType(attack);
 		temp->SetPassive(false);
+		temp->GetLevel() = 0;
 		User->GetAttackComponent()->AddAttack(temp);
 		break;
 	}
@@ -258,6 +262,7 @@ void ULevelUpSelectCard::WeaponFactory(const UBasic::AttackType& attack)
 		auto temp = NewObject<UStaff>(User);
 		temp->SetAttackType(attack);
 		temp->SetPassive(false);
+		temp->GetLevel() = 0;
 		User->GetAttackComponent()->AddAttack(temp);
 		break;
 	}
@@ -273,6 +278,7 @@ void ULevelUpSelectCard::WeaponFactory(const UBasic::AttackType& attack)
 		auto temp = NewObject<USheild>(User);
 		temp->SetAttackType(attack);
 		temp->SetPassive(false);
+		temp->GetLevel() = 0;
 		User->GetAttackComponent()->AddAttack(temp);
 		break;
 	}
@@ -294,6 +300,7 @@ void ULevelUpSelectCard::WeaponFactory(const UBasic::AttackType& attack)
 		auto temp = NewObject<UChakram>(User);
 		temp->SetAttackType(attack);
 		temp->SetPassive(false);
+		temp->GetLevel() = 0;
 		User->GetAttackComponent()->AddAttack(temp);
 		break;
 	}
@@ -303,6 +310,7 @@ void ULevelUpSelectCard::WeaponFactory(const UBasic::AttackType& attack)
 		auto temp = NewObject<UShoes>(User);
 		temp->SetAttackType(attack);
 		temp->SetPassive(false);
+		temp->GetLevel() = 0;
 		User->GetAttackComponent()->AddAttack(temp);
 		break;
 	}
@@ -330,6 +338,7 @@ void ULevelUpSelectCard::PassiveFactory(const UBasic::PassiveType& passive)
 		auto temp = NewObject<UFire>(User);
 		temp->SetPassiveType(passive);
 		temp->SetPassive(true);
+		temp->GetLevel() = 0;
 		User->GetAttackComponent()->AddAttack(temp);
 		break;
 	}
@@ -339,6 +348,7 @@ void ULevelUpSelectCard::PassiveFactory(const UBasic::PassiveType& passive)
 		auto temp = NewObject<UWind>(User);
 		temp->SetPassiveType(passive);
 		temp->SetPassive(true);
+		temp->GetLevel() = 0;
 		User->GetAttackComponent()->AddAttack(temp);
 		break;
 	}
@@ -356,6 +366,7 @@ void ULevelUpSelectCard::PassiveFactory(const UBasic::PassiveType& passive)
 		auto temp = NewObject<UMagnetic>(User);
 		temp->SetPassiveType(passive);
 		temp->SetPassive(true);
+		temp->GetLevel() = 0;
 		User->GetAttackComponent()->AddAttack(temp);
 		break;
 	}
@@ -365,6 +376,7 @@ void ULevelUpSelectCard::PassiveFactory(const UBasic::PassiveType& passive)
 		auto temp = NewObject<ULife>(User);
 		temp->SetPassiveType(passive);
 		temp->SetPassive(true);
+		temp->GetLevel() = 0;
 		User->GetAttackComponent()->AddAttack(temp);
 		break;
 	}

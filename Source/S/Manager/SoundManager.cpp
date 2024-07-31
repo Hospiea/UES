@@ -18,6 +18,9 @@ ASoundManager::ASoundManager()
 	BgmPlayer->bAutoActivate = false;
 	BgmPlayer->SetupAttachment(RootComponent);
 
+	//
+	BgmPlayer->SetVolumeMultiplier(0.0f);
+
 	for (int i = 0; i < 32; ++i)
 	{
 		FString ComponentName = FString::Printf(TEXT("AudioComponent_%d"), i);
@@ -25,7 +28,10 @@ ASoundManager::ASoundManager()
 		SfxPlayer.Add(temp);
 		temp->SetupAttachment(RootComponent);
 		temp->bAutoActivate = false;
-		temp->VolumeMultiplier = 32.0f;
+		//temp->VolumeMultiplier = 32.0f;
+		
+		//
+		temp->SetVolumeMultiplier(0.0f);
 	}
 
 	
@@ -48,7 +54,8 @@ void ASoundManager::PlaySfx(const FString& str)
 	
 
 	float total = SfxPlayer.Num();
-	float volume = 32.0f / total;
+	//float volume = 32.0f / total;
+	float volume = 0.0f;
 	bool bIsSet = false;
 
 	for (auto it = SfxPlayer.begin(); it != SfxPlayer.end(); ++it)
