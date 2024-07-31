@@ -25,12 +25,13 @@ void USpear::Init()
 void USpear::BasicAttack(const FVector2D& Dir)
 {
 	SpawnLocation = User->GetActorLocation();
-	APSpear* temp = World->SpawnActor<APSpear>(WeaponClass, SpawnLocation, FRotator(Angle -90.0f, 0.0f, 0.0f));
+	//APSpear* temp = World->SpawnActor<APSpear>(WeaponClass, SpawnLocation, FRotator(Angle -90.0f, 0.0f, 0.0f));
+	APSpear* temp = Managers->GetPoolManager<APSpear>()->Get(WeaponClass, SpawnLocation, FRotator(Angle -90.0f, 0.0f, 0.0f));
 	FVector Vel = FVector(Dir.X, temp->GetActorLocation().Y, Dir.Y) - temp->GetActorLocation();
 	Vel.Normalize();
 	Vel *= Data.Speed;
 	temp->GetCharacterMovement()->Velocity = Vel * User->GetStats().ProjectileSpeed;
-	temp->SetLifeSpan(Data.Duration * User->GetStats().ProjectileDuration);
+	temp->Span(Data.Duration * User->GetStats().ProjectileDuration);
 
 
 	float angle = FMath::Atan2(Vel.Z, Vel.X);

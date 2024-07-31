@@ -34,7 +34,7 @@ void APThunder::Tick(float dt)
 
 	if ((GetSprite()->GetPlaybackPosition()/GetSprite()->GetFlipbook()->GetTotalDuration()) >= 0.9f)
 	{
-		GetWorld()->DestroyActor(this);
+		SetActive(false);
 	}
 }
 

@@ -50,10 +50,19 @@ AGameObjects::AGameObjects()
 	++Order;
 }
 
+void AGameObjects::Span(const float& Timer)
+{
+	FTimerHandle Handle;
+	GetWorld()->GetTimerManager().SetTimer(Handle, [this]() {SpanHelper(); }, Timer, FTimerManagerTimerParameters());
+}
+
 void AGameObjects::BeginPlay()
 {
 	Super::BeginPlay();
 	GetSprite()->SetRelativeLocation(FVector(0.0f, Order, 0.0f));
+}
 
-	
+void AGameObjects::SpanHelper()
+{
+	SetActive(false);
 }

@@ -24,7 +24,8 @@ void UShoes::Init()
 void UShoes::BasicAttack(const FVector2D& Dir)
 {
 	SpawnLocation = User->GetActorLocation() - FVector(0.0f, 1.0f, 0.0f);
-	APShoes* temp = World->SpawnActor<APShoes>(WeaponClass, SpawnLocation, FRotator(0.0f, 0.0f, 0.0f));
+	//APShoes* temp = World->SpawnActor<APShoes>(WeaponClass, SpawnLocation, FRotator(0.0f, 0.0f, 0.0f));
+	APShoes* temp = Managers->GetPoolManager<APShoes>()->Get(WeaponClass, SpawnLocation, FRotator(0.0f, 0.0f, 0.0f));
 }
 
 void UShoes::SetWeaponData()

@@ -21,11 +21,12 @@ public:
 	virtual void OnDisable();
 	AGameObjects();
 	virtual void GetDamage(const float& value) {};
-	
+	void Span(const float& Timer);
 
 protected:
 	virtual void BeginPlay() override;
 	inline static uint8 Order = 0;
+	void SpanHelper();
 
 	UPROPERTY()
 	bool IsActive = true;

@@ -26,7 +26,7 @@ void UStaff::Init()
 void UStaff::BasicAttack(const FVector2D& Dir)
 {
 	SpawnLocation = FVector(Dir.X, 10.0f, Dir.Y);
-	APThunder* temp = World->SpawnActor<APThunder>(WeaponClass, SpawnLocation, FRotator(0.0f, 0.0f, 0.0f));
+	APThunder* temp = Managers->GetPoolManager<APThunder>()->Get(WeaponClass, SpawnLocation, FRotator(0.0f, 0.0f, 0.0f));
 }
 
 void UStaff::SetWeaponData()

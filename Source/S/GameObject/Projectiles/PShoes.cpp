@@ -33,7 +33,7 @@ void APShoes::Tick(float dt)
 	Timer += dt;
 	if (Timer >= Basic->GetData().Duration)
 	{
-		GetWorld()->DestroyActor(this);
+		SetActive(false);
 	}
 }
 

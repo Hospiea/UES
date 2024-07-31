@@ -27,12 +27,13 @@ void UAxe::BasicAttack(const FVector2D& Dir)
 {
 	//Super::BasicAttack(Dir);
 	SpawnLocation = User->GetActorLocation();
-	APAxe* temp = World->SpawnActor<APAxe>(WeaponClass, SpawnLocation, FRotator(Angle, 0.0f, 0.0f));
+	//APAxe* temp = World->SpawnActor<APAxe>(WeaponClass, SpawnLocation, FRotator(Angle, 0.0f, 0.0f));
+	APAxe* temp = Managers->GetPoolManager<APAxe>()->Get(WeaponClass, SpawnLocation, FRotator(Angle, 0.0f, 0.0f));
 	FVector Vel = FVector(Dir.X, temp->GetActorLocation().Y, Dir.Y) - temp->GetActorLocation();
 	Vel.Normalize();
 	Vel *= Data.Speed;
 	temp->GetCharacterMovement()->Velocity = Vel * User->GetStats().ProjectileSpeed;
-	temp->SetLifeSpan(Data.Duration * User->GetStats().ProjectileDuration);
+	temp->Span(Data.Duration * User->GetStats().ProjectileDuration);
 
 }
 
