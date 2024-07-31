@@ -56,7 +56,7 @@ inline T* PoolManager<T>::Get(UClass* Class, const FVector& Pos, const FRotator&
 	{
 		for (auto& temp : Pool)
 		{
-			if (!temp->AGameObjects::ActiveSelf() && temp->IsA(T::StaticClass()))
+			if (!temp->AGameObjects::ActiveSelf() && (temp->IsA(T::StaticClass()) || temp->IsA(Class)))
 			{
 				temp->AGameObjects::SetActive(true);
 				temp->AGameObjects::SetActorLocationAndRotation(Pos, Rot);
