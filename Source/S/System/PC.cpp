@@ -135,5 +135,4 @@ void APC::TouchFunc(const FInputActionValue& value)
 		Direction = Dir;
 
 	User->GetCharacterMovement()->Velocity = FVector(Dir.X, 0.0f, Dir.Y);
-
 }

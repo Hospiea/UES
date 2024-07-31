@@ -14,8 +14,8 @@ void AEnemyProjectiles::BeginPlay()
 {
 	Super::BeginPlay();
 	GetCapsuleComponent()->SetCollisionProfileName(TEXT("EnemyProjectile"));
+	UnPossessed();
 	Controller = NewObject<AAIC>(this);
-	Controller->UnPossess();
 	Controller->Possess(this);
 	GetCapsuleComponent()->OnComponentBeginOverlap.AddDynamic(this, &AEnemyProjectiles::OnOverlap);
 

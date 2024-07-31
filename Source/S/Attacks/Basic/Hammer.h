@@ -6,9 +6,7 @@
 #include "Attacks/Basic/Basic.h"
 #include "Hammer.generated.h"
 
-/**
- * 
- */
+
 UCLASS()
 class S_API UHammer : public UBasic
 {

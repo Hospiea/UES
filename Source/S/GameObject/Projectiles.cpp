@@ -15,6 +15,7 @@ AProjectiles::AProjectiles()
 {
 	GetCapsuleComponent()->SetCollisionProfileName(TEXT("Projectile"));
 	Deletable = false;
+	CollisionProfileName = TEXT("Projectile");
 }
 
 void AProjectiles::SetBasic(UBasic* basic)
@@ -26,8 +27,8 @@ void AProjectiles::BeginPlay()
 {
 	Super::BeginPlay();
 	GetCapsuleComponent()->SetCollisionProfileName(TEXT("Projectile"));
+	UnPossessed();
 	Controller = NewObject<AAIC>(this);
-	Controller->UnPossess();
 	Controller->Possess(this);
 	GetCapsuleComponent()->OnComponentBeginOverlap.AddDynamic(this, &AProjectiles::OnOverlap);
 

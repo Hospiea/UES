@@ -19,7 +19,7 @@ AEnemy::AEnemy()
 	GetCapsuleComponent()->SetCollisionProfileName(TEXT("Enemy"));
 	static ConstructorHelpers::FClassFinder<AExpOrb> orbclass(TEXT("/Script/Engine.Blueprint'/Game/Assets/Blueprints/GameObjects/Item/BP_ExpOrb.BP_ExpOrb_C'"));
 	OrbClass = orbclass.Class;
-
+	CollisionProfileName = TEXT("Enemy");
 }
 
 void AEnemy::SetEnemyState(const EnemyState& state)

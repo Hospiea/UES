@@ -36,6 +36,8 @@ AUser::AUser()
 
 	AnimationComponent = CreateDefaultSubobject<UAnimationComponent>(TEXT("AnimationComponent"));
 
+	CollisionProfileName = TEXT("Player");
+
 }
 
 

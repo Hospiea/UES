@@ -36,6 +36,7 @@ public:
 		Recovering,
 		Attacking,
 		Dead,
+		Hold,
 	};
 	AEnemy();
 

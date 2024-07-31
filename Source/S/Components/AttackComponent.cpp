@@ -14,6 +14,7 @@
 #include "Attacks/Basic/Sword.h"
 #include "Attacks/Basic/Spear.h"
 #include "Attacks/Basic/Chakram.h"
+#include "Attacks/Basic/Negative.h"
 #include "System/GMB.h"
 #include "Data/TextureAsset.h"
 #include "Widgets/LevelUpSelectCard.h"

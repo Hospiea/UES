@@ -31,7 +31,6 @@ void AGMB::BeginPlay()
 	Managers->Game->KillCounts = 0;
 	//Managers->Sound->PlayBgm("Opening");
 	
-	
 }
 
 void AGMB::EndPlay(const EEndPlayReason::Type reason)

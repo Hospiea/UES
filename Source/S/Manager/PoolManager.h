@@ -46,6 +46,7 @@ inline PoolManager<T>::~PoolManager()
 template<typename T>
 inline T* PoolManager<T>::Get(UClass* Class, const FVector& Pos, const FRotator& Rot)
 {
+
 	if (Pool.Num() == 0)
 	{
 		auto&& enemy = World->SpawnActor<T>(Class, Pos, Rot);
@@ -58,9 +59,9 @@ inline T* PoolManager<T>::Get(UClass* Class, const FVector& Pos, const FRotator&
 		{
 			if (!temp->ActiveSelf() && (temp->IsA(T::StaticClass()) || temp->IsA(Class)))
 			{
-				temp->SetActive(true);
 				temp->SetActorLocationAndRotation(Pos, Rot);
-				return Cast<T>(temp);
+				temp->T::SetActive(true);
+				return temp;
 			}
 		}
 		auto&& enemy = World->SpawnActor<T>(Class, Pos, Rot);

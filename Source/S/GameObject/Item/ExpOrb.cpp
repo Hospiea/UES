@@ -17,6 +17,9 @@ AExpOrb::AExpOrb()
 
 	GetCapsuleComponent()->SetCollisionProfileName(TEXT("Orb"));
 	Lv = 50;
+
+	CollisionProfileName = TEXT("Orb");
+
 }
 
 void AExpOrb::SetExpLevel(const uint8& lv)

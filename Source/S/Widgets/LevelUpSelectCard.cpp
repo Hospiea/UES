@@ -22,6 +22,7 @@
 #include "Attacks/Basic/Hammer.h"
 #include "Attacks/Basic/Shoes.h"
 #include "Attacks/Basic/Chakram.h"
+#include "Attacks/Basic/Negative.h"
 #include "LevelUpSkillSlot.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
@@ -317,7 +318,11 @@ void ULevelUpSelectCard::WeaponFactory(const UBasic::AttackType& attack)
 
 	case UBasic::AttackType::Negative:
 	{
-
+		auto temp = NewObject<UNegative>(User);
+		temp->SetAttackType(attack);
+		temp->SetPassive(false);
+		temp->GetLevel() = 0;
+		User->GetAttackComponent()->AddAttack(temp);
 		break;
 	}
 

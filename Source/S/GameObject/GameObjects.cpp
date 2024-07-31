@@ -31,8 +31,7 @@ void AGameObjects::OnEnable()
 
 void AGameObjects::OnDisable()
 {
-	CollisionProfileName = GetCapsuleComponent()->GetCollisionProfileName();
-	GetCapsuleComponent()->SetCollisionProfileName(TEXT("Dead"));
+	GetCapsuleComponent()->SetCollisionProfileName(TEXT("Nothing"));
 }
 
 AGameObjects::AGameObjects()
