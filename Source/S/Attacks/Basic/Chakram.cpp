@@ -7,11 +7,13 @@
 #include "GameObject/Player/User.h"
 #include "System/GMB.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "GameObject/Projectiles/PChakramBody.h"
 
 UChakram::UChakram(const FObjectInitializer& Init)
 	:Super(Init)
 {
 	APChakram::Basic = this;
+	APChakramBody::Basic = this;
 }
 
 void UChakram::Init()

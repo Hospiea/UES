@@ -7,6 +7,7 @@
 #include "PChakramBody.generated.h"
 
 class APChakram;
+class UChakram;
 
 UCLASS()
 class S_API APChakramBody : public AMelee
@@ -26,6 +27,8 @@ protected:
 	UPROPERTY()
 	TObjectPtr<APChakram> Center;
 
+	virtual void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) override;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rotate Property")
 	float RotateSpeed = 3.0f;
 
@@ -34,4 +37,8 @@ protected:
 
 	bool bIsRight;
 	float Timer;
+
+private:
+	static UChakram* Basic;
+	friend class UChakram;
 };
