@@ -59,7 +59,7 @@ void AWidgetManager::ClickToStart()
 	CurrentWidget->AddToViewport();
 	GetWorld()->SpawnActor<ASpawner>();
 
-	//Managers->Sound->PlayBgm("Stage1");
+	Managers->Sound->PlayBgm("Stage1");
 }
 
 void AWidgetManager::ClickToLobby()

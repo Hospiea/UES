@@ -23,6 +23,7 @@
 #include "Attacks/Basic/Shoes.h"
 #include "Attacks/Basic/Chakram.h"
 #include "Attacks/Basic/Negative.h"
+#include "Attacks/Basic/Dagger.h"
 #include "LevelUpSkillSlot.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
@@ -270,7 +271,11 @@ void ULevelUpSelectCard::WeaponFactory(const UBasic::AttackType& attack)
 
 	case UBasic::AttackType::Dagger:
 	{
-
+		auto temp = NewObject<UDagger>(User);
+		temp->SetAttackType(attack);
+		temp->SetPassive(false);
+		temp->GetLevel() = 0;
+		User->GetAttackComponent()->AddAttack(temp);
 		break;
 	}
 
