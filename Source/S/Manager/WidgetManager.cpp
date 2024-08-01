@@ -27,6 +27,7 @@ void AWidgetManager::LevelUp()
 
 	
 	UGameplayStatics::SetGlobalTimeDilation(GetWorld(), 0.0f);
+	//UGameplayStatics::SetGamePaused(GetWorld(), true);
 }
 
 void AWidgetManager::Pause()
@@ -41,6 +42,7 @@ void AWidgetManager::Pause()
 void AWidgetManager::RemovePopupWidget()
 {
 	UGameplayStatics::SetGlobalTimeDilation(GetWorld(), 1.0f);
+	//UGameplayStatics::SetGamePaused(GetWorld(), false);
 	PopupWidget->RemoveFromParent();
 	Managers->Controller->Resume();
 }
