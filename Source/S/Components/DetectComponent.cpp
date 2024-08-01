@@ -24,10 +24,7 @@ void UDetectComponent::BeginPlay()
 	DetectRange->RegisterComponent();
 	DetectRange->SetCollisionProfileName(TEXT("Detection"));
 
-	ObtainRange = NewObject<UBoxComponent>(this);
-	ObtainRange->SetupAttachment(GetOwner()->GetRootComponent());
-	ObtainRange->RegisterComponent();
-	ObtainRange->SetCollisionProfileName(TEXT("Obtain"));
+	
 
 	DetectRange->SetBoxExtent(FVector(500.0f, 500.0f, 500.0f));
 

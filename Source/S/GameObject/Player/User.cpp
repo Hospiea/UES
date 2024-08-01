@@ -18,6 +18,7 @@
 #include "System/PC.h"
 #include "Components/AnimationComponent.h"
 #include "Components/AttackComponent.h"
+#include "Obtainer.h"
 
 
 AUser::AUser()
@@ -91,6 +92,8 @@ void AUser::BeginPlay()
 	AnimationComponent->SetMovementComponent(GetCharacterMovement());
 
 	AttackComponent->Init(GetWorld());
+
+	AObtainer* obtainer = GetWorld()->SpawnActor<AObtainer>();
 	
 	CurHp = Stats.MaxHp;
 	Level = 0;

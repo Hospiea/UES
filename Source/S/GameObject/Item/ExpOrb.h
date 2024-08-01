@@ -16,15 +16,21 @@ class S_API AExpOrb : public AGameObjects
 public:
 	AExpOrb();
 	void SetExpLevel(const uint8& lv);
-
+	void Grabbed();
 
 protected:
 	virtual void BeginPlay() override;
+	virtual void Tick(float dt) override;
 
 	static TObjectPtr<UFlipbookAsset> ExpSprites;
 	
+	
+
 	UPROPERTY()
 	uint8 Lv;
+
+	UPROPERTY()
+	bool bIsGrabbed;
 
 	UFUNCTION()
 	void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);

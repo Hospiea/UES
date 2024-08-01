@@ -38,8 +38,7 @@ protected:
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UBoxComponent> DetectRange;
 
-	UPROPERTY(VisibleAnywhere)
-	TObjectPtr<UBoxComponent> ObtainRange;
+	
 
 	UPROPERTY()
 	TArray<TObjectPtr<AEnemy>> Enemylist;

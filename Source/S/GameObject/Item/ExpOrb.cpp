@@ -7,6 +7,8 @@
 #include "GameObject/Player/User.h"
 #include "PaperFlipbookComponent.h"
 #include "System/GMB.h"
+#include "System/AIC.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 TObjectPtr<UFlipbookAsset> AExpOrb::ExpSprites;
 
@@ -43,10 +45,27 @@ void AExpOrb::SetExpLevel(const uint8& lv)
 	}
 }
 
+void AExpOrb::Grabbed()
+{
+	bIsGrabbed = true;
+}
+
 void AExpOrb::BeginPlay()
 {
 	Super::BeginPlay();
 	GetCapsuleComponent()->OnComponentBeginOverlap.AddDynamic(this, &ThisClass::OnOverlap);
+	auto temp = NewObject<AAIC>(this);
+	temp->Possess(this);
+	bIsGrabbed = false;
+}
+
+void AExpOrb::Tick(float dt)
+{
+	Super::Tick(dt);
+	if (!bIsGrabbed) return;
+	FVector Dir = Managers->Game->Player->GetActorLocation() - GetActorLocation();
+	Dir *= 10.0f;
+	GetCharacterMovement()->Velocity = Dir;
 }
 
 void AExpOrb::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
