@@ -93,7 +93,7 @@ void AUser::BeginPlay()
 
 	AttackComponent->Init(GetWorld());
 
-	AObtainer* obtainer = GetWorld()->SpawnActor<AObtainer>();
+	Obtainer = GetWorld()->SpawnActor<AObtainer>();
 	
 	CurHp = Stats.MaxHp;
 	Level = 0;

@@ -12,6 +12,7 @@ class UBasic;
 class USWidgetComponent;
 class UDetectComponent;
 class UAttackComponent;
+class AObtainer;
 
 UCLASS()
 class S_API AUser : public AGameObjects
@@ -43,6 +44,7 @@ public:
 	inline TObjectPtr<UCenter>& GetCenter() { return Center; }
 	inline TObjectPtr <UDetectComponent>& GetDetectComponent() { return DetectComponent; }
 	inline TObjectPtr<UAttackComponent>& GetAttackComponent() { return AttackComponent; }
+	inline TObjectPtr<AObtainer>& GetObtainer() { return Obtainer; }
 
 	void GetExp(const float& value);
 	inline const uint8& GetLevel() { return Level; }
@@ -70,6 +72,8 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TObjectPtr<UDataTable> ExpData;
 
+	UPROPERTY()
+	TObjectPtr<AObtainer> Obtainer;
 
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UAnimationComponent> AnimationComponent;
