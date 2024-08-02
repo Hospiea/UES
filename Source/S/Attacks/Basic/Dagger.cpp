@@ -30,7 +30,6 @@ void UDagger::BasicAttack(const FVector2D& Dir)
 	Vel.Normalize();
 	Vel *= Data.Speed;
 	temp->GetCharacterMovement()->Velocity = Vel * User->GetStats().ProjectileSpeed;
-	temp->Span(Data.Duration * User->GetStats().ProjectileDuration);
 
 
 	float angle = FMath::Atan2(Vel.Z, Vel.X);
