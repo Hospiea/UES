@@ -16,9 +16,7 @@ class S_API UMagnetic : public UBasic
 
 public:
 
-	virtual uint8& GetLevel() override { return Level; };
 
 
-protected:
-	uint8 Level;
+
 };

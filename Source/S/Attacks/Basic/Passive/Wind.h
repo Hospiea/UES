@@ -16,7 +16,6 @@ class S_API UWind : public UBasic
 	
 public:
 	virtual void Init() override;
-	virtual uint8& GetLevel() override { return Level; };
 
 
 };

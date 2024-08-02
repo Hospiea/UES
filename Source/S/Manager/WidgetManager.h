@@ -8,6 +8,7 @@
 
 class UWidgetAsset;
 class ULevelUpSkillSlot;
+class UBasic;
 
 UCLASS()
 class S_API AWidgetManager : public AActor

@@ -43,4 +43,5 @@ void UBasic::BasicAttack(const FVector2D& Dir)
 void UBasic::Init()
 {
 	User = Managers->Game->Player;
+	++Level;
 }

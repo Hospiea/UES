@@ -17,7 +17,7 @@ class S_API UBasic : public UObject
 {
 	GENERATED_BODY()
 public:
-	enum class AttackType
+	enum class AttackType : int32
 	{
 		Sword,
 		Axe,
@@ -34,7 +34,7 @@ public:
 		Positive
 	};
 
-	enum class PassiveType
+	enum class PassiveType : int32
 	{
 		Fire,
 		Wind,
@@ -64,10 +64,9 @@ public:
 	inline void SetAttackType(const AttackType& type) { Type = type; }
 	inline const PassiveType& GetPassiveType() { return PType; }
 	inline void SetPassiveType(const PassiveType& type) { PType = type; }
-	virtual uint8& GetLevel() { return Level; };
+	virtual int32& GetLevel() { return Level; };
 	virtual void LevelUp() 
 	{ 
-		++Level; 
 		Init();
 	}
 	inline void SetPassive(const bool& flag) { bIsPassive = flag; }
@@ -106,5 +105,5 @@ protected:
 	PassiveType PType;
 
 	UPROPERTY()
-	uint8 Level;
+	int32 Level;
 };

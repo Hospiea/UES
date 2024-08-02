@@ -9,6 +9,8 @@
 #include "Components/CanvasPanel.h"
 #include "Components/GridPanel.h"
 #include "Components/GridSlot.h"
+#include "Components/AttackComponent.h"
+#include "Attacks/Basic/Basic.h"
 
 UPause::UPause(const FObjectInitializer& Init)
 	:Super(Init)
@@ -57,6 +59,7 @@ void UPause::NativeConstruct()
 	{
 		PassiveCards[i]->SetRenderOpacity(1.0f);
 		PassiveCards[i]->SetImage(Managers->Widget->GetPassiveImages()[i]);
+		PassiveCards[i]->SetLevel(Managers->Game->Player->GetAttackComponent()->GetPassiveTypes()[i]->GetLevel());
 	}
 
 
@@ -95,6 +98,7 @@ void UPause::NativeConstruct()
 	{
 		WeaponCards[i]->SetRenderOpacity(1.0f);
 		WeaponCards[i]->SetImage(Managers->Widget->GetWeaponImages()[i]);
+		WeaponCards[i]->SetLevel(Managers->Game->Player->GetAttackComponent()->GetAttackTypes()[i]->GetLevel());
 	}
 
 }

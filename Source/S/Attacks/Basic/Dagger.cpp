@@ -17,6 +17,7 @@ UDagger::UDagger(const FObjectInitializer& Init)
 void UDagger::Init()
 {
 	Super::Init();
+	++Level;
 	WeaponClass = Weapons->Weapons["Dagger"];
 	SetWeaponData();
 }

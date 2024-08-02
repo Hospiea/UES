@@ -16,9 +16,6 @@ class S_API ULife : public UBasic
 
 public:
 	virtual void Init() override;
-	virtual uint8& GetLevel() override { return Level; };
 	
 
-protected:
-	uint8 Level;
 };

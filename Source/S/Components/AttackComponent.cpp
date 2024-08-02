@@ -39,14 +39,7 @@ void UAttackComponent::Init(UWorld* world)
 	World = world;
 
 	
-	auto temp = NewObject<UDagger>(GetOwner());
-	temp->SetAttackType(UBasic::AttackType::Dagger);
-	temp->SetPassive(false);
-	temp->Init();
-	temp->SetPlayer(Cast<AUser>(GetOwner()));
-	AddAttack(temp);
-	Managers->Widget->GetWeaponImages().Add(Textures->MainWeapons[0]);
-	ULevelUpSelectCard::WeaponIndexes.Add(0);
+	
 
 	Detection = Cast<AUser>(GetOwner())->GetDetectComponent();
 }
@@ -85,6 +78,17 @@ void UAttackComponent::AddAttack(UBasic* attack)
 void UAttackComponent::BeginPlay()
 {
 	Super::BeginPlay();	
+
+	auto temp = NewObject<UDagger>(GetOwner());
+	temp->SetAttackType(UBasic::AttackType::Dagger);
+	auto index = static_cast<int32>(temp->GetAttackType());
+	temp->SetPassive(false);
+	temp->Init();
+	temp->GetLevel() = 0;
+	temp->SetPlayer(Cast<AUser>(GetOwner()));
+	AddAttack(temp);
+	Managers->Widget->GetWeaponImages().Add(Textures->MainWeapons[index]);
+	ULevelUpSelectCard::WeaponIndexes.Add(index);
 }
 
 

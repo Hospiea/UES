@@ -25,7 +25,6 @@ void UNegative::BasicAttack(const FVector2D& Dir)
 {
 	SpawnLocation = FVector(Dir.X, 10.0f, Dir.Y);
 	APNegative* temp = Managers->GetPoolManager<APNegative>()->Get(WeaponClass, SpawnLocation, FRotator(0.0f, 0.0f, 0.0f));
-
 }
 
 void UNegative::SetWeaponData()

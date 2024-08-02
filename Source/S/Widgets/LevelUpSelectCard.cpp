@@ -68,7 +68,8 @@ void ULevelUpSelectCard::NativeConstruct()
 	User = Managers->Game->Player;
 
 	RandIndex = FMath::Rand() % 13;
-	IsPassive = FMath::RandBool();
+	//IsPassive = FMath::RandBool();
+	IsPassive = false;
 
 
 
