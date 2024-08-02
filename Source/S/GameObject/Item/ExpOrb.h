@@ -24,7 +24,7 @@ protected:
 
 	static TObjectPtr<UFlipbookAsset> ExpSprites;
 	
-	
+	virtual void OnEnable() override;
 
 	UPROPERTY()
 	uint8 Lv;

@@ -41,10 +41,6 @@ void AObtainer::OnDetecting(UPrimitiveComponent* OverlappedComponent, AActor* Ot
 {
 	if (AExpOrb* orb = Cast<AExpOrb>(OtherActor))
 	{
-		/*FVector Dir = User->GetActorLocation() - orb->GetActorLocation();
-		Dir.Normalize();
-		Dir *= 100.0f;
-		orb->GetCharacterMovement()->Velocity = Dir;*/
 		orb->Grabbed();
 	}
 }
