@@ -18,6 +18,7 @@ APNegative::APNegative()
 void APNegative::BeginPlay()
 {
 	Super::BeginPlay();
+	GetSprite()->SetRelativeLocation(FVector(0.0f, 0, 0.0f));
 	bIsFirst = true;
 }
 
