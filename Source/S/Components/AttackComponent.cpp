@@ -15,6 +15,7 @@
 #include "Attacks/Basic/Spear.h"
 #include "Attacks/Basic/Chakram.h"
 #include "Attacks/Basic/Negative.h"
+#include "Attacks/Basic/Dagger.h"
 #include "System/GMB.h"
 #include "Data/TextureAsset.h"
 #include "Widgets/LevelUpSelectCard.h"
@@ -38,8 +39,8 @@ void UAttackComponent::Init(UWorld* world)
 	World = world;
 
 	
-	auto temp = NewObject<UChakram>(GetOwner());
-	temp->SetAttackType(UBasic::AttackType::Chakram);
+	auto temp = NewObject<UDagger>(GetOwner());
+	temp->SetAttackType(UBasic::AttackType::Dagger);
 	temp->SetPassive(false);
 	temp->Init();
 	temp->SetPlayer(Cast<AUser>(GetOwner()));
