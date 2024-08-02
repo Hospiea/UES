@@ -8,6 +8,7 @@
 #include "System/GMB.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameObject/Projectiles/PChakramBody.h"
+#include "Components/Center.h"
 
 UChakram::UChakram(const FObjectInitializer& Init)
 	:Super(Init)
@@ -25,32 +26,13 @@ void UChakram::Init()
 
 void UChakram::BasicAttack(const FVector2D& Dir)
 {
-	FVector2D NewDir = Dir.GetSafeNormal();
-	NewDir *= 50.0f;
-	SpawnLocation = User->GetActorLocation() + FVector(NewDir.X, 0.0f, NewDir.Y);
-	FVector Base = FVector::ForwardVector;
-
-	FVector NormalizedSpawnLocation = FVector(NewDir.X, 0.0f, NewDir.Y).GetSafeNormal();
-	FVector NormalizedBase = Base.GetSafeNormal();
-	float CosineAngle = FVector::DotProduct(NormalizedSpawnLocation, NormalizedBase);
-	Angle = FMath::RadiansToDegrees(FMath::Acos(CosineAngle));
-
-
-	FVector CrossProduct = FVector::CrossProduct(NormalizedSpawnLocation, NormalizedBase);
-	if (CrossProduct.Y < 0)
-		Angle = -Angle;
-
-
 	SpawnLocation = User->GetActorLocation();
-	//APChakram* temp = World->SpawnActor<APChakram>(WeaponClass, SpawnLocation, FRotator(Angle - 90.0f, 0.0f, 0.0f));
-	APChakram* temp = Managers->GetPoolManager<APChakram>()->Get(WeaponClass, SpawnLocation, FRotator(Angle - 90.0f, 0.0f, 0.0f));
+	APChakram* temp = GetWorld()->SpawnActor<APChakram>(WeaponClass, SpawnLocation, FRotator(Angle - 90.0f, 0.0f, 0.0f));
 	FVector Vel = FVector(Dir.X, temp->GetActorLocation().Y, Dir.Y) - temp->GetActorLocation();
 	Vel.Normalize();
 	Vel *= Data.Speed;
 	temp->GetCharacterMovement()->Velocity = Vel * User->GetStats().ProjectileSpeed;
-	temp->Span(Data.Duration * User->GetStats().ProjectileDuration);
-	
-
+	temp->SetLifeSpan(Data.Duration * User->GetStats().ProjectileDuration);
 }
 
 void UChakram::SetWeaponData()

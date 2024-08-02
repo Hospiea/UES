@@ -25,7 +25,6 @@ void USword::Init()
 void USword::BasicAttack(const FVector2D& Dir)
 {
 	Super::BasicAttack(Dir);
-	//APSword* temp = World->SpawnActor<APSword>(WeaponClass, SpawnLocation, FRotator(Angle, 0.0f, 0.0f));
 	APSword* temp = Managers->GetPoolManager<APSword>()->Get(WeaponClass, SpawnLocation, FRotator(Angle, 0.0f, 0.0f));
 	temp->AttachToComponent(User->GetCenter(), FAttachmentTransformRules::KeepWorldTransform);
 	temp->Span(Data.Duration * User->GetStats().ProjectileDuration);

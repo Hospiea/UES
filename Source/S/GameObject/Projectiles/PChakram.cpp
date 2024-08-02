@@ -4,6 +4,7 @@
 #include "GameObject/Projectiles/PChakram.h"
 #include "Components/SceneComponent.h"
 #include "PChakramBody.h"
+#include "Components/CapsuleComponent.h"
 
 UChakram* APChakram::Basic;
 
@@ -16,6 +17,7 @@ APChakram::APChakram()
 void APChakram::BeginPlay()
 {
 	Super::BeginPlay();
+	GetCapsuleComponent()->SetCollisionProfileName(TEXT("Nothing"));
 	Body1 = GetWorld()->SpawnActor<APChakramBody>(ChakramBodyClass, GetActorLocation(), GetActorRotation());
 	Body2 = GetWorld()->SpawnActor<APChakramBody>(ChakramBodyClass, GetActorLocation(), GetActorRotation());
 

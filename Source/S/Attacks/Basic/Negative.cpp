@@ -23,18 +23,8 @@ void UNegative::Init()
 
 void UNegative::BasicAttack(const FVector2D& Dir)
 {
-	SpawnLocation = User->GetActorLocation();
-	APNegative* temp = Managers->GetPoolManager<APNegative>()->Get(WeaponClass, SpawnLocation, FRotator(Angle - 90.0f, 0.0f, 0.0f));
-	FVector Vel = FVector(Dir.X, temp->GetActorLocation().Y, Dir.Y) - temp->GetActorLocation();
-	Vel.Normalize();
-	Vel *= Data.Speed;
-	temp->GetCharacterMovement()->Velocity = Vel * User->GetStats().ProjectileSpeed;
-	temp->Span(Data.Duration * User->GetStats().ProjectileDuration);
-
-
-	float angle = FMath::Atan2(Vel.Z, Vel.X);
-	angle = FMath::RadiansToDegrees(angle);
-	temp->SetActorRotation(FRotator(angle - 90.0f, 0.0f, 0.0f));
+	SpawnLocation = FVector(Dir.X, 10.0f, Dir.Y);
+	APNegative* temp = Managers->GetPoolManager<APNegative>()->Get(WeaponClass, SpawnLocation, FRotator(0.0f, 0.0f, 0.0f));
 
 }
 

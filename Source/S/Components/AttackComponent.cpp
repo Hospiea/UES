@@ -37,13 +37,9 @@ void UAttackComponent::Init(UWorld* world)
 {
 	World = world;
 
-	/*Attacks.Add(NewObject<USword>());
-	Attacks[0]->SetWorld(world);
-	Attacks[0]->SetPlayer(Cast<AUser>(GetOwner()));
-	Attacks[0]->Init();*/
-
-	auto temp = NewObject<USword>(GetOwner());
-	temp->SetAttackType(UBasic::AttackType::Sword);
+	
+	auto temp = NewObject<UChakram>(GetOwner());
+	temp->SetAttackType(UBasic::AttackType::Chakram);
 	temp->SetPassive(false);
 	temp->Init();
 	temp->SetPlayer(Cast<AUser>(GetOwner()));

@@ -6,13 +6,13 @@
 #include "Attacks/Basic/Negative.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "PaperFlipbookComponent.h"
 
 UNegative* APNegative::Basic;
 
 APNegative::APNegative()
 {
 	str = TEXT("Negative");
-
 }
 
 void APNegative::BeginPlay()
@@ -41,8 +41,7 @@ void APNegative::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Oth
 		enemy->GetDamage(Basic->GetData().Damage);
 		enemy->Hold(GetActorLocation());
 	}
-
-	SetActive(false);
+	Span(0.9f);
 }
 
 void APNegative::OnEnable()
@@ -50,6 +49,7 @@ void APNegative::OnEnable()
 	Super::OnEnable();
 	GetCapsuleComponent()->SetCapsuleRadius(10.0f);
 	GetCapsuleComponent()->SetCapsuleHalfHeight(10.0f);
+	GetSprite()->PlayFromStart();
 }
 
 void APNegative::OnDisable()
