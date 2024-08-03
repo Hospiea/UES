@@ -11,6 +11,7 @@
 #include "Components/GridSlot.h"
 #include "Components/AttackComponent.h"
 #include "Attacks/Basic/Basic.h"
+#include "Kismet/GameplayStatics.h"
 
 UPause::UPause(const FObjectInitializer& Init)
 	:Super(Init)
@@ -94,13 +95,12 @@ void UPause::NativeConstruct()
 		}
 	}
 
-	for (int i = 0; i < Managers->Widget->GetWeaponImages().Num(); ++i)
+	for (int i = 0; i < Managers->Game->Player->GetAttackComponent()->GetAttackTypes().Num(); ++i)
 	{
 		WeaponCards[i]->SetRenderOpacity(1.0f);
 		WeaponCards[i]->SetImage(Managers->Widget->GetWeaponImages()[i]);
 		WeaponCards[i]->SetLevel(Managers->Game->Player->GetAttackComponent()->GetAttackTypes()[i]->GetLevel());
 	}
-
 }
 
 void UPause::NativeTick(const FGeometry& geo, float dt)
@@ -111,5 +111,6 @@ void UPause::NativeTick(const FGeometry& geo, float dt)
 
 void UPause::Resume()
 {
+	UGameplayStatics::SetGamePaused(GetWorld(), false);
 	Managers->Widget->RemovePopupWidget();
 }

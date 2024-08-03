@@ -21,26 +21,22 @@ AWidgetManager::AWidgetManager()
 
 void AWidgetManager::LevelUp()
 {
+	UGameplayStatics::SetGamePaused(GetWorld(), true);
 	PopupWidget = CreateWidget(GetWorld(), Widgets->Widgets["LevelUp"]);
 	PopupWidget->AddToViewport();
-	Managers->Controller->Pause();
-
-	
-	UGameplayStatics::SetGamePaused(GetWorld(), true);
 }
 
 void AWidgetManager::Pause()
 {
+	UGameplayStatics::SetGamePaused(GetWorld(), true);
 	PopupWidget = CreateWidget(GetWorld(), Widgets->Widgets["Pause"]);
 	PopupWidget->AddToViewport();
-	Managers->Controller->Pause();
+	
 
-	UGameplayStatics::SetGamePaused(GetWorld(), true);
 }
 
 void AWidgetManager::RemovePopupWidget()
 {
-	UGameplayStatics::SetGamePaused(GetWorld(), false);
 	PopupWidget->RemoveFromParent();
 	Managers->Controller->Resume();
 }
@@ -75,6 +71,5 @@ void AWidgetManager::BeginPlay()
 	CurrentWidget = CreateWidget(GetWorld(), Widgets->Widgets["Opening"]);
 	CurrentWidget->AddToViewport();
 
-	WeaponImages.Empty();
-	PassiveImages.Empty();
+	
 }

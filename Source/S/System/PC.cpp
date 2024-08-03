@@ -29,7 +29,8 @@ void APC::Pause()
 
 void APC::Resume()
 {
-	Subsystem->AddMappingContext(Context, 0);
+	//Subsystem->AddMappingContext(Context, 0);
+	User->GetCharacterMovement()->StopMovementImmediately();
 }
 
 void APC::BeginPlay()

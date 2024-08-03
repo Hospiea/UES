@@ -24,8 +24,12 @@
 #include "Attacks/Basic/Chakram.h"
 #include "Attacks/Basic/Negative.h"
 #include "Attacks/Basic/Dagger.h"
+#include "Attacks/Basic/Positive.h"
+#include "Attacks/Basic/FireBottle.h"
+#include "Attacks/Basic/Rifle.h"
 #include "LevelUpSkillSlot.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 bool ULevelUpSelectCard::bIsWeaponMax = false;
 bool ULevelUpSelectCard::bIsPassiveMax = false;
@@ -184,7 +188,7 @@ void ULevelUpSelectCard::NativeConstruct()
 FReply ULevelUpSelectCard::NativeOnMouseButtonDown(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
 {
 	FReply Reply = Super::NativeOnMouseButtonDown(InGeometry, InMouseEvent);
-	Managers->Widget->RemovePopupWidget();
+	UGameplayStatics::SetGamePaused(GetWorld(), false);
 
 	if (IsFirst)
 	{
@@ -213,7 +217,7 @@ FReply ULevelUpSelectCard::NativeOnMouseButtonDown(const FGeometry& InGeometry, 
 	}
 
 	
-
+	Managers->Widget->RemovePopupWidget();
 	return Reply;
 }
 
@@ -291,15 +295,23 @@ void ULevelUpSelectCard::WeaponFactory(const UBasic::AttackType& attack)
 		break;
 	}
 
-	case UBasic::AttackType::Armor:
+	case UBasic::AttackType::FireBottle:
 	{
-
+		auto temp = NewObject<UFireBottle>(User);
+		temp->SetAttackType(attack);
+		temp->SetPassive(false);
+		temp->GetLevel() = 0;
+		User->GetAttackComponent()->AddAttack(temp);
 		break;
 	}
 
-	case UBasic::AttackType::Helmet:
+	case UBasic::AttackType::Rifle:
 	{
-
+		auto temp = NewObject<URifle>(User);
+		temp->SetAttackType(attack);
+		temp->SetPassive(false);
+		temp->GetLevel() = 0;
+		User->GetAttackComponent()->AddAttack(temp);
 		break;
 	}
 
@@ -335,7 +347,11 @@ void ULevelUpSelectCard::WeaponFactory(const UBasic::AttackType& attack)
 
 	case UBasic::AttackType::Positive:
 	{
-
+		auto temp = NewObject<UPositive>(User);
+		temp->SetAttackType(attack);
+		temp->SetPassive(false);
+		temp->GetLevel() = 0;
+		User->GetAttackComponent()->AddAttack(temp);
 		break;
 	}
 	}

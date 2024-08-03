@@ -43,4 +43,8 @@ void AGMB::EndPlay(const EEndPlayReason::Type reason)
 	{
 		temp->GetLevel() = 0;
 	}
+
+	Managers->Widget->GetWeaponImages().Empty();
+	Managers->Widget->GetPassiveImages().Empty();
+
 }
