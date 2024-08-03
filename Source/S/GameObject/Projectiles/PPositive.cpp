@@ -1,34 +1,33 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "GameObject/Projectiles/PNegative.h"
-#include "GameObject/Enemy.h"
-#include "Attacks/Basic/Negative.h"
-#include "Components/CapsuleComponent.h"
-#include "GameFramework/CharacterMovementComponent.h"
+#include "GameObject/Projectiles/PPositive.h"
 #include "PaperFlipbookComponent.h"
+#include "Components/CapsuleComponent.h"
+#include "GameObject/Enemy.h"
+#include "Attacks/Basic/Positive.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
-UNegative* APNegative::Basic;
+UPositive* APPositive::Basic;
 
-APNegative::APNegative()
+APPositive::APPositive()
 {
-	str = TEXT("Negative");
+	str = TEXT("Positive");
 }
 
-void APNegative::BeginPlay()
+void APPositive::BeginPlay()
 {
 	Super::BeginPlay();
 	GetSprite()->SetRelativeLocation(FVector(0.0f, 0, 0.0f));
 	bIsFirst = true;
 }
 
-void APNegative::Tick(float dt)
+void APPositive::Tick(float dt)
 {
 	Super::Tick(dt);
-
 }
 
-void APNegative::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+void APPositive::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	Super::OnOverlap(OverlappedComponent, OtherActor, OtherComp, OtherBodyIndex, bFromSweep, SweepResult);
 	if (bIsFirst)
@@ -42,13 +41,14 @@ void APNegative::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Oth
 		FTimerHandle Handle;
 		GetWorld()->GetTimerManager().SetTimer(Handle, [enemy, this]() {
 			enemy->GetDamage(Basic->GetData().Damage);
-			enemy->Hold(GetActorLocation());
+			enemy->Split(GetActorLocation()); 
 			}, 0.5f, FTimerManagerTimerParameters());
+		
 	}
 	Span(0.9f);
 }
 
-void APNegative::OnEnable()
+void APPositive::OnEnable()
 {
 	Super::OnEnable();
 	GetCapsuleComponent()->SetCapsuleRadius(10.0f);
@@ -56,7 +56,7 @@ void APNegative::OnEnable()
 	GetSprite()->PlayFromStart();
 }
 
-void APNegative::OnDisable()
+void APPositive::OnDisable()
 {
 	Super::OnDisable();
 	GetCapsuleComponent()->SetCapsuleRadius(0.1f);

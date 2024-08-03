@@ -29,7 +29,6 @@ void AGMB::BeginPlay()
 {
 	Super::BeginPlay();
 	Managers->Game->KillCounts = 0;
-	//Managers->Sound->PlayBgm("Opening");
 	
 }
 

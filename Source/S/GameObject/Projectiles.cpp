@@ -40,7 +40,6 @@ void AProjectiles::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* O
 {
 	if (AEnemy* enemy = Cast<AEnemy>(OtherActor))
 	{
-		enemy->GetSprite()->SetSpriteColor(FLinearColor::Red);
 		int32 rand = FMath::Rand() % 3;
 		switch (rand)
 		{

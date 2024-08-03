@@ -51,6 +51,7 @@ void AEnemy::SetEnemyState(const EnemyState& state)
 void AEnemy::GetDamage(const float& value)
 {
 	Super::GetDamage(value);
+	GetSprite()->SetSpriteColor(FLinearColor::Red);
 	CurHp -= value;
 	if (CurHp <= 0.0f && GetEnemyState() != EnemyState::Dead)
 	{
@@ -99,6 +100,15 @@ void AEnemy::Hold(const FVector& pos)
 	GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &ThisClass::RecoverFromKnockBack, 1.0f);
 }
 
+void AEnemy::Split(const FVector& pos)
+{
+	if (GetEnemyState() == EnemyState::Dead)
+		return;
+	SetEnemyState(EnemyState::Split);
+	HoldPos = pos;
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &ThisClass::RecoverFromKnockBack, 1.0f);
+}
+
 void AEnemy::PreInitializeComponents()
 {
 	Super::PreInitializeComponents();
@@ -140,6 +150,13 @@ void AEnemy::Tick(float dt)
 	{
 		FVector Dir = HoldPos - GetActorLocation();
 		GetCharacterMovement()->Velocity = Dir * 3;
+		break;
+	}
+
+	case EnemyState::Split:
+	{
+		FVector Dir = GetActorLocation() - HoldPos;
+		GetCharacterMovement()->Velocity = FVector(1000 / Dir.X, 0.0f, 1000 / Dir.Z);
 		break;
 	}
 	}

@@ -42,6 +42,7 @@ public:
 		Attacking,
 		Dead,
 		Hold,
+		Split,
 	};
 	AEnemy();
 
@@ -51,6 +52,7 @@ public:
 	inline const bool& GetArmorDamaged() { return IsArmored; }
 	void SetArmorDamaged();
 	void Hold(const FVector& pos);
+	void Split(const FVector& pos);
 
 protected:
 	virtual void PreInitializeComponents() override;

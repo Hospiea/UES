@@ -4,26 +4,28 @@
 
 #include "CoreMinimal.h"
 #include "GameObject/Projectiles/RangeBase.h"
-#include "PAxe.generated.h"
+#include "PPositive.generated.h"
 
-class UBasic;
-class UAxe;
+class UPositive;
 
 UCLASS()
-class S_API APAxe : public ARangeBase
+class S_API APPositive : public ARangeBase
 {
 	GENERATED_BODY()
-public:
-	APAxe();
-	virtual void SetBasic(UBasic* basic) override;
 	
+public:
+	APPositive();
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float dt) override;
 	virtual void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) override;
 
+	virtual void OnEnable() override;
+	virtual void OnDisable() override;
+
 private:
-	
-	friend class UAxe;
-	static UAxe* Basic;
+	bool bIsFirst;
+	friend class UPositive;
+	static UPositive* Basic;
 };

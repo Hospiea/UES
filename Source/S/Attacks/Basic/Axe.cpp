@@ -34,7 +34,7 @@ void UAxe::BasicAttack(const FVector2D& Dir)
 	Vel.Normalize();
 	Vel *= Data.Speed;
 	temp->GetCharacterMovement()->Velocity = Vel * User->GetStats().ProjectileSpeed;
-	temp->Span(Data.Duration * User->GetStats().ProjectileDuration);
+	//temp->Span(Data.Duration * User->GetStats().ProjectileDuration);
 
 }
 

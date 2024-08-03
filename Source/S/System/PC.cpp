@@ -41,8 +41,6 @@ void APC::BeginPlay()
 	temp->SetPlayer(Cast<AUser>(GetPawn()));
 #pragma endregion
 	User = Cast<AUser>(GetPawn());
-
-
 	Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
 	Subsystem->AddMappingContext(Context, 0);
 
@@ -56,6 +54,8 @@ void APC::BeginPlay()
 	SetInputMode(FInputModeUIOnly());
 
 	Managers->Controller = this;
+
+	
 
 	Timer = 0.0f;
 }

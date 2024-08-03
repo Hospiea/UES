@@ -16,6 +16,8 @@
 #include "Attacks/Basic/Chakram.h"
 #include "Attacks/Basic/Negative.h"
 #include "Attacks/Basic/Dagger.h"
+#include "Attacks/Basic/Axe.h"
+#include "Attacks/Basic/Positive.h"
 #include "System/GMB.h"
 #include "Data/TextureAsset.h"
 #include "Widgets/LevelUpSelectCard.h"
@@ -69,8 +71,6 @@ void UAttackComponent::AddAttack(UBasic* attack)
 			bWeaponMax = true;
 		}
 	}
-
-	
 }
 
 
@@ -79,8 +79,8 @@ void UAttackComponent::BeginPlay()
 {
 	Super::BeginPlay();	
 
-	auto temp = NewObject<UDagger>(GetOwner());
-	temp->SetAttackType(UBasic::AttackType::Dagger);
+	auto temp = NewObject<UAxe>(GetOwner());
+	temp->SetAttackType(UBasic::AttackType::Axe);
 	auto index = static_cast<int32>(temp->GetAttackType());
 	temp->SetPassive(false);
 	temp->Init();
