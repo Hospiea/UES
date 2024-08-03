@@ -8,6 +8,7 @@
 
 class AEnemy;
 class UEnemyAsset;
+class AUser;
 
 UCLASS()
 class S_API ASpawner : public AActor
@@ -35,6 +36,9 @@ public:
 
 	UPROPERTY()
 	TArray<TObjectPtr<AEnemy>> EnemyPool;
+
+	UPROPERTY()
+	TObjectPtr<AUser> User;
 
 private:
 	template<typename T>
