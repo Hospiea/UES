@@ -30,6 +30,7 @@ ASoundManager::ASoundManager()
 		temp->SetupAttachment(RootComponent);
 		temp->bAutoActivate = false;
 		temp->VolumeMultiplier = 32.0f;
+		temp->bIsUISound = true;
 		
 		//
 		//temp->SetVolumeMultiplier(0.0f);
