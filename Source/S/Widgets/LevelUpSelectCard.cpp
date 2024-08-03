@@ -184,6 +184,8 @@ void ULevelUpSelectCard::NativeConstruct()
 FReply ULevelUpSelectCard::NativeOnMouseButtonDown(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
 {
 	FReply Reply = Super::NativeOnMouseButtonDown(InGeometry, InMouseEvent);
+	Managers->Widget->RemovePopupWidget();
+
 	if (IsFirst)
 	{
 		if (IsPassive)
@@ -212,7 +214,6 @@ FReply ULevelUpSelectCard::NativeOnMouseButtonDown(const FGeometry& InGeometry, 
 
 	
 
-	Managers->Widget->RemovePopupWidget();
 	return Reply;
 }
 

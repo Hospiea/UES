@@ -17,6 +17,7 @@ ASoundManager::ASoundManager()
 	BgmPlayer = CreateDefaultSubobject<UAudioComponent>(TEXT("BgmPlayer"));
 	BgmPlayer->bAutoActivate = false;
 	BgmPlayer->SetupAttachment(RootComponent);
+	BgmPlayer->bIsUISound = true;
 
 	//
 	//BgmPlayer->SetVolumeMultiplier(0.0f);
@@ -40,6 +41,7 @@ ASoundManager::ASoundManager()
 void ASoundManager::PlayBgm(const FString& str, const float& Volume, const float& FadeIn, const bool& bLoop)
 {
 	//UGameplayStatics::PlaySound2D(GetWorld(), Sounds->Bgm[str]);
+
 	BgmPlayer->Stop();
 	Sounds->Bgm[str]->bLooping = bLoop;
 	Sounds->Bgm[str]->Volume = Volume;
