@@ -26,7 +26,7 @@ void UDetectComponent::BeginPlay()
 
 	
 
-	DetectRange->SetBoxExtent(FVector(500.0f, 500.0f, 500.0f));
+	DetectRange->SetBoxExtent(FVector(200.0f, 200.0f, 200.0f));
 
 	DetectRange->OnComponentBeginOverlap.AddDynamic(this, &UDetectComponent::OnDetecting);
 	DetectRange->OnComponentEndOverlap.AddDynamic(this, &UDetectComponent::EndDetecting);
@@ -62,6 +62,29 @@ const TObjectPtr<AEnemy> UDetectComponent::GetClosetEnemy()
 		}
 	}
 	return Target;
+}
+
+const TObjectPtr<AEnemy> UDetectComponent::GetFarEnemy()
+{
+	if (Enemylist.Num() == 0) return nullptr;
+
+	AEnemy* Target = nullptr;
+
+	FVector MyLocation = GetOwner()->GetActorLocation();
+	float Max = -1.0f;
+
+	for (AEnemy* enemy : Enemylist)
+	{
+		FVector TargetLocation = enemy->GetActorLocation();
+		float Distance = FVector::Dist(MyLocation, TargetLocation);
+		if (Distance > Max)
+		{
+			Max = Distance;
+			Target = enemy;
+		}
+	}
+	return Target;
+
 }
 
 void UDetectComponent::OnDetecting(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)

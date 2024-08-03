@@ -5,6 +5,7 @@
 #include "GameObject/Projectiles/PPositive.h"
 #include "Data/WeaponAsset.h"
 #include "System/GMB.h"
+#include "Components/DetectComponent.h"
 
 UPositive::UPositive(const FObjectInitializer& Init)
 	:Super(Init)
@@ -22,7 +23,9 @@ void UPositive::Init()
 
 void UPositive::BasicAttack(const FVector2D& Dir)
 {
-	SpawnLocation = FVector(Dir.X, 10.0f, Dir.Y);
+	//SpawnLocation = FVector(Dir.X, 10.0f, Dir.Y);
+	FVector Loc = User->GetDetectComponent()->GetFarEnemy()->GetActorLocation();
+	SpawnLocation = FVector(Loc.X, 10.0f, Loc.Z);
 	APPositive* temp = Managers->GetPoolManager<APPositive>()->Get(WeaponClass, SpawnLocation, FRotator(0.0f, 0.0f, 0.0f));
 }
 

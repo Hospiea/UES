@@ -29,6 +29,7 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	const TObjectPtr<AEnemy> GetClosetEnemy();
+	const TObjectPtr<AEnemy> GetFarEnemy();
 	inline const int32& GetDetectedEnemyNumber() { return EnemyNumbers; }
 
 protected:
