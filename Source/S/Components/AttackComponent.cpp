@@ -79,10 +79,8 @@ void UAttackComponent::BeginPlay()
 {
 	Super::BeginPlay();	
 
-	
-
-	auto temp = NewObject<USword>(GetOwner());
-	temp->SetAttackType(UBasic::AttackType::Sword);
+	auto temp = NewObject<UDagger>(GetOwner());
+	temp->SetAttackType(UBasic::AttackType::Dagger);
 	auto index = static_cast<int32>(temp->GetAttackType());
 	temp->SetPassive(false);
 	temp->Init();
