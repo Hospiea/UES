@@ -5,6 +5,7 @@
 #include "System/GMB.h"
 #include "Attacks/Basic/Shoes.h"
 #include "GameObject/Enemy.h"
+#include "PaperFlipbookComponent.h"
 
 UShoes* APShoes::Basic;
 
@@ -35,6 +36,13 @@ void APShoes::Tick(float dt)
 	{
 		SetActive(false);
 	}
+}
+
+void APShoes::OnEnable()
+{
+	Super::OnEnable();
+	GetSprite()->SetPlaybackPosition(0, false);
+	Timer = 0.0f;
 }
 
 void APShoes::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
