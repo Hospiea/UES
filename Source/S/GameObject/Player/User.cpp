@@ -134,7 +134,7 @@ void AUser::GetDamaged(const float& value)
 	else
 	{
 		GetCapsuleComponent()->SetCollisionProfileName(TEXT("Nothing"));
-		GetSprite()->SetSpriteColor(FLinearColor(1, 1, 1, 0.5f));
+		GetSprite()->SetSpriteColor(FLinearColor(0.1, 0.1, 0.1, 0.5f));
 		FTimerHandle Handle;
 		GetWorld()->GetTimerManager().SetTimer(Handle, [this]() {GetDamagedHelper(); }, 0.5f, FTimerManagerTimerParameters());
 	}
