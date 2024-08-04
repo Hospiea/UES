@@ -47,15 +47,10 @@ void ASpawner::Tick(float DeltaTime)
 		else
 			Pos = -250.0f;
 
-
-
-
-		//auto temp = Get<AEnemy1>(EnemyClasses->Enemies["Enemy1"], FVector(Pos, 10.0f, -Pos), FRotator::ZeroRotator);
-		//auto temp2 = Get<AEnemy2>(EnemyClasses->Enemies["Enemy2"], FVector(-Pos, 10.0f, -Pos), FRotator::ZeroRotator);
 		
 		auto temp = Managers->GetPoolManager<AEnemy1>()->Get(EnemyClasses->Enemies["Enemy1"], FVector(Pos+User->GetActorLocation().X, 10.0f, -Pos+User->GetActorLocation().Z));
-		auto temp2 = Managers->GetPoolManager<AEnemy2>()->Get(EnemyClasses->Enemies["Enemy2"], FVector(-Pos + User->GetActorLocation().X, 10.0f, Pos + User->GetActorLocation().Z));
-		auto temp3= Managers->GetPoolManager<AEnemy3>()->Get(EnemyClasses->Enemies["Enemy3"], FVector(-Pos + User->GetActorLocation().X, 10.0f, -Pos + User->GetActorLocation().Z));
+		//auto temp2 = Managers->GetPoolManager<AEnemy2>()->Get(EnemyClasses->Enemies["Enemy2"], FVector(-Pos + User->GetActorLocation().X, 10.0f, Pos + User->GetActorLocation().Z));
+		//auto temp3= Managers->GetPoolManager<AEnemy3>()->Get(EnemyClasses->Enemies["Enemy3"], FVector(-Pos + User->GetActorLocation().X, 10.0f, -Pos + User->GetActorLocation().Z));
 	}
 }
 

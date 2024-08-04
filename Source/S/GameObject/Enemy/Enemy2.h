@@ -15,6 +15,8 @@ class S_API AEnemy2 : public AEnemy
 	
 public:
 	AEnemy2();
+	virtual const FEnemyStat& GetStat() override { return Stats; };
+
 
 protected:
 	virtual void BeginPlay() override;

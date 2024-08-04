@@ -58,6 +58,13 @@ protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float dt) override;
 	void LevelUp();
+	void GetDamaged(const float& value);
+	void GetDamagedHelper();
+
+	UFUNCTION()
+	void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+	
 
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UCenter> Center;

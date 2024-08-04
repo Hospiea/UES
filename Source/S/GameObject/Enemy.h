@@ -13,6 +13,7 @@ struct FEnemyStat
 	GENERATED_BODY()
 	float Speed;
 	float MaxHp;
+	float Damage;
 };
 
 
@@ -50,6 +51,7 @@ public:
 	void SetEnemyState(const EnemyState& state);
 	virtual void GetDamage(const float& value) override;
 	inline const bool& GetArmorDamaged() { return IsArmored; }
+	virtual const FEnemyStat& GetStat() { return Dummy; }
 	void SetArmorDamaged();
 	void Hold(const FVector& pos);
 	void Split(const FVector& pos);
@@ -64,6 +66,7 @@ protected:
 	FTimerHandle TimerHandle;
 
 	EnemyState State;
+	FEnemyStat Dummy;
 
 	UPROPERTY()
 	TObjectPtr<AUser> Target;
