@@ -18,6 +18,7 @@
 #include "System/PC.h"
 #include "Components/AnimationComponent.h"
 #include "Components/AttackComponent.h"
+#include "GameObject/EnemyProjectiles.h"
 #include "Obtainer.h"
 
 
@@ -94,6 +95,8 @@ void AUser::BeginPlay()
 	AttackComponent->Init(GetWorld());
 
 	Obtainer = GetWorld()->SpawnActor<AObtainer>();
+
+	GetCapsuleComponent()->OnComponentBeginOverlap.AddDynamic(this, &ThisClass::OnOverlap);
 	
 	CurHp = Stats.MaxHp;
 	Level = 0;
@@ -118,4 +121,40 @@ void AUser::Tick(float dt)
 void AUser::LevelUp()
 {
 	Managers->Widget->LevelUp();
+}
+
+void AUser::GetDamaged(const float& value)
+{
+	CurHp -= value;
+	if (CurHp <= 0.0f)
+	{
+
+	}
+
+	else
+	{
+		GetCapsuleComponent()->SetCollisionProfileName(TEXT("Nothing"));
+		GetSprite()->SetSpriteColor(FLinearColor(1, 1, 1, 0.5f));
+		FTimerHandle Handle;
+		GetWorld()->GetTimerManager().SetTimer(Handle, [this]() {GetDamagedHelper(); }, 0.5f, FTimerManagerTimerParameters());
+	}
+}
+
+void AUser::GetDamagedHelper()
+{
+	GetCapsuleComponent()->SetCollisionProfileName(TEXT("Player"));
+	GetSprite()->SetSpriteColor(FLinearColor::White);
+}
+
+void AUser::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if (AEnemy* enemy = Cast<AEnemy>(OtherActor))
+	{
+		GetDamaged(enemy->GetStat().Damage);
+	}
+
+	else if (AEnemyProjectiles* penem = Cast<AEnemyProjectiles>(OtherActor))
+	{
+		GetDamaged(5.0f);
+	}
 }
