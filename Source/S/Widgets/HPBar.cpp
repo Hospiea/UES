@@ -2,4 +2,9 @@
 
 
 #include "Widgets/HPBar.h"
+#include "Components/ProgressBar.h"
 
+void UHPBar::SetValue(const float& value)
+{
+	HP_Bar->SetPercent(value);
+}

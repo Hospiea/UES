@@ -19,6 +19,7 @@
 #include "Components/AnimationComponent.h"
 #include "Components/AttackComponent.h"
 #include "GameObject/EnemyProjectiles.h"
+#include "Widgets/HPBar.h"
 #include "Obtainer.h"
 
 
@@ -28,18 +29,16 @@ AUser::AUser()
 	Center->SetupAttachment(RootComponent);
 	GetCapsuleComponent()->SetCollisionProfileName(TEXT("Player"));
 
-	HPBar = CreateDefaultSubobject<USWidgetComponent>(TEXT("HPBar"));
-	HPBar->SetupAttachment(RootComponent);
+	HpBar = CreateDefaultSubobject<USWidgetComponent>(TEXT("HpBar"));
+	HpBar->SetupAttachment(RootComponent);
 
 	DetectComponent = CreateDefaultSubobject<UDetectComponent>(TEXT("DetectComponent"));
 	DetectComponent->SetupAttachment(RootComponent);
 
 	AttackComponent = CreateDefaultSubobject<UAttackComponent>(TEXT("AttackComponent"));
-
 	AnimationComponent = CreateDefaultSubobject<UAnimationComponent>(TEXT("AnimationComponent"));
 
 	CollisionProfileName = TEXT("Player");
-
 }
 
 
@@ -126,6 +125,7 @@ void AUser::LevelUp()
 void AUser::GetDamaged(const float& value)
 {
 	CurHp -= value;
+	Cast<UHPBar>(HpBar->GetWidget())->SetValue(CurHp / Stats.MaxHp);
 	if (CurHp <= 0.0f)
 	{
 

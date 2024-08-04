@@ -23,6 +23,7 @@ void AEnemy1::BeginPlay()
 	Super::BeginPlay();
 	Stats.Speed = Managers->Data->EnemyStats->FindRow<FEnemyStats>(TEXT("1"), TEXT(""))->Speed;
 	Stats.MaxHp = Managers->Data->EnemyStats->FindRow<FEnemyStats>(TEXT("1"), TEXT(""))->MaxHp;
+	Stats.Damage = Managers->Data->EnemyStats->FindRow<FEnemyStats>(TEXT("1"), TEXT(""))->Damage;
 	CurHp = Stats.MaxHp;
 	bIsInitted = true;
 }

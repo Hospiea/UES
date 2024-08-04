@@ -30,6 +30,8 @@ struct S_API FEnemyStats : public FTableRowBase
 	UPROPERTY(EditAnywhere)
 	float MaxHp;
 
+	UPROPERTY(EditAnywhere)
+	float Damage;
 
 };
 
