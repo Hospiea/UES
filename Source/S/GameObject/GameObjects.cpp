@@ -27,6 +27,7 @@ void AGameObjects::OnEnable()
 {
 	GetCapsuleComponent()->SetCollisionProfileName(CollisionProfileName);
 	GetSprite()->SetSpriteColor(FLinearColor::White);
+	GetSprite()->SetVisibility(true);
 }
 
 void AGameObjects::OnDisable()

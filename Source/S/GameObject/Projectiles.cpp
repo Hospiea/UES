@@ -7,6 +7,7 @@
 #include "PaperFlipbookComponent.h"
 #include "System/GMB.h"
 #include "EnemyProjectiles.h"
+#include "HitEffect.h"
 #include "System/AIC.h"
 #include "Attacks/Basic/Basic.h"
 
@@ -16,6 +17,10 @@ AProjectiles::AProjectiles()
 	GetCapsuleComponent()->SetCollisionProfileName(TEXT("Projectile"));
 	Deletable = false;
 	CollisionProfileName = TEXT("Projectile");
+
+	static ConstructorHelpers::FClassFinder<AHitEffect> hiteffect(TEXT("/Script/Engine.Blueprint'/Game/Assets/Blueprints/GameObjects/Effect/BP_HitEffect.BP_HitEffect_C'"));
+	HitEffect = hiteffect.Class;
+
 }
 
 void AProjectiles::SetBasic(UBasic* basic)
@@ -55,6 +60,9 @@ void AProjectiles::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* O
 			Managers->Sound->PlaySfx(TEXT("Hit3"));
 			break;
 		}
+
+		Managers->GetPoolManager<AHitEffect>()->Get(HitEffect, GetActorLocation());
+		
 		
 	}
 

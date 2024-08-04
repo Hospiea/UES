@@ -19,6 +19,7 @@ struct FProjectileData
 	float Timer;
 };
 
+class AHitEffect;
 class UBasic;
 
 UCLASS()
@@ -35,6 +36,9 @@ protected:
 
 	UFUNCTION()
 	virtual void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+	UPROPERTY()
+	TSubclassOf<AHitEffect> HitEffect;
 
 	bool Deletable;
 	FName str;
