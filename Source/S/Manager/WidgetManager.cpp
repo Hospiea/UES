@@ -39,6 +39,7 @@ void AWidgetManager::RemovePopupWidget()
 {
 	PopupWidget->RemoveFromParent();
 	Managers->Controller->Resume();
+	UGameplayStatics::SetGamePaused(GetWorld(), false);
 }
 
 void AWidgetManager::EndOpening()
