@@ -20,7 +20,7 @@ ASoundManager::ASoundManager()
 	BgmPlayer->bIsUISound = true;
 
 	//
-	//BgmPlayer->SetVolumeMultiplier(0.0f);
+	BgmPlayer->SetVolumeMultiplier(0.0f);
 
 	for (int i = 0; i < 32; ++i)
 	{
@@ -33,7 +33,7 @@ ASoundManager::ASoundManager()
 		temp->bIsUISound = true;
 		
 		//
-		//temp->SetVolumeMultiplier(0.0f);
+		temp->SetVolumeMultiplier(0.0f);
 	}
 
 	
@@ -55,8 +55,8 @@ void ASoundManager::PlayBgm(const FString& str, const float& Volume, const float
 void ASoundManager::PlaySfx(const FString& str)
 {
 	float total = SfxPlayer.Num();
-	float volume = 32.0f / total;
-	//float volume = 0.0f;
+	//float volume = 32.0f / total;
+	float volume = 0.0f;
 	bool bIsSet = false;
 
 	for (auto it = SfxPlayer.begin(); it != SfxPlayer.end(); ++it)

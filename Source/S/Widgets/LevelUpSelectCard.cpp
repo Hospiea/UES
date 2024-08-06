@@ -30,11 +30,14 @@
 #include "LevelUpSkillSlot.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Components/TextBlock.h"
 
 bool ULevelUpSelectCard::bIsWeaponMax = false;
 bool ULevelUpSelectCard::bIsPassiveMax = false;
 TArray<int32> ULevelUpSelectCard::WeaponIndexes;
 TArray<int32> ULevelUpSelectCard::PassiveIndexes;
+TArray<FText> ULevelUpSelectCard::AttackNames;
+TArray<FText> ULevelUpSelectCard::PassiveNames;
 
 ULevelUpSelectCard::ULevelUpSelectCard(const FObjectInitializer& Init)
 	:
@@ -67,33 +70,50 @@ ULevelUpSelectCard::ULevelUpSelectCard(const FObjectInitializer& Init)
 void ULevelUpSelectCard::NativeConstruct()
 {
 	Super::NativeConstruct();
+	if (AttackNames.Num() == 0)
+	{
+		AttackNames.Push(FText::FromString(TEXT("Sword")));
+		AttackNames.Push(FText::FromString(TEXT("Axe")));
+		AttackNames.Push(FText::FromString(TEXT("Hammer")));
+		AttackNames.Push(FText::FromString(TEXT("Spear")));
+		AttackNames.Push(FText::FromString(TEXT("Staff")));
+		AttackNames.Push(FText::FromString(TEXT("Dagger")));
+		AttackNames.Push(FText::FromString(TEXT("Shield")));
+		AttackNames.Push(FText::FromString(TEXT("FireBottle")));
+		AttackNames.Push(FText::FromString(TEXT("Rifle")));
+		AttackNames.Push(FText::FromString(TEXT("Chakram")));
+		AttackNames.Push(FText::FromString(TEXT("Shoes")));
+		AttackNames.Push(FText::FromString(TEXT("Negative")));
+		AttackNames.Push(FText::FromString(TEXT("Positive")));
+
+
+		PassiveNames.Push(FText::FromString(TEXT("Fire")));
+		PassiveNames.Push(FText::FromString(TEXT("Wind")));
+		PassiveNames.Push(FText::FromString(TEXT("Will")));
+		PassiveNames.Push(FText::FromString(TEXT("Magnetic")));
+		PassiveNames.Push(FText::FromString(TEXT("Life")));
+		PassiveNames.Push(FText::FromString(TEXT("Iron")));
+		PassiveNames.Push(FText::FromString(TEXT("Time")));
+		PassiveNames.Push(FText::FromString(TEXT("Circular")));
+		PassiveNames.Push(FText::FromString(TEXT("Thunder")));
+		PassiveNames.Push(FText::FromString(TEXT("Rock")));
+		PassiveNames.Push(FText::FromString(TEXT("Belief")));
+		PassiveNames.Push(FText::FromString(TEXT("Experience")));
+		PassiveNames.Push(FText::FromString(TEXT("Rich")));
+	}
+
 	Level = -1;
 	IsFirst = false;
 	User = Managers->Game->Player;
 
-	RandIndex = FMath::Rand() % 13;
+	//RandIndex = FMath::Rand() % 13;
+	RandIndex = 6;
 	//IsPassive = FMath::RandBool();
 	IsPassive = false;
 
 
-
 	WeaponType = static_cast<UBasic::AttackType>(RandIndex);
 	PassiveType = static_cast<UBasic::PassiveType>(RandIndex);
-
-
-
-	if (bIsWeaponMax && !IsPassive)
-	{
-		RandIndex = FMath::Rand() % 6;
-		WeaponType = static_cast<UBasic::AttackType>(WeaponIndexes[RandIndex]);
-	}
-
-	else if (bIsPassiveMax && IsPassive)
-	{
-		RandIndex = FMath::Rand() % 6;
-		PassiveType = static_cast<UBasic::PassiveType>(PassiveIndexes[RandIndex]);
-	}
-
 
 
 	if (!IsPassive)
@@ -105,6 +125,7 @@ void ULevelUpSelectCard::NativeConstruct()
 				Level = temp->GetLevel();
 				Item_Image->SetBrushFromSoftTexture(Textures->MainWeapons[static_cast<int32>(WeaponType)]);
 				Attack = temp;
+				Skill_Name->SetText(AttackNames[static_cast<int32>(WeaponType)]);
 			}
 		}
 	}
@@ -117,6 +138,7 @@ void ULevelUpSelectCard::NativeConstruct()
 				Level = temp->GetLevel();
 				Item_Image->SetBrushFromSoftTexture(Textures->Passives[static_cast<int32>(PassiveType)]);
 				Attack = temp;
+				Skill_Name->SetText(PassiveNames[static_cast<int32>(PassiveType)]);
 			}
 		}
 	}
@@ -129,20 +151,34 @@ void ULevelUpSelectCard::NativeConstruct()
 		IsFirst = true;
 		if (!IsPassive)
 		{
-			Item_Image->SetBrushFromSoftTexture(Textures->MainWeapons[RandIndex]);
-			WeaponType = static_cast<UBasic::AttackType>(RandIndex);
+			Item_Image->SetBrushFromSoftTexture(Textures->MainWeapons[static_cast<int32>(WeaponType)]);
+			Skill_Name->SetText(AttackNames[static_cast<int32>(WeaponType)]);
 		}
 
 		else if(IsPassive)
 		{
-			Item_Image->SetBrushFromSoftTexture(Textures->Passives[RandIndex]);
-			PassiveType = static_cast<UBasic::PassiveType>(RandIndex);
+			Item_Image->SetBrushFromSoftTexture(Textures->Passives[static_cast<int32>(PassiveType)]);
+			Skill_Name->SetText(PassiveNames[static_cast<int32>(PassiveType)]);
 		}
 	}
 
 
 
+	if (bIsWeaponMax && !IsPassive)
+	{
+		RandIndex = FMath::Rand() % 6;
+		WeaponType = static_cast<UBasic::AttackType>(WeaponIndexes[RandIndex]);
+		Skill_Name->SetText(AttackNames[RandIndex]);
 
+	}
+
+	else if (bIsPassiveMax && IsPassive)
+	{
+		RandIndex = FMath::Rand() % 6;
+		PassiveType = static_cast<UBasic::PassiveType>(PassiveIndexes[RandIndex]);
+		Skill_Name->SetText(PassiveNames[RandIndex]);
+
+	}
 
 
 
@@ -182,7 +218,7 @@ void ULevelUpSelectCard::NativeConstruct()
 	}
 #pragma endregion
 
-
+	UGameplayStatics::SetGamePaused(GetWorld(), true);
 }
 
 FReply ULevelUpSelectCard::NativeOnMouseButtonDown(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
@@ -190,13 +226,15 @@ FReply ULevelUpSelectCard::NativeOnMouseButtonDown(const FGeometry& InGeometry, 
 	FReply Reply = Super::NativeOnMouseButtonDown(InGeometry, InMouseEvent);
 	UGameplayStatics::SetGamePaused(GetWorld(), false);
 
+	GEngine->AddOnScreenDebugMessage(0, 1.0f, FColor::Cyan, FString::Printf(TEXT("%d"), RandIndex));
+
 	if (IsFirst)
 	{
 		if (IsPassive)
 		{
 			PassiveFactory(PassiveType);
-			Managers->Widget->GetPassiveImages().Add(Textures->Passives[RandIndex]);
-			PassiveIndexes.Add(RandIndex);
+			Managers->Widget->GetPassiveImages().Push(Textures->Passives[RandIndex]);
+			PassiveIndexes.Push(RandIndex);
 			if (PassiveIndexes.Num() == 6)
 				bIsPassiveMax = true;
 		}
@@ -204,8 +242,8 @@ FReply ULevelUpSelectCard::NativeOnMouseButtonDown(const FGeometry& InGeometry, 
 		else if(!IsPassive)
 		{
 			WeaponFactory(WeaponType);
-			Managers->Widget->GetWeaponImages().Add(Textures->MainWeapons[RandIndex]);
-			WeaponIndexes.Add(RandIndex);
+			Managers->Widget->GetWeaponImages().Push(Textures->MainWeapons[RandIndex]);
+			WeaponIndexes.Push(RandIndex);
 			if (WeaponIndexes.Num() == 6)
 				bIsWeaponMax = true;
 		}

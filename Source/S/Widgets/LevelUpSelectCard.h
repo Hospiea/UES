@@ -37,7 +37,9 @@ protected:
 
 	UPROPERTY(meta=(BindWidget))
 	TObjectPtr<UTextBlock> Skill_Name;
-	
+
+	static TArray<FText> AttackNames;
+	static TArray<FText> PassiveNames;	
 	
 	virtual FReply NativeOnMouseButtonDown(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent) override;
 	

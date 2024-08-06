@@ -6,9 +6,8 @@
 #include "Attacks/Basic/Basic.h"
 #include "Sheild.generated.h"
 
-/**
- * 
- */
+class APSheild;
+
 UCLASS()
 class S_API USheild : public UBasic
 {
@@ -20,6 +19,11 @@ public:
 	virtual void BasicAttack(const FVector2D& Dir) override;
 	virtual void SetWeaponData() override;
 
+	UPROPERTY()
+	TArray<TObjectPtr<APSheild>> Shields;
+
+	UPROPERTY()
+	uint8 counter;
 
 private:
 	friend class APSheild;

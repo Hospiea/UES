@@ -21,7 +21,7 @@ AWidgetManager::AWidgetManager()
 
 void AWidgetManager::LevelUp()
 {
-	UGameplayStatics::SetGamePaused(GetWorld(), true);
+	//UGameplayStatics::SetGamePaused(GetWorld(), true);
 	PopupWidget = CreateWidget(GetWorld(), Widgets->Widgets["LevelUp"]);
 	PopupWidget->AddToViewport();
 }
