@@ -40,11 +40,17 @@ void UDagger::BasicAttack(const FVector2D& Dir)
 
 void UDagger::SetWeaponData()
 {
-	FName str = TEXT("Dagger");
+	str = TEXT("Dagger");
 
 	Data.Damage = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Damage;
 	Data.Rate = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Rate;
 	Data.Range = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Range;
 	Data.Duration = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Duration;
 	Data.Speed = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Speed;
+}
+
+void UDagger::LevelUp()
+{
+	Super::LevelUp();
+	Data.Damage = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Damage * ((Level * 0.15) + 1);
 }

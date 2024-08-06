@@ -32,7 +32,7 @@ void USword::BasicAttack(const FVector2D& Dir)
 
 void USword::SetWeaponData()
 {
-	FName str = TEXT("Sword");
+	str = TEXT("Sword");
 
 
 	Data.Damage = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Damage;

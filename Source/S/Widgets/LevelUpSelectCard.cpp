@@ -107,7 +107,7 @@ void ULevelUpSelectCard::NativeConstruct()
 	User = Managers->Game->Player;
 
 	//RandIndex = FMath::Rand() % 13;
-	RandIndex = 6;
+	RandIndex = 5;
 	//IsPassive = FMath::RandBool();
 	IsPassive = false;
 
@@ -233,8 +233,8 @@ FReply ULevelUpSelectCard::NativeOnMouseButtonDown(const FGeometry& InGeometry, 
 		if (IsPassive)
 		{
 			PassiveFactory(PassiveType);
-			Managers->Widget->GetPassiveImages().Push(Textures->Passives[RandIndex]);
-			PassiveIndexes.Push(RandIndex);
+			Managers->Widget->GetPassiveImages().Push(Textures->Passives[static_cast<int32>(PassiveType)]);
+			PassiveIndexes.Push(static_cast<int32>(PassiveType));
 			if (PassiveIndexes.Num() == 6)
 				bIsPassiveMax = true;
 		}
@@ -242,8 +242,8 @@ FReply ULevelUpSelectCard::NativeOnMouseButtonDown(const FGeometry& InGeometry, 
 		else if(!IsPassive)
 		{
 			WeaponFactory(WeaponType);
-			Managers->Widget->GetWeaponImages().Push(Textures->MainWeapons[RandIndex]);
-			WeaponIndexes.Push(RandIndex);
+			Managers->Widget->GetWeaponImages().Push(Textures->MainWeapons[static_cast<int32>(WeaponType)]);
+			WeaponIndexes.Push(static_cast<int32>(WeaponType));
 			if (WeaponIndexes.Num() == 6)
 				bIsWeaponMax = true;
 		}

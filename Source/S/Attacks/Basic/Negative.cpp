@@ -30,7 +30,7 @@ void UNegative::BasicAttack(const FVector2D& Dir)
 void UNegative::SetWeaponData()
 {
 	Super::SetWeaponData();
-	FName str = TEXT("Negative");
+	str = TEXT("Negative");
 
 	Data.Damage = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Damage;
 	Data.Rate = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Rate;

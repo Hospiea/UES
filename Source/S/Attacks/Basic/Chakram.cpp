@@ -37,7 +37,7 @@ void UChakram::BasicAttack(const FVector2D& Dir)
 
 void UChakram::SetWeaponData()
 {
-	FName str = TEXT("Chakram");
+	str = TEXT("Chakram");
 
 
 	Data.Damage = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Damage;

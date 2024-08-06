@@ -31,7 +31,7 @@ void UStaff::BasicAttack(const FVector2D& Dir)
 
 void UStaff::SetWeaponData()
 {
-	FName str = TEXT("Thunder");
+	str = TEXT("Thunder");
 
 	Data.Damage = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Damage;
 	Data.Rate = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Rate;

@@ -98,6 +98,8 @@ protected:
 	UPROPERTY()
 	TObjectPtr<UWeaponAsset> Weapons;
 
+	FName str;
+
 	UPROPERTY()
 	TSubclassOf<AProjectiles> WeaponClass;
 

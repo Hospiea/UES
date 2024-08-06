@@ -32,7 +32,7 @@ void UShoes::SetWeaponData()
 {
 	Super::SetWeaponData();
 
-	FName str = TEXT("Shoes");
+	str = TEXT("Shoes");
 
 	Data.Damage = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Damage;
 	Data.Rate = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Rate;

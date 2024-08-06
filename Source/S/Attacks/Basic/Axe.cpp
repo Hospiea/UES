@@ -40,7 +40,7 @@ void UAxe::BasicAttack(const FVector2D& Dir)
 
 void UAxe::SetWeaponData()
 {
-	FName str = TEXT("Axe");
+	str = TEXT("Axe");
 
 	Data.Damage = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Damage;
 	Data.Rate = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Rate;

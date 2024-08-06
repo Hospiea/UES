@@ -41,7 +41,7 @@ void USpear::BasicAttack(const FVector2D& Dir)
 
 void USpear::SetWeaponData()
 {
-	FName str = TEXT("Spear");
+	str = TEXT("Spear");
 
 
 	Data.Damage = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Damage;

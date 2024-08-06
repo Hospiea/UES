@@ -30,7 +30,7 @@ void UHammer::BasicAttack(const FVector2D& Dir)
 void UHammer::SetWeaponData()
 {
 	Super::SetWeaponData();
-	FName str = TEXT("Hammer");
+	str = TEXT("Hammer");
 
 
 	Data.Damage = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Damage;

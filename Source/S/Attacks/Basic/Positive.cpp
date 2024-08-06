@@ -32,7 +32,7 @@ void UPositive::BasicAttack(const FVector2D& Dir)
 void UPositive::SetWeaponData()
 {
 	Super::SetWeaponData();
-	FName str = TEXT("Positive");
+	str = TEXT("Positive");
 
 	Data.Damage = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Damage;
 	Data.Rate = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Rate;

@@ -28,16 +28,17 @@ AEnemy::AEnemy()
 
 void AEnemy::SetEnemyState(const EnemyState& state)
 {
-	State = state;
-
 	if (state == EnemyState::KnockBacked)
 	{
+		if (State == state)
+			return;
 		FVector dir = GetActorLocation() - Managers->Game->Player->GetActorLocation();
 		dir.Y = 0.0f;
 		dir.Normalize();
 		dir *= 200.0f;
 		GetCharacterMovement()->Velocity = dir;
-		GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &ThisClass::RecoverColor, 0.05f);
+		FTimerHandle Handle;
+		GetWorld()->GetTimerManager().SetTimer(Handle, this, &ThisClass::RecoverFromKnockBack, 0.05f);
 
 	}
 	
@@ -46,6 +47,8 @@ void AEnemy::SetEnemyState(const EnemyState& state)
 		GetCharacterMovement()->Velocity = FVector::ZeroVector;
 		GetSprite()->SetSpriteColor(FLinearColor::White);
 	}
+
+	State = state;
 }
 
 void AEnemy::GetDamage(const float& value)
@@ -56,8 +59,6 @@ void AEnemy::GetDamage(const float& value)
 	if (CurHp <= 0.0f && GetEnemyState() != EnemyState::Dead)
 	{
 		++Managers->Game->KillCounts;
-		GetWorld()->GetTimerManager().ClearTimer(TimerHandle);
-
 		GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &AEnemy::SetActiveHelper, 1.0f);
 		GetCapsuleComponent()->SetCollisionProfileName(TEXT("Dead"));
 		SetEnemyState(EnemyState::Dead);
@@ -69,12 +70,6 @@ void AEnemy::GetDamage(const float& value)
 	else if (GetEnemyState() == EnemyState::Dead)
 	{
 
-	}
-
-	else if (GetEnemyState() == EnemyState::KnockBacked)
-	{
-		GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &ThisClass::RecoverFromKnockBack, 0.05f);
-		SetEnemyState(EnemyState::Recovering);
 	}
 
 	else

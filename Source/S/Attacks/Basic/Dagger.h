@@ -19,7 +19,7 @@ public:
 	virtual void Init() override;
 	virtual void BasicAttack(const FVector2D& Dir) override;
 	virtual void SetWeaponData() override;
-
+	virtual void LevelUp() override;
 
 private:
 	friend class APDagger;
