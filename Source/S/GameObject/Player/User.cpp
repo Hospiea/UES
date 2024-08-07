@@ -21,6 +21,7 @@
 #include "GameObject/EnemyProjectiles.h"
 #include "Widgets/HPBar.h"
 #include "Obtainer.h"
+#include "Kismet/GameplayStatics.h"
 
 
 AUser::AUser()
@@ -42,6 +43,16 @@ AUser::AUser()
 }
 
 
+
+void AUser::StartGame()
+{
+	SetActorLocation(FVector(0.0f, 10.0f, 0.0f));
+	GetCharacterMovement()->Velocity = FVector::ZeroVector;
+	CurHp = Stats.MaxHp;
+	Level = 0;
+	CurExp = 0;
+	Cast<UHPBar>(HpBar->GetWidget())->SetValue(CurHp / Stats.MaxHp);
+}
 
 void AUser::GetExp(const float& value)
 {
@@ -128,7 +139,8 @@ void AUser::GetDamaged(const float& value)
 	Cast<UHPBar>(HpBar->GetWidget())->SetValue(CurHp / Stats.MaxHp);
 	if (CurHp <= 0.0f)
 	{
-
+		UGameplayStatics::SetGamePaused(GetWorld(), true);
+		Managers->Widget->GameOver();
 	}
 
 	else

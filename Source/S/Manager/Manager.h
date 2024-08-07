@@ -29,19 +29,14 @@ public:
 	
 	GameManager* Game;
 	
-	inline void PoolClear() { PoolMap.Empty(); }
-
-	//template<typename T>
-	//PoolManager<T>* GetPoolManager()
-	//{
-	//	if (Pool == nullptr)
-	//	{
-	//		Pool = MakeShared<PoolManager<T>>();
-	//		static_cast<PoolManager<T>*>(Pool.Get())->SetWorld(World);
-	//	}
-	//		
-	//	return static_cast<PoolManager<T>*>(Pool.Get());
-	//}
+	inline void PoolClear() 
+	{ 
+		for (auto& temp : PoolMap)
+		{
+			temp.Value->ExecuteClear();
+		}
+		PoolMap.Empty(); 
+	}
 
 	template<typename T>
 	PoolManager<T>* GetPoolManager()
@@ -76,6 +71,5 @@ protected:
 	UWorld* World;
 
 private:
-	TMap<UClass*, TSharedPtr<void>> PoolMap;
-
+	TMap<UClass*, TSharedPtr<IPoolManager>> PoolMap;
 };

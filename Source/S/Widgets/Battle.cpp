@@ -27,6 +27,7 @@ void UBattle::NativeConstruct()
 	EXP_Gauge->SetPercent(0.0f);
 
 	Pause_Game->OnClicked.AddDynamic(this, &UBattle::PauseButton);
+	RemainTime = 420.0f;
 }
 
 void UBattle::NativeTick(const FGeometry& geo, float dt)
@@ -35,7 +36,12 @@ void UBattle::NativeTick(const FGeometry& geo, float dt)
 	if (!User)
 		User = Managers->Game->Player;
 
+	RemainTime -= dt;
 
+	uint8 min = static_cast<uint8>(RemainTime / 60);
+	float second = FMath::Fmod(RemainTime, 60.0f);
+
+	Timer->SetText(FText::FromString(FString::Printf(TEXT("%d : %.0f"), min, second)));
 	EXP_Gauge->SetPercent(User->GetExpPercent());
 	Money_Text->SetText(FText::FromString(FString::Printf(TEXT("Lv.%d"), User->GetLevel())));
 	KillCount_Text->SetText(FText::FromString(FString::Printf(TEXT("%d"), Managers->Game->KillCounts)));

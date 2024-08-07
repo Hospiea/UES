@@ -32,6 +32,9 @@ public:
 	float Timer;
 
 	UPROPERTY()
+	uint32 counter;
+
+	UPROPERTY()
 	TObjectPtr<UEnemyAsset> EnemyClasses;
 
 	UPROPERTY()

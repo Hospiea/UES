@@ -8,6 +8,7 @@
 
 class UButton;
 class ULevelUpSkillSlot;
+class ULevelUpSelectCard;
 
 UCLASS()
 class S_API ULevelupPopup : public UWidgetBase
@@ -33,6 +34,18 @@ protected:
 
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UButton> Button2;
+
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<ULevelUpSelectCard> LVUP_Card_Button_0;
+
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<ULevelUpSelectCard> LVUP_Card_Button_1;
+
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<ULevelUpSelectCard> LVUP_Card_Button_2;
+
+	UPROPERTY()
+	TArray< TObjectPtr<ULevelUpSelectCard>> Cards;
 
 	UFUNCTION()
 	void OnClicked();

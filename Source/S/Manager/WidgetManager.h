@@ -9,6 +9,7 @@
 class UWidgetAsset;
 class ULevelUpSkillSlot;
 class UBasic;
+class ASpawner;
 
 UCLASS()
 class S_API AWidgetManager : public AActor
@@ -25,6 +26,7 @@ public:
 	void EndOpening();
 	void ClickToStart();
 	void ClickToLobby();
+	void GameOver();
 
 protected:
 	virtual void BeginPlay() override;
@@ -39,6 +41,9 @@ protected:
 
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UWidgetAsset> Widgets;
+
+	UPROPERTY()
+	TObjectPtr<ASpawner> Spawner;
 
 	UPROPERTY()
 	TArray<TObjectPtr<UTexture2D>> WeaponImages;

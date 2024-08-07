@@ -54,16 +54,28 @@ void AWidgetManager::ClickToStart()
 	CurrentWidget->RemoveFromParent();
 	CurrentWidget = CreateWidget(GetWorld(), Widgets->Widgets["Battle"]);
 	CurrentWidget->AddToViewport();
-	GetWorld()->SpawnActor<ASpawner>();
+	Spawner = GetWorld()->SpawnActor<ASpawner>();
 
 	Managers->Sound->PlayBgm("Stage1");
 }
 
 void AWidgetManager::ClickToLobby()
 {
+	UGameplayStatics::SetGamePaused(GetWorld(), false);
+	Managers->Game->Player->StartGame();
 	CurrentWidget->RemoveFromParent();
 	CurrentWidget = CreateWidget(GetWorld(), Widgets->Widgets["Lobby"]);
 	CurrentWidget->AddToViewport();
+	
+}
+
+void AWidgetManager::GameOver()
+{
+	CurrentWidget->RemoveFromParent();
+	CurrentWidget = CreateWidget(GetWorld(), Widgets->Widgets["GameOver"]);
+	CurrentWidget->AddToViewport();
+	GetWorld()->DestroyActor(Spawner);
+	Managers->PoolClear();
 }
 
 void AWidgetManager::BeginPlay()

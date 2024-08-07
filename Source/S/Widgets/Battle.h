@@ -66,4 +66,7 @@ protected:
 
 	UFUNCTION()
 	void PauseButton();
+
+	UPROPERTY()
+	float RemainTime;
 };

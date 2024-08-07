@@ -21,6 +21,11 @@ class S_API ULevelUpSelectCard : public UWidgetBase
 	
 public:
 	ULevelUpSelectCard(const FObjectInitializer& Init);
+	bool IsSame(const ULevelUpSelectCard& other)
+	{
+		return (IsPassive == other.IsPassive && RandIndex == other.RandIndex);
+	}
+	void ReRoll();
 
 protected:
 	virtual void NativeConstruct() override;
@@ -89,4 +94,7 @@ private:
 	void WeaponFactory(const UBasic::AttackType& attack);
 	void PassiveFactory(const UBasic::PassiveType& passive);
 	friend class UAttackComponent;
+	void RandSelectCard();
+	void GetRandomCard();
+	void SetStars();
 };

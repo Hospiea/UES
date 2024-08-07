@@ -45,6 +45,7 @@ public:
 	inline TObjectPtr <UDetectComponent>& GetDetectComponent() { return DetectComponent; }
 	inline TObjectPtr<UAttackComponent>& GetAttackComponent() { return AttackComponent; }
 	inline TObjectPtr<AObtainer>& GetObtainer() { return Obtainer; }
+	void StartGame();
 
 	void GetExp(const float& value);
 	inline const uint8& GetLevel() { return Level; }

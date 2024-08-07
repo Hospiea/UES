@@ -12,18 +12,26 @@
 class UWorld;
 class AEnemy;
 
+class IPoolManager
+{
+public:
+	virtual void ExecuteClear() = 0;
+	virtual ~IPoolManager() = default;
+};
+
 
 template<typename T>
-class S_API PoolManager
+class S_API PoolManager : public IPoolManager
 {
 	static_assert(!std::is_base_of<T, AGameObjects>::value, "T must be derieved from AGameObjects");
 
 public:
 	PoolManager();
-	~PoolManager();
+	virtual ~PoolManager();
 	inline void SetWorld(UWorld* world) { World = world; }
 	T* Get(UClass* Class, const FVector& Pos = FVector::ZeroVector, const FRotator& Rot = FRotator::ZeroRotator);
-
+	void Clear();
+	virtual void ExecuteClear() override { Clear(); }
 
 private:
 	TArray<TObjectPtr<T>> Pool;
@@ -68,4 +76,14 @@ inline T* PoolManager<T>::Get(UClass* Class, const FVector& Pos, const FRotator&
 		Pool.Add(enemy);
 		return enemy;
 	}
+}
+
+template<typename T>
+inline void PoolManager<T>::Clear()
+{
+	for (auto& temp : Pool)
+	{
+		World->DestroyActor(temp);
+	}
+	Pool.Empty();
 }
