@@ -3,3 +3,8 @@
 
 #include "Attacks/Basic/Passive/Belief.h"
 
+void UBelief::Init()
+{
+	Super::Init();
+
+}

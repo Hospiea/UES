@@ -15,7 +15,9 @@ class S_API UMagnetic : public UBasic
 	GENERATED_BODY()
 
 public:
-
+	
+protected:
+	virtual void Init() override;
 
 
 

@@ -6,6 +6,7 @@
 #include "GameObject/Player/User.h"
 #include "Components/Center.h"
 #include "Data/WeaponAsset.h"
+#include "System/GMB.h"
 
 
 USheild::USheild(const FObjectInitializer& Init)
@@ -118,7 +119,7 @@ void USheild::Init()
 			Angle = -Angle;
 
 
-		APSheild* temp = World->SpawnActor<APSheild>(WeaponClass, Points[i], FRotator(Angle, 0.0f, 0.0f));
+		APSheild* temp = GetWorld()->SpawnActor<APSheild>(WeaponClass, Points[i], FRotator(Angle, 0.0f, 0.0f));
 		temp->AttachToComponent(User->GetCenter(), FAttachmentTransformRules::KeepWorldTransform);
 		Shields.Push(temp);
 	}
@@ -135,4 +136,12 @@ void USheild::SetWeaponData()
 {
 	Super::SetWeaponData();
 
+	str = TEXT("Sheild");
+
+
+	Data.Damage = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Damage;
+	Data.Rate = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Rate;
+	Data.Range = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Range;
+	Data.Duration = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Duration;
+	Data.Speed = Managers->Data->WeaponData->FindRow<FWeaponData>(str, TEXT(""))->Speed;
 }

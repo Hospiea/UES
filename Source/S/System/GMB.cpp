@@ -23,6 +23,7 @@ void AGMB::InitGame(const FString& MapName, const FString& Options, FString& Err
 	Managers->SetWorld(GetWorld());
 	Managers->Widget = GetWorld()->SpawnActor<AWidgetManager>();
 	Managers->Sound = GetWorld()->SpawnActor<ASoundManager>();
+	Managers->Game = new GameManager;
 }
 
 void AGMB::BeginPlay()
@@ -46,5 +47,7 @@ void AGMB::EndPlay(const EEndPlayReason::Type reason)
 
 	Managers->Widget->GetWeaponImages().Empty();
 	Managers->Widget->GetPassiveImages().Empty();
-
+	GetWorld()->DestroyActor(Managers->Widget);
+	GetWorld()->DestroyActor(Managers->Sound);
+	delete Managers->Game;
 }

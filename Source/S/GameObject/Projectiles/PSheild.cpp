@@ -43,6 +43,7 @@ void APSheild::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Other
 			return;
 		enemy->SetEnemyState(AEnemy::EnemyState::KnockBacked);
 		enemy->GetDamage(Basic->GetData().Damage);
+		GEngine->AddOnScreenDebugMessage(0, 1.0f, FColor::Cyan, FString::Printf(TEXT("%f"), Basic->GetData().Damage));
 		
 	}
 }

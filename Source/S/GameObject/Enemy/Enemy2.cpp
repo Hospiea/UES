@@ -101,7 +101,7 @@ void AEnemy2::Tick(float dt)
 			if (bullet)
 			{
 				bullet->GetCharacterMovement()->Velocity = Dir;
-				bullet->SetActorRotation(FRotator(angle - 90.0f, 0.0f, 0.0f));
+				bullet->GetSprite()->SetRelativeRotation(FRotator(angle - 90.0f, 0.0f, 0.0f));
 			}
 		}
 

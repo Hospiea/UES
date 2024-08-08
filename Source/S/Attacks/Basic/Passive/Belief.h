@@ -14,4 +14,6 @@ class S_API UBelief : public UBasic
 {
 	GENERATED_BODY()
 	
+protected:
+	virtual void Init() override;
 };

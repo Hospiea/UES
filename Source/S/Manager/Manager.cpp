@@ -5,13 +5,11 @@
 
 UManager::~UManager()
 {
-	delete Game;
 }
 
 void UManager::Initialize(FSubsystemCollectionBase& Collection)
 {
 	Super::Initialize(Collection);
-	Game = new GameManager;
 	Data = NewObject<UDataManager>(this);
 }
 

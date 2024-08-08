@@ -27,6 +27,16 @@
 #include "Attacks/Basic/Positive.h"
 #include "Attacks/Basic/FireBottle.h"
 #include "Attacks/Basic/Rifle.h"
+#include "Attacks/Basic/Passive/Belief.h"
+#include "Attacks/Basic/Passive/Circular.h"
+#include "Attacks/Basic/Passive/Experience.h"
+#include "Attacks/Basic/Passive/Iron.h"
+#include "Attacks/Basic/Passive/Magnetic.h"
+#include "Attacks/Basic/Passive/Will.h"
+#include "Attacks/Basic/Passive/Rich.h"
+#include "Attacks/Basic/Passive/Rock.h"
+#include "Attacks/Basic/Passive/Time.h"
+#include "Attacks/Basic/Passive/Thunder.h"
 #include "LevelUpSkillSlot.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
@@ -312,9 +322,11 @@ void ULevelUpSelectCard::PassiveFactory(const UBasic::PassiveType& passive)
 
 	case UBasic::PassiveType::Will:
 	{
-		/*auto temp = NewObject<UHammer>(User);
-		temp->SetAttackType(attack);
-		User->GetAttackComponent()->AddAttack(temp);*/
+		auto temp = NewObject<UWill>(User);
+		temp->SetPassiveType(passive);
+		temp->SetPassive(true);
+		temp->GetLevel() = 0;
+		User->GetAttackComponent()->AddAttack(temp);
 		break;
 	}
 
@@ -331,6 +343,86 @@ void ULevelUpSelectCard::PassiveFactory(const UBasic::PassiveType& passive)
 	case UBasic::PassiveType::Life:
 	{
 		auto temp = NewObject<ULife>(User);
+		temp->SetPassiveType(passive);
+		temp->SetPassive(true);
+		temp->GetLevel() = 0;
+		User->GetAttackComponent()->AddAttack(temp);
+		break;
+	}
+
+	case UBasic::PassiveType::Iron:
+	{
+		auto temp = NewObject<UIron>(User);
+		temp->SetPassiveType(passive);
+		temp->SetPassive(true);
+		temp->GetLevel() = 0;
+		User->GetAttackComponent()->AddAttack(temp);
+		break;
+	}
+
+	case UBasic::PassiveType::Time:
+	{
+		auto temp = NewObject<UTime>(User);
+		temp->SetPassiveType(passive);
+		temp->SetPassive(true);
+		temp->GetLevel() = 0;
+		User->GetAttackComponent()->AddAttack(temp);
+		break;
+	}
+
+	case UBasic::PassiveType::Circular:
+	{
+		auto temp = NewObject<UCircular>(User);
+		temp->SetPassiveType(passive);
+		temp->SetPassive(true);
+		temp->GetLevel() = 0;
+		User->GetAttackComponent()->AddAttack(temp);
+		break;
+	}
+
+	case UBasic::PassiveType::Thunder:
+	{
+		auto temp = NewObject<UThunder>(User);
+		temp->SetPassiveType(passive);
+		temp->SetPassive(true);
+		temp->GetLevel() = 0;
+		User->GetAttackComponent()->AddAttack(temp);
+		break;
+	}
+
+	case UBasic::PassiveType::Rock:
+	{
+		auto temp = NewObject<URock>(User);
+		temp->SetPassiveType(passive);
+		temp->SetPassive(true);
+		temp->GetLevel() = 0;
+		User->GetAttackComponent()->AddAttack(temp);
+		break;
+	}
+
+	case UBasic::PassiveType::Belief:
+	{
+		auto temp = NewObject<UBelief>(User);
+		temp->SetPassiveType(passive);
+		temp->SetPassive(true);
+		temp->GetLevel() = 0;
+		User->GetAttackComponent()->AddAttack(temp);
+		break;
+	}
+
+	case UBasic::PassiveType::Experience:
+	{
+		auto temp = NewObject<UExperience>(User);
+		temp->SetPassiveType(passive);
+		temp->SetPassive(true);
+		temp->GetLevel() = 0;
+		User->GetAttackComponent()->AddAttack(temp);
+		break;
+	}
+
+	case UBasic::PassiveType::Rich:
+	{
+		auto temp = NewObject<URich>(User);
 		temp->SetPassiveType(passive);
 		temp->SetPassive(true);
 		temp->GetLevel() = 0;
@@ -418,8 +510,7 @@ void ULevelUpSelectCard::GetRandomCard()
 	Level = -1;
 	IsFirst = false;
 	RandIndex = FMath::Rand() % 13;
-	//IsPassive = FMath::RandBool();
-	IsPassive = false;
+	IsPassive = FMath::RandBool();
 	WeaponType = static_cast<UBasic::AttackType>(RandIndex);
 	PassiveType = static_cast<UBasic::PassiveType>(RandIndex);
 

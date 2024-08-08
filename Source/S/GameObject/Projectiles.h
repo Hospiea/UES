@@ -30,6 +30,7 @@ class S_API AProjectiles : public AGameObjects
 public:
 	AProjectiles();
 	virtual void SetBasic(UBasic* basic);
+	inline const bool& IsDeletable() { return Deletable; }
 
 protected:
 	virtual void BeginPlay() override;

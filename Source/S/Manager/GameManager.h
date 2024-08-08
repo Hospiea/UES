@@ -23,5 +23,7 @@ public:
 	UPROPERTY()
 	float Timer;
 
+private:
+	friend class AGMB;
 
 };

@@ -54,9 +54,16 @@ void AUser::StartGame()
 	Cast<UHPBar>(HpBar->GetWidget())->SetValue(CurHp / Stats.MaxHp);
 }
 
+void AUser::SetObtainRange(const int32& level)
+{
+	Stats.ObtainRange *= (1 + (0.2f * static_cast<float>(Level)));
+}
+
+
+
 void AUser::GetExp(const float& value)
 {
-	CurExp += value;
+	CurExp += value * Stats.ExpValue;
 
 	if (CurExp >= RequiredExp[Level]->RequiredExp)
 	{
@@ -126,6 +133,12 @@ void AUser::Tick(float dt)
 	else
 		GetSprite()->SetFlipbook(Flipbooks->Flipbooks["C1_Run"]);
 
+	if (CurHp < Stats.MaxHp)
+	{
+		CurHp += dt * Stats.HPRegen;
+		Cast<UHPBar>(HpBar->GetWidget())->SetValue(CurHp / Stats.MaxHp);
+	}
+		
 }
 
 void AUser::LevelUp()
@@ -135,7 +148,7 @@ void AUser::LevelUp()
 
 void AUser::GetDamaged(const float& value)
 {
-	CurHp -= value;
+	CurHp -= value * Stats.Defense;
 	Cast<UHPBar>(HpBar->GetWidget())->SetValue(CurHp / Stats.MaxHp);
 	if (CurHp <= 0.0f)
 	{

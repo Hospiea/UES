@@ -79,13 +79,12 @@ void UAttackComponent::BeginPlay()
 {
 	Super::BeginPlay();	
 
-	auto temp = NewObject<UDagger>(GetOwner());
-	temp->SetAttackType(UBasic::AttackType::Dagger);
+	auto temp = NewObject<USheild>(GetOwner());
+	temp->SetAttackType(UBasic::AttackType::Shield);
 	auto index = static_cast<int32>(temp->GetAttackType());
 	temp->SetPassive(false);
-	temp->Init();
 	temp->GetLevel() = 0;
-	temp->SetPlayer(Cast<AUser>(GetOwner()));
+	temp->SetWeaponData();
 	AddAttack(temp);
 	Managers->Widget->GetWeaponImages().Add(Textures->MainWeapons[index]);
 	ULevelUpSelectCard::WeaponIndexes.Add(index);
